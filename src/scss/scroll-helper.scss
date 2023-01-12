@@ -1,0 +1,48 @@
+@import './vars';
+
+$color1: $blue;
+$color2: $pink;
+
+/* width */
+.coolscroll::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+/* Track */
+.coolscroll::-webkit-scrollbar-track {
+    background: $color2;
+}
+
+/* Handle */
+.coolscroll::-webkit-scrollbar-thumb {
+    background: black;
+    border-radius: 10px;
+    border: 2px solid $color1;
+}
+
+/* Handle on hover */
+.coolscroll::-webkit-scrollbar-thumb:hover {
+    background: lighten($color1, 5%);
+}
+
+.coolscroll-small::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+.coolscroll-small::-webkit-scrollbar-track {
+    background: $color2;
+    border-radius: 10px;
+}
+
+.coolscroll-small::-webkit-scrollbar-thumb {
+    background: black;
+    border-radius: 10px;
+    // border: 2px solid $color1;
+    background: $color1;
+}
+
+.coolscroll-small::-webkit-scrollbar-thumb:hover {
+    background: lighten($color1, 5%);
+}

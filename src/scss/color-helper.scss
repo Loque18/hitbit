@@ -1,0 +1,150 @@
+@use 'sass:color';
+@use 'sass:map';
+@import './vars';
+
+$levels: 20;
+$corners: 'top', 'right', 'bottom', 'left';
+
+@mixin calcColor($color, $pctg) {
+    @if lightness($color) < $pctg {
+        color: white;
+    } @else {
+        color: black;
+    }
+}
+
+@mixin bg-blur-list {
+    @for $i from 1 through 4 {
+        .has-bg-blur-#{$i} {
+            -webkit-backdrop-filter: blur(#{$i * 5}px);
+            backdrop-filter: blur(#{$i * 5}px);
+        }
+    }
+}
+
+@include bg-blur-list;
+
+@mixin generate-color-classes($color, $colorName) {
+    .has-bg-#{$colorName} {
+        background: $color !important;
+    }
+
+    .has-text-#{$colorName} {
+        color: $color !important;
+    }
+
+    // opacity levels 1-10
+    @for $i from 1 through $levels {
+        .has-bg-#{$colorName}-o-#{($i)*5} {
+            background-color: rgba($color, $i * 5 / 100) !important;
+        }
+
+        .has-text-#{$colorName}-o-#{($i)*5} {
+            color: rgba($color, $i * 5 / 100) !important;
+        }
+    }
+
+    // input
+    .input.is-#{$colorName} {
+        background: unset !important;
+        border-color: rgba($color, 0.5) !important;
+
+        &:focus {
+            border-color: $color !important;
+            box-shadow: 0 0 0 0.125em rgba($color, 0.25);
+        }
+    }
+
+    // button
+    // .button.is-#{$colorName} {
+    //     background: $color;
+    //     border-color: $color;
+
+    //     @include calcColor($color, 80);
+
+    //     // color: if(lightness($color) < 50, pink, black);
+
+    //     &:disabled {
+    //         background-color: $color;
+    //         border-color: $color;
+    //         box-shadow: none;
+    //         opacity: 0.5;
+    //     }
+
+    //     &:hover {
+    //         &:enabled {
+    //             background-color: lighten($color, 10);
+    //             box-shadow: 0 0 0 0.125em rgba($color, 0.25);
+    //             border-color: transparent;
+    //             @include calcColor($color, 80);
+    //         }
+
+    //         &:disabled {
+    //             @include calcColor($color, 80);
+    //         }
+    //     }
+
+    //     &:active:enabled {
+    //         background-color: lighten($color, 20);
+    //         box-shadow: 0 0 0 0.125em rgba($color, 0.25);
+    //         @include calcColor($color, 80);
+    //     }
+
+    //     &:focus:enabled {
+    //         // background-color: lighten($color, 10) !important;
+    //         box-shadow: 0 0 0 0.125em rgba($color, 0.25);
+    //         border-color: $color;
+    //         @include calcColor($color, 80);
+    //     }
+    // }
+
+    // .button.is-#{$colorName}.outlined {
+    //     background-color: rgba($color, 0.25);
+    //     border-color: $color;
+    //     color: $color;
+
+    //     &:hover:enabled {
+    //         background-color: $color;
+    //         box-shadow: 0 0 0 0.125em rgba($color, 0.25);
+    //         @include calcColor($color, 80);
+    //     }
+
+    //     &:active:enabled {
+    //         background-color: lighten($color, 20);
+    //         box-shadow: 0 0 0 0.125em rgba($color, 0.25);
+    //         @include calcColor($color, 80);
+    //     }
+
+    //     &:focus:enabled {
+    //         box-shadow: 0 0 0 0.125em rgba($color, 0.25);
+    //     }
+    // }
+
+    // border
+    @for $i from 1 through 20 {
+        @for $j from 1 through 5 {
+            .has-border-#{$j}-#{$colorName}-o-#{($i)*5} {
+                border: #{$j}px solid rgba($color, $i * 5 / 100) !important;
+            }
+        }
+    }
+
+    // border corners
+    @each $corner in $corners {
+        .has-#{$corner}-border-#{$colorName} {
+            border-#{$corner}: 1px solid $color;
+        }
+    }
+}
+
+@each $colorName, $color in $hcolors {
+    @include generate-color-classes($color, $colorName);
+}
+
+.has-bg-transparent {
+    background: rgba(0, 0, 0, 0) !important;
+}
+
+.is-borderless {
+    border: none !important;
+}

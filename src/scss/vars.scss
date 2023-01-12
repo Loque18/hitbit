@@ -1,0 +1,15 @@
+@use 'sass:map';
+
+$blue: #00b2ff;
+$pink: #ff00aa;
+
+$hgra1: linear-gradient(-45deg, $pink 0%, rgba(#fff, 0) 33%, rgba(#fff, 0) 66%, $blue 100%);
+
+$hcolors: (
+    blue: $blue,
+    pink: $pink,
+);
+
+$hgras: (
+    hgra1: $hgra1,
+);

@@ -1,0 +1,32 @@
+// import your fonts here and create a font-face rule for them
+
+@import url('https://fonts.googleapis.com/css2?family=PT+Mono&display=swap&family=Poppins:wght@400;500;600;700&display=swap&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet');
+
+.has-font-montserrat {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+
+.has-font-poppins {
+    font-family: 'Poppins', sans-serif;
+
+    &.semibold {
+        font-weight: 500;
+    }
+
+    &.semibold2 {
+        font-weight: 600;
+    }
+
+    &.bold {
+        font-weight: 700;
+    }
+}
+
+// *:not(i):not(.pi):not(.has-font-outfit):not(.ignore-font):not(p):not(h2) {
+//     @extend .has-font-poppins;
+// }
+
+// *:not(.has-font-airborne):not(i) {
+//     font-family: 'Montserrat', sans-serif;
+// }

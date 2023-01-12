@@ -1,0 +1,24 @@
+@import './vars';
+
+@mixin generate-gradients-classes($gradient, $gradientName) {
+    .has-bg-#{$gradientName} {
+        background: $gradient !important;
+    }
+
+    .is-#{$gradientName} {
+        background: $gradient !important;
+        border: none !important;
+    }
+
+    .has-text-#{$gradientName} {
+        background: $gradient;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-fill-color: transparent;
+    }
+}
+
+@each $gradientName, $gradient in $hgras {
+    @include generate-gradients-classes($gradient, $gradientName);
+}
