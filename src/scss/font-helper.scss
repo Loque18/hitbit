@@ -1,25 +1,70 @@
 // import your fonts here and create a font-face rule for them
 
-@import url('https://fonts.googleapis.com/css2?family=PT+Mono&display=swap&family=Poppins:wght@400;500;600;700&display=swap&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
 
 .has-font-montserrat {
     font-family: 'Montserrat', sans-serif;
-    font-weight: 700;
-}
+    font-weight: 400;
 
-.has-font-poppins {
-    font-family: 'Poppins', sans-serif;
+    &.light {
+        font-weight: 300;
+    }
 
-    &.semibold {
+    &.regular {
+        font-weight: 400;
+    }
+
+    &.medium {
         font-weight: 500;
     }
 
-    &.semibold2 {
+    &.semibold {
         font-weight: 600;
     }
 
     &.bold {
         font-weight: 700;
+    }
+
+    &.extrabold {
+        font-weight: 800;
+    }
+
+    &.black {
+        font-weight: 900;
+    }
+}
+
+.has-font-poppins {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+
+    &.light {
+        font-weight: 300;
+    }
+
+    &.regular {
+        font-weight: 400;
+    }
+
+    &.medium {
+        font-weight: 500;
+    }
+
+    &.semibold {
+        font-weight: 600;
+    }
+
+    &.bold {
+        font-weight: 700;
+    }
+
+    &.extrabold {
+        font-weight: 800;
+    }
+
+    &.black {
+        font-weight: 900;
     }
 }
 

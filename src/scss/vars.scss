@@ -3,11 +3,25 @@
 $blue: #00b2ff;
 $pink: #ff00aa;
 
+$blue-100: #012745;
+$blue-200: #023a68;
+$blue-300: #034e8a;
+$blue-400: #0462ad;
+$blue-500: #0575d0;
+$blue-600: #0575d0;
+
 $hgra1: linear-gradient(-45deg, $pink 0%, rgba(#fff, 0) 33%, rgba(#fff, 0) 66%, $blue 100%);
 
 $hcolors: (
     blue: $blue,
     pink: $pink,
+
+    blue-100: $blue-100,
+    blue-200: $blue-200,
+    blue-300: $blue-300,
+    blue-400: $blue-400,
+    blue-500: $blue-500,
+    blue-600: $blue-600,
 );
 
 $hgras: (

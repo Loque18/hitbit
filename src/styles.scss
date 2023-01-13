@@ -1,17 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
-// @import 'src/scss/border-helper';
-// @import 'src/scss/bulma-custom-vars';
-// @import 'src/scss/bulma-helper';
-// @import 'src/scss/button-helper';
-// @import 'src/scss/color-helper';
-// @import 'src/scss/font-helper';
-// @import 'src/scss/gradient-helper';
-// @import 'src/scss/scroll-helper';
-// // @import 'src/scss/size-helper';
-// @import 'src/scss/user-select-helper';
-// @import 'src/scss/vars';
+@import 'src/scss/font-helper';
 
-$primary: red;
-$link: pink;
+@import 'src/scss/border-helper';
+@import 'src/scss/bulma-custom-vars';
+@import 'src/scss/bulma-helper';
+@import 'src/scss/button-helper';
+@import 'src/scss/color-helper';
+@import 'src/scss/gradient-helper';
+@import 'src/scss/scroll-helper';
+// @import 'src/scss/size-helper';
+@import 'src/scss/user-select-helper';
+@import 'src/scss/vars';
 
 @import 'node_modules/bulma/bulma.sass';
