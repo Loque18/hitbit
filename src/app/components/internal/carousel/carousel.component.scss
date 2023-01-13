@@ -1,0 +1,13 @@
+.carousel {
+    height: 330px;
+
+    .box {
+        height: 100% !important;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .carousel {
+        height: 200px;
+    }
+}

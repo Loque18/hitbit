@@ -1,0 +1,5 @@
+@import 'src/scss/bulma-custom-vars';
+
+.main-layout {
+    min-height: calc(100vh - $navbar-height);
+}

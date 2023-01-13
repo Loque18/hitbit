@@ -1,0 +1,40 @@
+<aside class="app-sidebar has-background-blue200" [ngClass]="collapsed ? 'collapsed' : ''">
+    <div class="sidebar-container">
+        <ul>
+            <li>
+                <a class="sidebar-link" (click)="toggleCollapsed()">
+                    <span class="icon">
+                        <img src="https://picsum.photos/64" alt="" />
+                    </span>
+
+                    <div class="has-text-white medium">Collapse</div>
+                </a>
+            </li>
+
+            <li *ngFor="let link of topLinks">
+                <a class="sidebar-link" [href]="link.url">
+                    <span class="icon">
+                        <img [src]="link.icon" alt="" />
+                    </span>
+
+                    <div class="has-text-white medium">
+                        {{ link.label }}
+                    </div>
+                </a>
+            </li>
+        </ul>
+
+        <ul>
+            <li *ngFor="let link of bottomLinks">
+                <a class="sidebar-link" [href]="link.url">
+                    <span class="icon">
+                        <img [src]="link.icon" alt="" />
+                    </span>
+                    <div class="has-text-white medium">
+                        {{ link.label }}
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+</aside>

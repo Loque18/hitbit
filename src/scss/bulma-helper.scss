@@ -1,5 +1,11 @@
 @media (max-width: 768px) {
     /* <== You can change this break point as per your  needs */
+
+    // add a bit of pading to container
+    .container {
+        padding: 0 1.5rem;
+    }
+
     .is-reverse {
         flex-direction: column-reverse;
     }

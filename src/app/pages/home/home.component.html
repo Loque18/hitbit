@@ -1,22 +1,28 @@
-<section class="has-background-blue100">
-    <div class="container py-5">
-        <div class="block"><app-carousel></app-carousel></div>
-        <div class="block"></div>
-        <div class="block" [style]="{ overflow: 'hidden' }">
-            <h1 class="title is-5 has-text-white">HitBits original <span class="tag is-danger">Special</span></h1>
+<app-main-layout>
+    <section class="home_root has-background-blue100">
+        <div class="container py-5">
+            <div class="block">
+                <app-carousel>
+                    <h1 class="title has-text-white">asd</h1>
+                </app-carousel>
+            </div>
+            <div class="block"></div>
+            <div class="block" [style]="{ overflow: 'hidden' }">
+                <h1 class="title is-5 has-text-white">HitBits original <span class="tag is-danger">Special</span></h1>
 
-            <ul class="is-flex">
-                <li *ngFor="let game of games">
-                    <div class="box game_box">
-                        <h1 class="subtitle is-6 has-text-white has-font-monserrat extrabold">
-                            {{ game.name | uppercase }}
-                        </h1>
-                        <figure class="image is-square">
-                            <img [src]="game.icon" alt="game image" />
-                        </figure>
-                    </div>
-                </li>
-            </ul>
+                <ul class="is-flex">
+                    <li *ngFor="let game of games">
+                        <div class="box game_box">
+                            <h1 class="subtitle is-6 has-text-white has-font-monserrat extrabold">
+                                {{ game.name | uppercase }}
+                            </h1>
+                            <figure class="image is-square">
+                                <img [src]="game.icon" alt="game image" />
+                            </figure>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
+</app-main-layout>

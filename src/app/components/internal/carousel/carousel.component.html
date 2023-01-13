@@ -1,3 +1,8 @@
 <div class="carousel">
-    <div class="box has-background-blue200"></div>
+    <div class="box has-background-blue200">
+        <div *ngFor="let slide of slides">
+            <div [innerHTML]="slide.template"></div>
+            <!-- <ng-template [ngTemplateOutlet]="slide.template"></ng-template> -->
+        </div>
+    </div>
 </div>
