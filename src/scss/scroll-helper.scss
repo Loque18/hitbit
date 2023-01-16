@@ -1,12 +1,13 @@
 @import './vars';
+@import './bulma-custom-vars';
 
-$color1: $blue;
-$color2: $pink;
+$color1: rgb(116, 159, 184);
+$color2: $blue200;
 
 /* width */
 .coolscroll::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
 }
 
 /* Track */
@@ -16,15 +17,16 @@ $color2: $pink;
 
 /* Handle */
 .coolscroll::-webkit-scrollbar-thumb {
-    background: black;
-    border-radius: 10px;
-    border: 2px solid $color1;
+    background: $color1;
+    border-radius: 8px;
 }
 
 /* Handle on hover */
 .coolscroll::-webkit-scrollbar-thumb:hover {
-    background: lighten($color1, 5%);
+    background: lighten($color1, 10%);
 }
+
+// small
 
 .coolscroll-small::-webkit-scrollbar {
     width: 5px;
