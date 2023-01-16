@@ -1,8 +1,8 @@
-<aside class="app-sidebar has-background-blue200" [ngClass]="collapsed ? 'collapsed' : ''">
+<aside class="app-sidebar has-background-blue200 coolscroll-small" [ngClass]="collapsed ? 'collapsed' : ''">
     <div class="sidebar-container">
         <ul>
             <li>
-                <a class="sidebar-link" (click)="toggleCollapsed()" id="collapse-sidebar-button">
+                <a class="sidebar-link" (click)="toggleSidebar()" id="collapse-sidebar-button">
                     <span class="icon">
                         <img [src]="collapsed ? arrowRightIcon : arrowLeftIcon" alt="" />
                     </span>

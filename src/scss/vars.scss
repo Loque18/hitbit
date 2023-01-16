@@ -27,3 +27,20 @@ $hcolors: (
 $hgras: (
     hgra1: $hgra1,
 );
+
+/* *~~*~~*~~*~~*~~* Z-INDEX *~~*~~*~~*~~*~~* */
+
+$z-foreground: 5;
+$z-background: 0;
+$z-modal: 10;
+
+/* *~~*~~*~~*~~*~~* lAYOUT *~~*~~*~~*~~*~~* */
+
+$sidebar-open-width-desktop: 200px;
+$sidebar-closed-width-desktop: 50px;
+
+$chat-open-width-desktop: 350px;
+$chat-closed-width-desktop: 0px;
+
+/* *~~*~~*~~*~~*~~* TRANSITION *~~*~~*~~*~~*~~* */
+$fast-bezier: 0.25s cubic-bezier(0.83, 0, 0.17, 1);

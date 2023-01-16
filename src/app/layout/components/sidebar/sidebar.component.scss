@@ -1,17 +1,46 @@
+@import 'src/scss/bulma-custom-vars';
+@import 'src/scss/vars';
+
+.app-sidebar {
+    position: fixed;
+
+    transition: 0.25s cubic-bezier(0.83, 0, 0.17, 1);
+
+    user-select: none;
+
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.25);
+
+    z-index: $z-foreground;
+
+    .sidebar-container {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        padding: 10px 0;
+
+        .sidebar-link {
+            display: flex;
+            column-gap: 1rem;
+            margin-bottom: 1.75rem;
+            padding: 0 10px;
+
+            &:hover {
+                border-right: 5px solid $blue600;
+            }
+        }
+    }
+}
+
 // for desktop
 @media screen and (min-width: 1024px) {
     .app-sidebar {
         width: 200px;
-        height: 100%;
-
-        padding: 10px;
-
-        transition: 0.25s cubic-bezier(0.83, 0, 0.17, 1);
-
-        user-select: none;
+        height: calc(100vh - $navbar-height);
 
         &.collapsed {
-            width: 70px;
+            width: 50px;
 
             .sidebar-container {
                 ul li a.sidebar-link div {
@@ -30,6 +59,10 @@
                 display: flex;
                 column-gap: 1rem;
                 margin-bottom: 1.75rem;
+
+                &:hover {
+                    border-right: 3px solid $blue600;
+                }
             }
         }
     }
@@ -37,4 +70,31 @@
 
 // for mobile and tablet
 @media screen and (max-width: 1023px) {
+    .app-sidebar {
+        width: 200px;
+        height: calc(100vh);
+
+        // top: 0;
+
+        &.collapsed {
+            transform: translateX(-100%);
+        }
+
+        .sidebar-container {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            ul li a.sidebar-link {
+                display: flex;
+                column-gap: 1rem;
+                margin-bottom: 1.75rem;
+
+                &:hover {
+                    border-right: 3px solid $blue600;
+                }
+            }
+        }
+    }
 }
