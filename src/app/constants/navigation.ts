@@ -10,52 +10,52 @@ const NAV_LINKS: INavLink[] = [
     {
         label: 'All Games',
         url: '/home',
-        icon: tempImg,
+        icon: '/assets/icons/category.svg',
     },
     {
         label: 'Dice',
         url: '/dice',
-        icon: tempImg,
+        icon: '/assets/icons/dice.svg',
     },
     {
         label: 'Slots',
         url: '/slots',
-        icon: tempImg,
+        icon: '/assets/icons/apple-arcade.svg',
     },
     {
         label: 'Roulette',
         url: '/roulette',
-        icon: tempImg,
+        icon: '/assets/icons/poker-chip.svg',
     },
     {
         label: 'Blackjack',
         url: '/blackjack',
-        icon: tempImg,
+        icon: '/assets/icons/cards.svg',
     },
     {
         label: 'Towers',
         url: '/towers',
-        icon: tempImg,
+        icon: '/assets/icons/tower.svg',
     },
     {
         label: 'Mines',
         url: '/mines',
-        icon: tempImg,
+        icon: '/assets/icons/bomb.svg',
     },
     {
         label: 'Lottery',
         url: '/lottery',
-        icon: tempImg,
+        icon: '/assets/icons/ticket.svg',
     },
     {
         label: 'JackPot',
         url: '/jackpot',
-        icon: tempImg,
+        icon: '/assets/icons/cherry.svg',
     },
     {
         label: 'News',
         url: '/news',
-        icon: tempImg,
+        icon: '/assets/icons/news.svg',
     },
 ];
 

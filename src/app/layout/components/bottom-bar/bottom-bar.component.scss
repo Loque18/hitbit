@@ -1,0 +1,30 @@
+@media screen and (min-width: 1024px) {
+    .app-button-bar {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 1023px) {
+    .app-button-bar {
+        position: fixed;
+
+        left: 0;
+        bottom: 0;
+
+        height: 65px;
+        width: 100vw;
+
+        z-index: 10;
+
+        .app-buttom-bar-container {
+            width: 100%;
+            height: 100%;
+
+            padding: 10px 20px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+}

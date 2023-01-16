@@ -13,6 +13,9 @@ export class SidebarComponent {
 
     collapsed: boolean = localStorage.getItem('sidebarCollapsed') === 'true';
 
+    readonly arrowLeftIcon = '/assets/icons/arrow-left.svg';
+    readonly arrowRightIcon = '/assets/icons/arrow-right.svg';
+
     toggleCollapsed(): void {
         this.collapsed = !this.collapsed;
         localStorage.setItem('sidebarCollapsed', this.collapsed.toString());

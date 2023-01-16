@@ -1,0 +1,10 @@
+.chat-container {
+    height: 100%;
+    width: 350px;
+
+    transition: 0.25s cubic-bezier(0.83, 0, 0.17, 1);
+
+    &.collapsed {
+        width: 0;
+    }
+}

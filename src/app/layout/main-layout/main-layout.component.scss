@@ -2,4 +2,19 @@
 
 .main-layout {
     min-height: calc(100vh - $navbar-height);
+    max-width: 100vw;
+}
+
+// for mobile and tablet
+@media screen and (max-width: 1023px) {
+    .main-layout {
+        display: block;
+    }
+}
+
+// for desktop
+@media screen and (min-width: 1024px) {
+    .main-layout {
+        display: flex;
+    }
 }
