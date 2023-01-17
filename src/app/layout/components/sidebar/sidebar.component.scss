@@ -10,7 +10,7 @@
 
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.25);
 
-    z-index: $z-foreground;
+    z-index: $z-foreground-1;
 
     .sidebar-container {
         height: 100%;
@@ -38,6 +38,8 @@
     .app-sidebar {
         width: 200px;
         height: calc(100vh - $navbar-height);
+
+        z-index: $z-foreground-1;
 
         &.collapsed {
             width: 50px;
@@ -74,7 +76,9 @@
         width: 200px;
         height: calc(100vh);
 
-        // top: 0;
+        top: 0;
+
+        z-index: $z-foreground-2;
 
         &.collapsed {
             transform: translateX(-100%);

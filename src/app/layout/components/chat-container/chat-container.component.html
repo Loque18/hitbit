@@ -1,1 +1,15 @@
-<aside class="chat-container has-background-blue200" [ngClass]="collapsed ? 'collapsed' : ''"></aside>
+<aside class="chat-container has-background-blue200" [ngClass]="collapsed ? 'collapsed' : ''">
+    <button class="button is-blue200 chat-button-mobile" (click)="toggleChat()">
+        <span class="icon" [style]="{ display: 'grid', placeItems: 'center' }">
+            <img src="/assets/icons/arrow-right.svg" />
+        </span>
+    </button>
+</aside>
+
+<div class="chat-button-desktop-container">
+    <button class="button is-blue200 chat-button-desktop" (click)="toggleChat()">
+        <span class="icon" [style]="{ display: 'grid', placeItems: 'center' }">
+            <img src="/assets/icons/bottom-bar/chat.svg" />
+        </span>
+    </button>
+</div>
