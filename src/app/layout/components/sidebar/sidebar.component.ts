@@ -25,8 +25,6 @@ export class SidebarComponent implements OnInit {
         this.LayoutService.isSidebarCollapsed$.subscribe((isCollapsed: boolean) => {
             this.collapsed = isCollapsed;
         });
-
-        console.log('initial sidebar state: collapsed -> ', this.collapsed);
     }
 
     toggleSidebar() {

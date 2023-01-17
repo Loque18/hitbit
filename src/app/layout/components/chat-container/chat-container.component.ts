@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { LayoutService } from 'src/app/layout/services/layout.service';
 
@@ -7,12 +7,16 @@ import { LayoutService } from 'src/app/layout/services/layout.service';
     templateUrl: './chat-container.component.html',
     styleUrls: ['./chat-container.component.scss'],
 })
-export class ChatContainerComponent {
+export class ChatContainerComponent implements OnInit {
     collapsed: boolean = false;
 
-    constructor(private layoutService: LayoutService) {
+    constructor(private layoutService: LayoutService) {}
+
+    ngOnInit(): void {
         this.layoutService.isChatCollapsed$.subscribe((isCollapsed: boolean) => {
             this.collapsed = isCollapsed;
+
+            console.log('Chat collapsed initial state -> ', isCollapsed);
         });
     }
 
