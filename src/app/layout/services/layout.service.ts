@@ -11,7 +11,7 @@ export class LayoutService {
 
     // observable to subscribe to chatcontainer toggle changes
     private lastChatContainerState = localStorage.getItem('layout.chatContainerCollapsed') === 'true';
-    private isChatContainerCollapsed = new BehaviorSubject<boolean>(this.lastChatContainerState);
+    private isChatContainerCollapsed = new BehaviorSubject<boolean>(false);
 
     // public observable to subscribe to sidebar toggle changes
     public isSidebarCollapsed$ = this.isSidebarCollapsed.asObservable();

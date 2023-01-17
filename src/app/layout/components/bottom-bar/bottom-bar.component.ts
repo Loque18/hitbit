@@ -13,4 +13,8 @@ export class BottomBarComponent {
     toggleSidebar() {
         this.layoutService.toggleSidebar();
     }
+
+    toggleChat() {
+        this.layoutService.toggleChat();
+    }
 }
