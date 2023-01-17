@@ -7,7 +7,7 @@ import { LayoutService } from '../../services/layout.service';
 @Component({
     selector: 'app-sidebar',
     templateUrl: './sidebar.component.html',
-    styleUrls: ['./sidebar.component.scss'],
+    styleUrls: ['./sidebar.component.scss', './sidebar-bg.component.scss'],
 })
 export class SidebarComponent implements OnInit {
     topLinks: INavLink[] = NAV_LINKS.slice(0, 7);

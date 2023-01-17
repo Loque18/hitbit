@@ -1,0 +1,34 @@
+@import 'src/scss/vars';
+
+// for desktop
+@media screen and (min-width: 1024px) {
+    .sidebar-bg {
+        display: none;
+    }
+}
+
+// for mobile and tablet
+@media screen and (max-width: 1023px) {
+    .sidebar-bg {
+        position: fixed;
+
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+
+        z-index: -1;
+
+        background-color: rgba(black, 0.5);
+        opacity: 0;
+
+        backdrop-filter: blur(5px);
+
+        transition: $fast-bezier;
+
+        &.active {
+            opacity: 1;
+            z-index: $z-foreground-1;
+        }
+    }
+}
