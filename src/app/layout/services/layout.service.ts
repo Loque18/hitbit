@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
+import { LayoutModule } from 'src/app/layout/layout.module';
+
 @Injectable({
     providedIn: 'root',
 })
@@ -15,6 +17,8 @@ export class LayoutService {
 
     // public observable to subscribe to sidebar toggle changes
     public isSidebarCollapsed$ = this.isSidebarCollapsed.asObservable();
+
+    // public observable to subscribe to chat toggle changes
     public isChatCollapsed$ = this.isChatContainerCollapsed.asObservable();
 
     public toggleSidebar() {

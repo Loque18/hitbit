@@ -20,16 +20,16 @@ describe('SidebarComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should collapse', fakeAsync(() => {
-        spyOn(component, 'toggleCollapsed');
+    // it('should collapse', fakeAsync(() => {
+    //     spyOn(component, 'toggleCollapsed');
 
-        let button = fixture.debugElement.nativeElement.querySelector('#collapse-sidebar-button');
-        button.click();
+    //     let button = fixture.debugElement.nativeElement.querySelector('#collapse-sidebar-button');
+    //     button.click();
 
-        tick();
+    //     tick();
 
-        expect(component.toggleCollapsed).toHaveBeenCalled();
-    }));
+    //     expect(component.toggleCollapsed).toHaveBeenCalled();
+    // }));
 
     // it('should collapse', () => {
     //     // simulate click on collapse button

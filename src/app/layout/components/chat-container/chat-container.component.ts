@@ -15,8 +15,6 @@ export class ChatContainerComponent implements OnInit {
     ngOnInit(): void {
         this.layoutService.isChatCollapsed$.subscribe((isCollapsed: boolean) => {
             this.collapsed = isCollapsed;
-
-            console.log('Chat collapsed initial state -> ', isCollapsed);
         });
     }
 

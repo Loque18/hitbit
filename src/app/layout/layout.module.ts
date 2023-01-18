@@ -12,6 +12,13 @@ import { ChatContainerComponent } from './components/chat-container/chat-contain
 @NgModule({
     imports: [CommonModule],
     exports: [MainLayoutComponent],
-    declarations: [MainLayoutComponent, HeaderComponent, FooterComponent, SidebarComponent, BottomBarComponent, ChatContainerComponent],
+    declarations: [
+        MainLayoutComponent,
+        HeaderComponent,
+        FooterComponent,
+        SidebarComponent,
+        BottomBarComponent,
+        ChatContainerComponent,
+    ],
 })
 export class LayoutModule {}
