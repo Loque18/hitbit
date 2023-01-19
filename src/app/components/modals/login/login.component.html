@@ -1,1 +1,5 @@
-<app-modal [id]="id" [show]="show" (onClose)="onCloseClick()"></app-modal>
+<app-modal [id]="id" [show]="show" (onClose)="onCloseClick()">
+    <div class="box">
+        <button type="button" aria-label="Close" (click)="signUpClick()">Sign up instead</button>
+    </div>
+</app-modal>

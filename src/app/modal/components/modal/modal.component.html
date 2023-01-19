@@ -1,11 +1,6 @@
 <div class="modal" [ngClass]="{ 'is-active': show }">
-    <div class="modal-background"></div>
     <div class="modal-content">
-        <!-- Any other Bulma elements you want -->
-        <div class="box">
-            {{ id }}
-            <!-- <ng-content></ng-content> -->
-        </div>
+        <ng-content></ng-content>
     </div>
     <button class="modal-close is-large" aria-label="close" type="button" (click)="closeClick()"></button>
 </div>

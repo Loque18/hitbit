@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalCoreService } from 'src/app/modal/services/modal-core.service';
 
-import { IAppModal } from 'src/app/constants/modal';
-
 import { AppModals } from 'src/static/app.modals';
 import { AbstModalComponent } from 'src/app/modal/components/modal/modalComponent';
 
@@ -20,5 +18,10 @@ export class LoginComponent extends AbstModalComponent implements OnInit {
 
     ngOnInit(): void {
         super.onInit();
+    }
+
+    signUpClick(): void {
+        this.modalService.closeModal(this.id);
+        this.modalService.openModal(AppModals.SIGN_UP);
     }
 }
