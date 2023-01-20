@@ -17,6 +17,8 @@ $ww-0: #dedede;
 
 $bb-0: #211f30;
 
+$error: #cc3b3b;
+
 $hgra1: linear-gradient(-45deg, $pink 0%, rgba(#fff, 0) 33%, rgba(#fff, 0) 66%, $blue 100%);
 $ygra: linear-gradient(180deg, #fff492 0%, #faea5f 38.03%, #e2d34e 66.67%, #c5b946 100%);
 
@@ -37,6 +39,8 @@ $hcolors: (
     bb-0: $bb-0,
 
     amarellow: $amarellow,
+
+    error: $error,
 );
 
 $hgras: (

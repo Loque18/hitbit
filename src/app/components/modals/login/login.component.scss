@@ -2,11 +2,24 @@
 
 .l_input {
     background-color: $blue-200;
-    border: none;
-
+    border-color: transparent;
     &::placeholder {
         color: $ww-0;
         font-weight: 500;
+    }
+
+    &.is-error {
+        border-color: $error;
+    }
+}
+
+.pass-eye {
+    height: 100% !important;
+    pointer-events: all !important;
+    color: $ww-0 !important;
+
+    &:hover {
+        text-shadow: 0 0 0.1rem $ww-0;
     }
 }
 

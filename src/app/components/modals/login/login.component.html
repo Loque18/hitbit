@@ -18,7 +18,12 @@
                                 type="email"
                                 placeholder="your@email.com"
                                 formControlName="email"
+                                [ngClass]="{ 'is-error': submitted && lf['email'].errors }"
                             />
+                        </div>
+                        <div *ngIf="submitted && lf['email'].errors" class="help is-error">
+                            <div *ngIf="lf['email'].errors['required']">Please enter your email</div>
+                            <div *ngIf="lf['email'].errors['email']">Email is invalid</div>
                         </div>
                     </div>
 
@@ -28,13 +33,23 @@
                         >
                         <div class="control has-icons-right">
                             <input
-                                type="text"
                                 id="l.password"
                                 class="password input l_input has-text-white is-size-7 py-5"
-                                type="password"
+                                [type]="showPass ? 'text' : 'password'"
                                 placeholder="your password"
                                 formControlName="password"
+                                [ngClass]="{ 'is-error': submitted && lf['password'].errors }"
                             />
+                            <button
+                                class="pass-eye icon is-small is-right unstyled-button"
+                                type="button"
+                                (click)="toggleShowPass()"
+                            >
+                                <i [ngClass]="!showPass ? 'far fa-eye' : 'far fa-eye-slash'"></i>
+                            </button>
+                        </div>
+                        <div *ngIf="submitted && lf['password'].errors" class="help is-error">
+                            <div *ngIf="lf['password'].errors['required']">Please enter your email</div>
                         </div>
                     </div>
 
@@ -49,16 +64,23 @@
                     <div class="field is-grouped is-grouped-centered">
                         <div class="control">
                             <button class="button is-blue0 alternative-login-btn is-size-7" type="button">
-                                Metamask
+                                <span class="icon">
+                                    <img src="/assets/logos/metamask.svg" alt="" />
+                                </span>
+                                <span> Metamask </span>
                             </button>
                         </div>
                         <div class="control">
                             <button class="button is-blue0 alternative-login-btn is-size-7" type="button">
-                                WalletConnect
+                                <span class="icon">
+                                    <img src="/assets/logos/walletconnect.png" alt="" />
+                                </span>
+                                <span> WalletConnect </span>
                             </button>
                         </div>
                     </div>
 
+                    <br />
                     <br />
 
                     <div class="field">
@@ -74,9 +96,9 @@
             </div>
 
             <div class="column is-flex is-flex-direction-column is-justify-content-end">
-                <div class="is-flex-grow-1 is-flex is-flex-direction-column is-justify-content-center">
+                <div class="is-flex-grow-1 is-flex is-flex-direction-column is-justify-content-center is-hidden-mobile">
                     <div>
-                        <img src="/assets/modals/login/poker.png" alt="" />
+                        <img src="/assets/modals/login/banner.png" alt="" />
                     </div>
                 </div>
                 <div class="has-text-white has-text-centered is-size-7">

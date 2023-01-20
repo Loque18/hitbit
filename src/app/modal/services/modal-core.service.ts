@@ -36,8 +36,6 @@ export class ModalCoreService {
 
     constructor() {
         this.modalSubject$.subscribe((modal: IAppModal) => {
-            console.log(this._modals);
-
             if (this._modals.length > 0) {
                 // open glass panel
                 this._glassPanelSubject.next(true);

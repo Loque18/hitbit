@@ -44,16 +44,16 @@ $corners: 'top', 'right', 'bottom', 'left';
         }
     }
 
-    // input
-    .input.is-#{$colorName} {
-        background: unset !important;
-        border-color: rgba($color, 0.5) !important;
+    // // input
+    // .input.is-#{$colorName} {
+    //     background: unset !important;
+    //     border-color: rgba($color, 0.5) !important;
 
-        &:focus {
-            border-color: $color !important;
-            box-shadow: 0 0 0 0.125em rgba($color, 0.25);
-        }
-    }
+    //     &:focus {
+    //         border-color: $color !important;
+    //         box-shadow: 0 0 0 0.125em rgba($color, 0.25);
+    //     }
+    // }
 
     // button
     // .button.is-#{$colorName} {

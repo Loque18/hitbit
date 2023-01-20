@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { ModalCoreService } from 'src/app/modal/services/modal-core.service';
 
@@ -12,13 +12,13 @@ import { AbstModalComponent } from 'src/app/modal/components/modal/modalComponen
     styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent extends AbstModalComponent implements OnInit {
-    /* *~~*~~*~~ Modal logic *~~*~~*~~ */
-
-    override id: string = AppModals.LOGIN;
-
     constructor(modalService: ModalCoreService) {
         super(modalService);
     }
+
+    /* *~~*~~*~~ Modal logic *~~*~~*~~ */
+
+    override id: string = AppModals.LOGIN;
 
     ngOnInit(): void {
         super.onInit();
@@ -31,24 +31,29 @@ export class LoginComponent extends AbstModalComponent implements OnInit {
 
     /* *~~*~~*~~ Login logic *~~*~~*~~ */
 
+    showPass: boolean = false;
+
     loginForm: FormGroup = new FormGroup({
         email: new FormControl('', [Validators.required, Validators.email]),
-        password: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(20)]),
+        password: new FormControl('', [Validators.required]),
     });
+    submitted: boolean = false;
+
+    toggleShowPass(): void {
+        this.showPass = !this.showPass;
+    }
 
     login(): void {
+        // mark form as submitted
+        this.submitted = true;
+
+        if (this.loginForm.invalid) return;
+
         // log values
-        console.log(this.loginForm.value);
-
-        // log status
-        console.log(this.loginForm.status);
-
-        // log errors
-        console.log(this.loginForm);
+        window.alert(JSON.stringify(this.loginForm.value, null, 4));
     }
-    // onChanges(): void {
-    //     this.loginForm.valueChanges.subscribe(val => {
-    //         console.log(val);
-    //     });
-    // }
+
+    get lf(): { [key: string]: AbstractControl } {
+        return this.loginForm.controls;
+    }
 }

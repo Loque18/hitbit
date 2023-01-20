@@ -110,6 +110,10 @@ $colors: mergeColorMaps(
             $ww-0,
             findColorInvert($ww-0),
         ),
+        'error': (
+            $error,
+            findColorInvert($error),
+        ),
         'link': (
             $link,
             $link-invert,
