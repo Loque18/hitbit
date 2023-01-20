@@ -1,20 +1,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ModalComponent } from './components/modal/modal.component';
+
 
 import { GlassPanelComponent } from './components/glass-panel/glass-panel.component';
+import { BasicModalComponent } from './components/basic-modal/basic-modal.component';
+import { CardModalComponent } from './components/card-modal/card-modal.component';
 
 @NgModule({
   declarations: [
-    ModalComponent,
-    GlassPanelComponent
+    GlassPanelComponent,
+    BasicModalComponent,
+    CardModalComponent
   ],
   imports: [
     CommonModule
   ],
   exports: [
-    ModalComponent,
-    GlassPanelComponent
+    GlassPanelComponent,
+    BasicModalComponent,
+    CardModalComponent
   ]
 })
 export class ModalModule { }

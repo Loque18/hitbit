@@ -1,9 +1,7 @@
 import { Injectable, OnInit } from '@angular/core';
-import { ModalModule } from '../modal.module';
 import { IAppModal } from 'src/app/constants/modal';
 
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
-import { ModalComponent } from '../components/modal/modal.component';
 
 /**
  * This service is used to handle app modals

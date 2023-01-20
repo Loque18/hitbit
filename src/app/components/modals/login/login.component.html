@@ -1,4 +1,4 @@
-<app-modal [id]="id" [show]="show">
+<app-basic-modal [id]="id" [show]="show" [modalContentClasses]="'login-resize-manager'">
     <div class="box login-box has-background-blue100 mb-0">
         <div class="is-flex is-justify-content-space-between">
             <h1 class="title is-4 has-text-white has-font-montserrat black">HITBIT</h1>
@@ -98,7 +98,7 @@
             <div class="column is-flex is-flex-direction-column is-justify-content-end">
                 <div class="is-flex-grow-1 is-flex is-flex-direction-column is-justify-content-center is-hidden-mobile">
                     <div>
-                        <img src="/assets/modals/login/banner.png" alt="" />
+                        <!-- <img src="/assets/modals/login/banner.png" alt="" /> -->
                     </div>
                 </div>
                 <div class="has-text-white has-text-centered is-size-7">
@@ -108,4 +108,4 @@
             </div>
         </div>
     </div>
-</app-modal>
+</app-basic-modal>

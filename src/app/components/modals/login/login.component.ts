@@ -1,34 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { ModalCoreService } from 'src/app/modal/services/modal-core.service';
+import { IOnModalClose } from 'src/app/modal/IOnModalClose';
 
 import { AppModals } from 'src/static/app.modals';
-import { AbstModalComponent } from 'src/app/modal/components/modal/modalComponent';
+import { AbstModalComponent } from 'src/app/modal/AbstractModal';
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent extends AbstModalComponent implements OnInit {
-    constructor(modalService: ModalCoreService) {
-        super(modalService);
-    }
-
+export class LoginComponent extends AbstModalComponent implements OnInit, IOnModalClose {
     /* *~~*~~*~~ Modal logic *~~*~~*~~ */
-
     override id: string = AppModals.LOGIN;
-
-    ngOnInit(): void {
-        super.onInit();
-    }
 
     signUpClick(): void {
         this.modalService.closeModal(this.id);
         this.modalService.openModal(AppModals.SIGN_UP);
     }
 
+    onClose(): void {
+        this.resetForm();
+    }
     /* *~~*~~*~~ Login logic *~~*~~*~~ */
 
     showPass: boolean = false;
@@ -37,6 +31,7 @@ export class LoginComponent extends AbstModalComponent implements OnInit {
         email: new FormControl('', [Validators.required, Validators.email]),
         password: new FormControl('', [Validators.required]),
     });
+
     submitted: boolean = false;
 
     toggleShowPass(): void {
@@ -51,6 +46,11 @@ export class LoginComponent extends AbstModalComponent implements OnInit {
 
         // log values
         window.alert(JSON.stringify(this.loginForm.value, null, 4));
+    }
+
+    resetForm(): void {
+        this.submitted = false;
+        this.loginForm.reset();
     }
 
     get lf(): { [key: string]: AbstractControl } {

@@ -1,14 +1,19 @@
-import { IAppModal } from 'src/app/constants/modal';
-import { ModalCoreService } from '../../services/modal-core.service';
+import { Component, HostListener, OnInit } from '@angular/core';
 
-export abstract class AbstModalComponent implements IAppModal {
+import { IOnModalClose } from './IOnModalClose';
+import { IAppModal } from 'src/app/constants/modal';
+import { ModalCoreService } from './services/modal-core.service';
+
+@Component({
+    template: '',
+})
+export abstract class AbstModalComponent implements IAppModal, OnInit {
     abstract id: string;
     show: boolean = false;
-    protected onClose?: () => void = () => {};
 
     constructor(protected modalService: ModalCoreService) {}
 
-    onInit() {
+    ngOnInit() {
         this.modalService.modalSubject$.subscribe((modal: IAppModal) => {
             if (this.id === modal.id) {
                 if (modal.show) this.open();
@@ -24,14 +29,18 @@ export abstract class AbstModalComponent implements IAppModal {
 
     private close(): void {
         this.show = false;
-        this.onClose?.();
+
+        if ('onClose' in this) {
+            (this as IOnModalClose).onClose();
+        }
     }
-
-    // *~~*~~*~~*~~*~~* MODAL EVENTS *~~*~~*~~*~~*~~* //
-
-    protected onCloseClick(): void {}
 
     protected closeModal(): void {
         this.modalService.closeModal(this.id);
+    }
+
+    @HostListener('document:keydown.escape', ['$event'])
+    onKeydownHandler(event: KeyboardEvent) {
+        this.closeModal();
     }
 }
