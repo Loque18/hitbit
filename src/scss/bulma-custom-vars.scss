@@ -3,6 +3,11 @@
 @import 'node_modules/bulma/sass/utilities/derived-variables.sass';
 @import 'node_modules/bulma/sass/utilities/functions.sass';
 
+$blue0: $blue-0;
+$blue0-invert: findColorInvert($blue0);
+$blue0-light: findLightColor($blue0);
+$blue0-dark: findDarkColor($blue0);
+
 $blue100: $blue-100;
 $blue100-invert: findColorInvert($blue100);
 $blue100-light: findLightColor($blue100);
@@ -59,6 +64,12 @@ $colors: mergeColorMaps(
             $primary-light,
             $primary-dark,
         ),
+        'blue0': (
+            $blue0,
+            $blue0-invert,
+            $blue0-light,
+            $blue0-dark,
+        ),
         'blue100': (
             $blue100,
             $blue100-invert,
@@ -94,6 +105,10 @@ $colors: mergeColorMaps(
             $blue600-invert,
             $blue600-light,
             $blue600-dark,
+        ),
+        'ww0': (
+            $ww-0,
+            findColorInvert($ww-0),
         ),
         'link': (
             $link,

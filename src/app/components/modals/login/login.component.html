@@ -1,5 +1,89 @@
-<app-modal [id]="id" [show]="show" (onClose)="onCloseClick()">
-    <div class="box">
-        <button type="button" aria-label="Close" (click)="signUpClick()">Sign up instead</button>
+<app-modal [id]="id" [show]="show">
+    <div class="box login-box has-background-blue100 mb-0">
+        <div class="is-flex is-justify-content-space-between">
+            <h1 class="title is-4 has-text-white has-font-montserrat black">HITBIT</h1>
+            <button class="delete is-medium" aria-label="close" type="button" (click)="closeModal()"></button>
+        </div>
+        <div class="columns">
+            <div class="column">
+                <form [formGroup]="loginForm" (ngSubmit)="login()">
+                    <div class="field">
+                        <label class="label has-text-white has-font-poppins semibold is-size-6" for="l.email"
+                            >Email</label
+                        >
+                        <div class="control">
+                            <input
+                                id="l.email"
+                                class="input l_input has-text-white is-size-7 py-5"
+                                type="email"
+                                placeholder="your@email.com"
+                                formControlName="email"
+                            />
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label has-text-white has-font-poppins semibold is-size-6" for="l.password"
+                            >Password</label
+                        >
+                        <div class="control has-icons-right">
+                            <input
+                                type="text"
+                                id="l.password"
+                                class="password input l_input has-text-white is-size-7 py-5"
+                                type="password"
+                                placeholder="your password"
+                                formControlName="password"
+                            />
+                        </div>
+                    </div>
+
+                    <div>
+                        <a class="has-text-amarellow has-font-poppins semibold is-size-7" href="#">
+                            <u>Forgot yout password?</u>
+                        </a>
+                    </div>
+
+                    <hr class="login-serparator" />
+
+                    <div class="field is-grouped is-grouped-centered">
+                        <div class="control">
+                            <button class="button is-blue0 alternative-login-btn is-size-7" type="button">
+                                Metamask
+                            </button>
+                        </div>
+                        <div class="control">
+                            <button class="button is-blue0 alternative-login-btn is-size-7" type="button">
+                                WalletConnect
+                            </button>
+                        </div>
+                    </div>
+
+                    <br />
+
+                    <div class="field">
+                        <button class="button hitbit-btn has-font-poppins extrabold is-fullwidth" type="submit">
+                            Login
+                        </button>
+                    </div>
+                    <div class="is-size-7 has-text-ww0">
+                        Don't have an account yet ?
+                        <a class="has-text-amarellow" (click)="signUpClick()"><u>Sign Up</u></a>
+                    </div>
+                </form>
+            </div>
+
+            <div class="column is-flex is-flex-direction-column is-justify-content-end">
+                <div class="is-flex-grow-1 is-flex is-flex-direction-column is-justify-content-center">
+                    <div>
+                        <img src="/assets/modals/login/poker.png" alt="" />
+                    </div>
+                </div>
+                <div class="has-text-white has-text-centered is-size-7">
+                    By accessing the site, I attest that I am at least 18 years old and have read the Terms &
+                    Conditions.
+                </div>
+            </div>
+        </div>
     </div>
 </app-modal>

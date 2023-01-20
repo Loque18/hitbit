@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
 import { ModalModule } from './modal/modal.module';
 import { LayoutModule } from './layout/layout.module';
 
@@ -25,8 +26,10 @@ import { SignupComponent } from './components/modals/signup/signup.component';
     imports: [
         BrowserModule,
         AppRoutingModule,
+        ReactiveFormsModule,
         ModalModule,
-        LayoutModule,
+        LayoutModule
+        
     ],
     bootstrap: [AppComponent]
 })

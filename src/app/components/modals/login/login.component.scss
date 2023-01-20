@@ -1,0 +1,37 @@
+@import 'src/scss/vars';
+
+.l_input {
+    background-color: $blue-200;
+    border: none;
+
+    &::placeholder {
+        color: $ww-0;
+        font-weight: 500;
+    }
+}
+
+.login-serparator {
+    background-color: white;
+
+    position: relative;
+
+    overflow: visible;
+
+    &::after {
+        content: 'Or Login With';
+        background-color: $blue-100;
+        color: white;
+        padding: 0 10px;
+        font-weight: 500;
+        font-size: 0.75rem;
+
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+
+.alternative-login-btn {
+    color: $ww-0;
+}

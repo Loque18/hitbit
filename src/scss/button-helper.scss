@@ -1,3 +1,5 @@
+@import './vars';
+
 .unstyled-button {
     background: none;
     color: inherit;
@@ -6,4 +8,20 @@
     font: inherit;
     cursor: pointer;
     outline: inherit;
+}
+
+.hitbit-btn {
+    background: $ygra;
+    border: 3px solid $bb-0 !important;
+    box-shadow: 0px 5px 0px $bb-0 !important;
+}
+
+// for desktop
+@media screen and (min-width: 1024px) {
+    .hitbit-btn {
+        &:hover {
+            transform: translateY(3px);
+            box-shadow: 0px 2px 0px $bb-0 !important;
+        }
+    }
 }

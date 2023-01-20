@@ -18,18 +18,20 @@ export abstract class AbstModalComponent implements IAppModal {
     }
 
     // *~~*~~*~~*~~*~~* MODAL LOGIC *~~*~~*~~*~~*~~* //
-    protected open(): void {
+    private open(): void {
         this.show = true;
     }
 
-    protected close(): void {
+    private close(): void {
         this.show = false;
         this.onClose?.();
     }
 
     // *~~*~~*~~*~~*~~* MODAL EVENTS *~~*~~*~~*~~*~~* //
 
-    protected onCloseClick(): void {
+    protected onCloseClick(): void {}
+
+    protected closeModal(): void {
         this.modalService.closeModal(this.id);
     }
 }

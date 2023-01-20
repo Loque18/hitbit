@@ -21,6 +21,8 @@
 .modal {
     animation: modalFadeOut $fast-bezier;
 
+    z-index: $z-modal-0;
+
     &.is-active {
         animation: modalFadeIn $fast-bezier;
     }
