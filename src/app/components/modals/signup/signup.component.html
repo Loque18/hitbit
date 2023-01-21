@@ -1,3 +1,133 @@
-<app-basic-modal [id]="id" [show]="show">
-    <div class="box">sign up</div>
+<app-basic-modal [id]="id" [show]="show" [modalContentClasses]="'login-resize-manager'">
+    <div class="box login-box has-background-blue100 mb-0">
+        <div class="is-flex is-justify-content-space-between">
+            <h1 class="title is-4 has-text-white has-font-montserrat black">HITBIT</h1>
+            <button class="delete is-medium" aria-label="close" type="button" (click)="closeModal()"></button>
+        </div>
+        <div class="columns">
+            <div class="column">
+                <form [formGroup]="signupForm" (ngSubmit)="signup()">
+                    <div class="field">
+                        <label class="label has-text-white has-font-poppins semibold is-size-6" for="su.email">
+                            Email
+                        </label>
+                        <div class="control">
+                            <input
+                                id="su.email"
+                                class="input l_input has-text-white is-size-7 py-5"
+                                type="email"
+                                placeholder="your@email.com"
+                                formControlName="email"
+                                [ngClass]="{ 'is-error': submitted && sf['email'].errors }"
+                            />
+                        </div>
+                        <div *ngIf="submitted && sf['email'].errors" class="help is-error">
+                            <div *ngIf="sf['email'].errors['required']">Please enter your email</div>
+                            <div *ngIf="sf['email'].errors['email']">Email is invalid</div>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label has-text-white has-font-poppins semibold is-size-6" for="su.password">
+                            Password
+                        </label>
+                        <div class="control has-icons-right">
+                            <input
+                                id="su.password"
+                                class="password input l_input has-text-white is-size-7 py-5"
+                                [type]="showPass ? 'text' : 'password'"
+                                placeholder="your password"
+                                formControlName="password"
+                                [ngClass]="{ 'is-error': submitted && sf['password'].errors }"
+                            />
+                            <button
+                                class="pass-eye icon is-small is-right unstyled-button"
+                                type="button"
+                                (click)="toggleShowPass()"
+                            >
+                                <i [ngClass]="!showPass ? 'far fa-eye' : 'far fa-eye-slash'"></i>
+                            </button>
+                        </div>
+                        <div *ngIf="submitted && sf['password'].errors" class="help is-error">
+                            <div *ngIf="sf['password'].errors['required']">Please enter your password</div>
+                            <div *ngIf="sf['password'].errors['minlength']">Password must be at least 8 characters</div>
+                            <div *ngIf="sf['password'].errors['maxlength']">Password must be at most 20 characters</div>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label has-text-white has-font-poppints semibold is-size-6" for="su.username">
+                            Username
+                        </label>
+                        <div class="control">
+                            <input
+                                id="su.username"
+                                class="username input l_input has-text-white is-size-7 py-5"
+                                type="text"
+                                placeholder="your username"
+                                formControlName="username"
+                                [ngClass]="{ 'is-error': submitted && sf['username'].errors }"
+                            />
+
+                            <div *ngIf="submitted && sf['username'].errors" class="help is-error">
+                                <div *ngIf="sf['username'].errors['required']">Please enter an username</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div class="control">
+                            <div class="is-flex is-align-items-start">
+                                <input
+                                    id="su.userAgreement"
+                                    name="su.userAgreement"
+                                    class="is-checkradio has-background-color is-blue0"
+                                    type="checkbox"
+                                    formControlName="userAgreement"
+                                />
+
+                                <label class="has-text-white su-userAgreement px-4 mt-1" for="su.userAgreement">
+                                </label>
+
+                                <p class="has-text-white">
+                                    I have read and accept the <a class="has-text-white"><u>Terms of Service</u></a
+                                    >, <a class="has-text-white"><u>Privacy Policy</u></a
+                                    >, <a class="has-text-white"><u>Responsible Gambling Policy</u></a
+                                    >, and all associated policies
+                                </p>
+                            </div>
+                            <div *ngIf="submitted && sf['userAgreement'].errors" class="help is-error">
+                                <div *ngIf="sf['userAgreement'].errors['required']">Please accept the terms</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br />
+                    <br />
+
+                    <div class="field">
+                        <button class="button hitbit-btn has-font-poppins extrabold is-fullwidth" type="submit">
+                            SIGN UP
+                        </button>
+                    </div>
+                    <div class="is-size-7 has-text-ww0">
+                        Already have an account yet ?
+                        <a class="has-text-amarellow" (click)="loginClick()"><u>Login</u></a>
+                    </div>
+                </form>
+            </div>
+
+            <div class="column is-flex is-flex-direction-column is-justify-content-end">
+                <div class="is-flex-grow-1 is-flex is-flex-direction-column is-justify-content-center is-hidden-mobile">
+                    <div>
+                        <img src="/assets/modals/login/banner.png" alt="" />
+                    </div>
+                </div>
+                <div class="has-text-white has-text-centered is-size-7">
+                    By accessing the site, I attest that I am at least 18 years old and have read the Terms &
+                    Conditions.
+                </div>
+            </div>
+        </div>
+    </div>
 </app-basic-modal>
