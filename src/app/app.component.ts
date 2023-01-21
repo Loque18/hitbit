@@ -14,7 +14,5 @@ export class AppComponent implements OnInit {
 
     ngOnInit(): void {
         // disable page scroll
-
-        this.modalService.openModal(AppModals.SIGN_UP);
     }
 }
