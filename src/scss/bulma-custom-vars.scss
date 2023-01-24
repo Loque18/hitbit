@@ -153,6 +153,18 @@ $colors: mergeColorMaps(
 // $navbar-item-img-max-height: 3.5rem;
 $navbar-height: 5rem;
 
+$navbar-item-color: rgba(white, 0.75);
+$navbar-item-hover-color: rgba(white, 1);
+
+$navbar-item-hover-background-color: rgba(white, 0.1);
+
+$navbar-dropdown-background-color: $blue200;
+
+$navbar-dropdown-arrow: white;
+
+$navbar-dropdown-item-hover-color: white;
+$navbar-dropdown-item-hover-background-color: $blue0;
+
 /* *~~*~~*~~*~~*~~* INPUT *~~*~~*~~*~~*~~* */
 
 // $input-focus-border-color: $hpurple;

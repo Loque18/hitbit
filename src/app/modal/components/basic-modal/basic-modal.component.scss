@@ -23,7 +23,26 @@
 
     z-index: $z-modal-0;
 
+    overflow: hidden auto !important;
+
+    height: 100%;
+    width: 100%;
+
     &.is-active {
+        display: block;
+
         animation: modalFadeIn $fast-bezier;
+    }
+
+    .modal-content {
+        margin: 0 !important;
+        overflow: unset;
+        min-height: 100%;
+        max-height: unset;
+        padding: 20px 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: unset;
     }
 }

@@ -25,4 +25,8 @@ export class HeaderComponent {
     onSignupClick(): void {
         this.modalService.openModal(AppModals.SIGN_UP);
     }
+
+    onLanguageChange(language: string): void {
+        window.location.href = `/${language}`;
+    }
 }

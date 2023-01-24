@@ -1,8 +1,20 @@
 <div class="carousel">
-    <div class="box has-background-blue200">
-        <div *ngFor="let slide of slides">
-            <div [innerHTML]="slide.template"></div>
-            <!-- <ng-template [ngTemplateOutlet]="slide.template"></ng-template> -->
+    <div class="carousel-container">
+        <div class="carousel-track" #carouselTrack>
+            <div *ngFor="let slide of slides" class="carousel-item">
+                <div class="box has-background-blue200" [innerHTML]="slide.template"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="carousel-controls">
+        <div class="controls-cantainer">
+            <div
+                class="carousel-control-dot"
+                *ngFor="let slide of slides; let i = index"
+                (click)="goTo(i)"
+                [ngClass]="{ active: i === offset }"
+            ></div>
         </div>
     </div>
 </div>

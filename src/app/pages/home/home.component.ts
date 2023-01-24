@@ -14,6 +14,6 @@ export class HomeComponent {
     games: IGame[] = games;
 
     constructor(private titleService: Title) {
-        this.titleService.setTitle(`${config.appTitle} · Home`);
+        this.titleService.setTitle($localize`${config.appTitle} · Home`);
     }
 }
