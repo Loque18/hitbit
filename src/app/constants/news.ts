@@ -6,8 +6,8 @@ interface INew {
 const news: INew[] = [
     {
         id: 1,
-        template: `<div>
-    <img src="/assets/carousel/welcome.png" alt="welcome" />
+        template: `<div class="car-item">
+    <img src="/assets/carousel/welcome.png" alt="news" />
 </div>`,
     },
     {

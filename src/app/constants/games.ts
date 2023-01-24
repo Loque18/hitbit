@@ -8,32 +8,27 @@ const games: IGame[] = [
     {
         id: 1,
         name: 'Roulette',
-        icon: 'https://picsum.photos/200/200',
+        icon: '/assets/games/roulette.png',
     },
     {
         id: 2,
         name: 'Towers',
-        icon: 'https://picsum.photos/200/200',
+        icon: '/assets/games/towers.png',
     },
     {
         id: 3,
         name: 'Dice',
-        icon: 'https://picsum.photos/200/200',
+        icon: '/assets/games/dice.png',
     },
     {
         id: 4,
         name: 'Slots',
-        icon: 'https://picsum.photos/200/200',
+        icon: '/assets/games/slots.png',
     },
     {
         id: 5,
         name: 'Blackjack',
-        icon: 'https://picsum.photos/200/200',
-    },
-    {
-        id: 6,
-        name: 'Poker',
-        icon: 'https://picsum.photos/200/200',
+        icon: '/assets/games/blackjack.png',
     },
 ];
 

@@ -18,7 +18,8 @@ export class CarouselComponent implements OnInit {
 
     @ViewChild('carouselTrack') track: ElementRef | undefined;
 
-    private C_HEIGHT: number = 330;
+    private C_HEIGHT: number = 250;
+    private TIMER: number = 50 * 1000;
 
     private interval: any;
 
@@ -37,7 +38,7 @@ export class CarouselComponent implements OnInit {
         // automatically scroll each 3 seconds
         this.interval = setInterval(() => {
             this.next();
-        }, 5 * 1000);
+        }, this.TIMER);
     }
 
     goTo(index: number): void {
@@ -67,6 +68,6 @@ export class CarouselComponent implements OnInit {
 
         this.interval = setInterval(() => {
             this.next();
-        }, 5 * 1000);
+        }, this.TIMER);
     }
 }

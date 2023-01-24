@@ -2,26 +2,44 @@
     <section class="home_root has-background-blue100">
         <div class="container py-5 px-4">
             <div class="block">
-                <app-carousel>
-                    <h1 class="title has-text-white">asd</h1>
-                </app-carousel>
+                <app-carousel></app-carousel>
             </div>
-            <div class="block"></div>
             <div class="block" [style]="{ overflow: 'hidden' }">
-                <h1 class="title is-5 has-text-white">
-                    HitBits original &nbsp; <span class="tag is-error">SPECIAL</span>
-                </h1>
+                <div class="is-flex is-justify-content-space-between">
+                    <h1 class="title is-5 has-text-white">
+                        HitBits original &nbsp; <span class="tag is-error">SPECIAL</span>
+                    </h1>
 
-                <ul class="is-flex">
+                    <div class="buttons">
+                        <button class="button is-blue200 is-small">
+                            <span class="icon">
+                                <i class="fas fa-chevron-left"></i>
+                            </span>
+                        </button>
+
+                        <button class="button is-blue200 is-small">
+                            <span class="icon">
+                                <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+
+                <ul class="is-flex" [ngStyle]="{ columnGap: '32px' }">
                     <li *ngFor="let game of games">
-                        <div class="box game_box">
-                            <h1 class="subtitle is-6 has-text-white has-font-monserrat extrabold">
+                        <a class="box game_box">
+                            <h1 class="subtitle is-6 has-text-white has-font-montserrat black has-text-centered mb-0">
                                 {{ game.name | uppercase }}
                             </h1>
-                            <figure class="image is-square">
-                                <img [src]="game.icon" alt="game image" />
-                            </figure>
-                        </div>
+
+                            <div class="p-5">
+                                <figure class="image is-square">
+                                    <img [src]="game.icon" alt="game image" />
+                                </figure>
+                            </div>
+
+                            <h2 class="has-text-centered has-text-warning">Play Now</h2>
+                        </a>
                     </li>
                 </ul>
             </div>
