@@ -4,12 +4,6 @@
     "newProjectRoot": "projects",
     "projects": {
         "hitbit": {
-            "i18n": {
-                "sourceLocale": "en-US",
-                "locales": {
-                    "es-CO": "src/locale/messages.es.xlf"
-                }
-            },
             "projectType": "application",
             "schematics": {
                 "@schematics/angular:component": {
@@ -23,7 +17,6 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
-                        "localize": ["en-US"],
                         "outputPath": "dist/hitbit",
                         "index": "src/index.html",
                         "main": "src/main.ts",
