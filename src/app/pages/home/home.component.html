@@ -4,6 +4,8 @@
             <div class="block">
                 <app-carousel></app-carousel>
             </div>
+
+            <!-- Classic games -->
             <div class="block" [style]="{ overflow: 'hidden' }">
                 <div class="is-flex is-justify-content-space-between">
                     <h1 class="title is-5 has-text-white">
@@ -39,6 +41,37 @@
                             </div>
 
                             <h2 class="has-text-centered has-text-warning">Play Now</h2>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Live casino -->
+            <div class="block" [style]="{ overflow: 'hidden' }">
+                <div class="is-flex is-justify-content-space-between">
+                    <h1 class="title is-5 has-text-white">Live casino &nbsp; <span class="casino_dot"></span></h1>
+
+                    <div class="buttons">
+                        <button class="button is-blue200 is-small">
+                            <span class="icon">
+                                <i class="fas fa-chevron-left"></i>
+                            </span>
+                        </button>
+
+                        <button class="button is-blue200 is-small">
+                            <span class="icon">
+                                <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+
+                <ul class="is-flex" [ngStyle]="{ columnGap: '32px' }">
+                    <li *ngFor="let lcItem of lcItems">
+                        <a class="box game_box p-0">
+                            <figure class="image is-square">
+                                <img [src]="lcItem.img" alt="game image" />
+                            </figure>
                         </a>
                     </li>
                 </ul>

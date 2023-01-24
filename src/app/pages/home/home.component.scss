@@ -16,3 +16,11 @@
         transform: translateY(-10px);
     }
 }
+
+.casino_dot {
+    width: 10px;
+    height: 10px;
+    background-color: $error;
+    border-radius: 50%;
+    display: inline-block;
+}

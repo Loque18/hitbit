@@ -1,7 +1,6 @@
 <nav class="custom-navbar navbar is-fixed-top has-background-blue200" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
         <a class="navbar-item" href="https://bulma.io">
-            <!-- <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28" /> -->
             <h1 class="title is-4 has-text-white has-font-montserrat black">HITBIT</h1>
         </a>
 
@@ -20,8 +19,142 @@
     </div>
 
     <div class="navbar-menu" [ngClass]="menuOpen ? 'is-active' : ''">
-        <div class="navbar-end">
+        <div class="navbar-start is-hidden">
             <div class="navbar-item">
+                <form>
+                    <div class="field has-addons">
+                        <div class="control">
+                            <div class="dropdown is-hoverable">
+                                <div class="dropdown-trigger">
+                                    <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+                                        <img src="https://picsum.photos/32" alt="" />
+                                        <span>USD</span>
+                                        <span class="icon is-small">
+                                            <i class="fas fa-angle-down" aria-hidden="true"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                                <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                                    <div class="dropdown-content">
+                                        <a href="#" class="dropdown-item">
+                                            <img src="https://picsum.photos/32" alt="" />
+                                            <span>USD</span>
+                                        </a>
+                                        <a href="#" class="dropdown-item">
+                                            <img src="https://picsum.photos/32" alt="" />
+                                            <span>USD</span>
+                                        </a>
+                                        <a href="#" class="dropdown-item">
+                                            <img src="https://picsum.photos/32" alt="" />
+                                            <span>USD</span>
+                                        </a>
+                                        <a href="#" class="dropdown-item">
+                                            <img src="https://picsum.photos/32" alt="" />
+                                            <span>USD</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="control">
+                            <button class="button hitbit-btn">DEPOSIT</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="navbar-end">
+            <!-- <div class="navbar-item">
+                <span class="has-text-white mr-2" i18n> Bets Wagered </span>
+                <span class="has-text-amarellow" i18n> 352,458 </span>
+            </div> -->
+
+            <!-- <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link">
+                    <span class="icon">
+                        <i class="fas fa-globe"></i>
+                    </span>
+                    <span i18n> Language </span>
+                </a>
+
+                <div class="navbar-dropdown">
+                    <a class="navbar-item" (click)="onLanguageChange('en')" i18n>English</a>
+                    <a class="navbar-item" (click)="onLanguageChange('es')" i18n>Spanish</a>
+                </div>
+            </div> -->
+
+            <div class="navbar-item">
+                <div class="buttons">
+                    <a class="button hitbit-btn has-font-poppins extrabold" (click)="onLoginClick()" i18n> LOGIN </a>
+                    <a class="has-text-white has-font-montserrat black is-size-6" (click)="onSignupClick()" i18n>
+                        SIGN UP
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- <nav class="custom-navbar">
+    <div class="navbar-container">
+        <div class="start">
+            <div class="nav-item has-bg-">
+                <div class="nav-brand">
+                    <a href="/home">
+                        <h1 class="title is-4 has-text-white has-font-montserrat black">HITBIT</h1>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="center">
+            <div class="nav-item">
+                <form>
+                    <div class="field has-addons">
+                        <div class="control">
+                            <div class="dropdown is-hoverable">
+                                <div class="dropdown-trigger">
+                                    <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+                                        <img src="https://picsum.photos/32" alt="" />
+                                        <span>USD</span>
+                                        <span class="icon is-small">
+                                            <i class="fas fa-angle-down" aria-hidden="true"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                                <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                                    <div class="dropdown-content">
+                                        <a href="#" class="dropdown-item">
+                                            <img src="https://picsum.photos/32" alt="" />
+                                            <span>USD</span>
+                                        </a>
+                                        <a href="#" class="dropdown-item">
+                                            <img src="https://picsum.photos/32" alt="" />
+                                            <span>USD</span>
+                                        </a>
+                                        <a href="#" class="dropdown-item">
+                                            <img src="https://picsum.photos/32" alt="" />
+                                            <span>USD</span>
+                                        </a>
+                                        <a href="#" class="dropdown-item">
+                                            <img src="https://picsum.photos/32" alt="" />
+                                            <span>USD</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="control">
+                            <button class="button hitbit-btn">DEPOSIT</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="end">
+            <div class="nav-item">
                 <span class="has-text-white mr-2" i18n> Bets Wagered </span>
                 <span class="has-text-amarellow" i18n> 352,458 </span>
             </div>
@@ -40,7 +173,7 @@
                 </div>
             </div>
 
-            <div class="navbar-item">
+            <div class="nav-item">
                 <div class="buttons">
                     <a class="button hitbit-btn has-font-poppins extrabold" (click)="onLoginClick()" i18n> LOGIN </a>
                     <a class="has-text-white has-font-montserrat black is-size-6" (click)="onSignupClick()" i18n>
@@ -50,4 +183,4 @@
             </div>
         </div>
     </div>
-</nav>
+</nav> -->
