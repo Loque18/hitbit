@@ -4,8 +4,6 @@ interface INavLink {
     icon: string;
 }
 
-const tempImg = 'https://picsum.photos/64';
-
 const NAV_LINKS: INavLink[] = [
     {
         label: 'All Games',

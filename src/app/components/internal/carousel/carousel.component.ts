@@ -21,7 +21,7 @@ export class CarouselComponent implements OnInit {
     private C_HEIGHT: number = 250;
     private TIMER: number = 50 * 1000;
 
-    private interval: any;
+    private interval: ReturnType<typeof setInterval> | undefined;
 
     ngOnInit() {
         this.offset$.subscribe(offset => {

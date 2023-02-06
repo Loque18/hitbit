@@ -1,4 +1,4 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { IAppModal } from 'src/app/constants/modal';
 
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
@@ -33,6 +33,7 @@ export class ModalCoreService {
     public glassPanelSubject$ = this._glassPanelSubject.asObservable();
 
     constructor() {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         this.modalSubject$.subscribe((modal: IAppModal) => {
             if (this._modals.length > 0) {
                 // open glass panel

@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { AppModals } from 'src/static/app.modals';
+import { Component } from '@angular/core';
 import { ModalCoreService } from './modal/services/modal-core.service';
 
 @Component({
@@ -7,12 +6,8 @@ import { ModalCoreService } from './modal/services/modal-core.service';
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
     title = 'hitbit';
 
     constructor(private modalService: ModalCoreService) {}
-
-    ngOnInit(): void {
-        // disable page scroll
-    }
 }

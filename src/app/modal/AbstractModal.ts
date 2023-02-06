@@ -40,7 +40,7 @@ export abstract class AbstModalComponent implements IAppModal, OnInit {
     }
 
     @HostListener('document:keydown.escape', ['$event'])
-    onKeydownHandler(event: KeyboardEvent) {
+    onKeydownHandler() {
         this.closeModal();
     }
 }
