@@ -3,150 +3,48 @@
 @import 'node_modules/bulma/sass/utilities/derived-variables.sass';
 @import 'node_modules/bulma/sass/utilities/functions.sass';
 
-$blue0: $blue-0;
-$blue0-invert: findColorInvert($blue0);
-$blue0-light: findLightColor($blue0);
-$blue0-dark: findDarkColor($blue0);
-
-$blue100: $blue-100;
-$blue100-invert: findColorInvert($blue100);
-$blue100-light: findLightColor($blue100);
-$blue100-dark: findDarkColor($blue100);
-
-$blue200: $blue-200;
-$blue200-invert: findColorInvert($blue200);
-$blue200-light: findLightColor($blue200);
-$blue200-dark: findDarkColor($blue200);
-
-$blue300: $blue-300;
-$blue300-invert: findColorInvert($blue300);
-$blue300-light: findLightColor($blue300);
-$blue300-dark: findDarkColor($blue300);
-
-$blue400: $blue-400;
-$blue400-invert: findColorInvert($blue400);
-$blue400-light: findLightColor($blue400);
-$blue400-dark: findDarkColor($blue400);
-
-$blue500: $blue-500;
-$blue500-invert: findColorInvert($blue500);
-$blue500-light: findLightColor($blue500);
-$blue500-dark: findDarkColor($blue500);
-
-$blue600: $blue-600;
-$blue600-invert: findColorInvert($blue600);
-$blue600-light: findLightColor($blue600);
-$blue600-dark: findDarkColor($blue600);
-
 /* *~~*~~*~~*~~*~~* COLORS *~~*~~*~~*~~*~~* */
 
-$colors: mergeColorMaps(
-    (
-        'white': (
-            $white,
-            $black,
-        ),
-        'black': (
-            $black,
-            $white,
-        ),
-        'light': (
-            $light,
-            $light-invert,
-        ),
-        'dark': (
-            $dark,
-            $dark-invert,
-        ),
-        'primary': (
-            $primary,
-            $primary-invert,
-            $primary-light,
-            $primary-dark,
-        ),
-        'blue0': (
-            $blue0,
-            $blue0-invert,
-            $blue0-light,
-            $blue0-dark,
-        ),
-        'blue100': (
-            $blue100,
-            $blue100-invert,
-            $blue100-light,
-            $blue100-dark,
-        ),
-        'blue200': (
-            $blue200,
-            $blue200-invert,
-            $blue200-light,
-            $blue200-dark,
-        ),
-        'blue300': (
-            $blue300,
-            $blue300-invert,
-            $blue300-light,
-            $blue300-dark,
-        ),
-        'blue400': (
-            $blue400,
-            $blue400-invert,
-            $blue400-light,
-            $blue400-dark,
-        ),
-        'blue500': (
-            $blue500,
-            $blue500-invert,
-            $blue500-light,
-            $blue500-dark,
-        ),
-        'blue600': (
-            $blue600,
-            $blue600-invert,
-            $blue600-light,
-            $blue600-dark,
-        ),
-        'ww0': (
-            $ww-0,
-            findColorInvert($ww-0),
-        ),
-        'error': (
-            $error,
-            findColorInvert($error),
-        ),
-        'link': (
-            $link,
-            $link-invert,
-            $link-light,
-            $link-dark,
-        ),
-        'info': (
-            $info,
-            $info-invert,
-            $info-light,
-            $info-dark,
-        ),
-        'success': (
-            $success,
-            $success-invert,
-            $success-light,
-            $success-dark,
-        ),
-        'warning': (
-            $warning,
-            $warning-invert,
-            $warning-light,
-            $warning-dark,
-        ),
-        'danger': (
-            $danger,
-            $danger-invert,
-            $danger-light,
-            $danger-dark,
-        ),
+$custom-colors: (
+    'blue0': (
+        $blue-0,
+        findColorInvert($blue-0),
     ),
-    $custom-colors
+    'blue100': (
+        $blue-100,
+        findColorInvert($blue-100),
+    ),
+    'blue200': (
+        $blue-200,
+        findColorInvert($blue-200),
+    ),
+    'blue300': (
+        $blue-300,
+        findColorInvert($blue-300),
+    ),
+    'blue400': (
+        $blue-400,
+        findColorInvert($blue-400),
+    ),
+    'blue500': (
+        $blue-500,
+        findColorInvert($blue-500),
+    ),
+    'blue600': (
+        $blue-600,
+        findColorInvert($blue-600),
+    ),
+    'ww0': (
+        $ww-0,
+        findColorInvert($ww-0),
+    ),
+    'error': (
+        $error,
+        findColorInvert($error),
+    ),
 );
+
+$colors: mergeColorMaps($colors, $custom-colors);
 
 // *~~*~~*~~*~~*~~* NAVBAR *~~*~~*~~*~~*~~* */
 
@@ -158,12 +56,12 @@ $navbar-item-hover-color: rgba(white, 1);
 
 $navbar-item-hover-background-color: rgba(white, 0.1);
 
-$navbar-dropdown-background-color: $blue200;
+$navbar-dropdown-background-color: $blue-200;
 
 $navbar-dropdown-arrow: white;
 
 $navbar-dropdown-item-hover-color: white;
-$navbar-dropdown-item-hover-background-color: $blue0;
+$navbar-dropdown-item-hover-background-color: $blue-0;
 
 /* *~~*~~*~~*~~*~~* INPUT *~~*~~*~~*~~*~~* */
 

@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
-import { LayoutModule } from 'src/app/layout/layout.module';
-
 @Injectable({
     providedIn: 'root',
 })

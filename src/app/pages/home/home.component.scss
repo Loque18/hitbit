@@ -7,12 +7,12 @@
 .game_box {
     min-width: 200px;
 
-    background-color: $blue200;
+    background-color: $blue-200;
 
     transition: transform 0.3s cubic-bezier(0.65, 0, 0.35, 1);
 
     &:hover {
-        background-color: $blue500;
+        background-color: $blue-500;
         transform: translateY(-10px);
     }
 }
