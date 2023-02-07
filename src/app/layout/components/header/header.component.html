@@ -26,7 +26,12 @@
                         <div class="control">
                             <div class="dropdown2 is-hoverable">
                                 <div class="dropdown2-trigger">
-                                    <button class="button is-blue0" aria-haspopup="true" aria-controls="dropdown2-menu">
+                                    <button
+                                        class="button is-blue0"
+                                        aria-haspopup="true"
+                                        aria-controls="dropdown2-menu"
+                                        [style]="{ height: '3rem' }"
+                                    >
                                         <div class="is-flex is-align-items-center" [style]="{ columnGap: '5px' }">
                                             <img src="https://picsum.photos/32" alt="" width="24" />
                                             <div>$11.01</div>
@@ -80,7 +85,9 @@
                             </div>
                         </div>
                         <div class="control">
-                            <button class="button deposit-btn has-font-poppins extrabold">DEPOSIT</button>
+                            <button class="button deposit-btn has-font-poppins extrabold" [style]="{ height: '3rem' }">
+                                DEPOSIT
+                            </button>
                         </div>
                     </div>
                 </form>
@@ -90,10 +97,22 @@
         <div class="navbar-end is-hidden-desktop">
             <div class="navbar-item">
                 <div class="buttons">
-                    <a class="button hitbit-btn has-font-poppins extrabold" (click)="onLoginClick()" i18n> LOGIN </a>
-                    <a class="has-text-white has-font-montserrat black is-size-6" (click)="onSignupClick()" i18n>
+                    <button
+                        class="button hitbit-btn has-font-poppins extrabold"
+                        (click)="onLoginClick()"
+                        [style]="{ height: '3rem' }"
+                        i18n
+                    >
+                        LOGIN
+                    </button>
+                    <button
+                        class="has-text-white has-font-montserrat black is-size-6"
+                        (click)="onSignupClick()"
+                        [style]="{ height: '3rem' }"
+                        i18n
+                    >
                         SIGN UP
-                    </a>
+                    </button>
                 </div>
             </div>
         </div>
@@ -102,7 +121,14 @@
     <div class="navbar-end-desktop is-hidden-touch">
         <div class="navbar-item">
             <div class="buttons">
-                <a class="button hitbit-btn has-font-poppins extrabold" (click)="onLoginClick()" i18n> LOGIN </a>
+                <button
+                    class="button hitbit-btn has-font-poppins extrabold"
+                    (click)="onLoginClick()"
+                    [style]="{ height: '3rem' }"
+                    i18n
+                >
+                    LOGIN
+                </button>
                 <a class="has-text-white has-font-montserrat black is-size-6" (click)="onSignupClick()" i18n>
                     SIGN UP
                 </a>
