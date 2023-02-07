@@ -1,14 +1,15 @@
 <app-main-layout>
     <section class="home_root has-background-blue100">
-        <div class="container py-5 px-4">
+        <div class="container">
             <div class="block">
                 <app-carousel></app-carousel>
             </div>
 
             <!-- Classic games -->
             <div class="block" [style]="{ overflow: 'hidden' }">
-                <div class="is-flex is-justify-content-space-between">
-                    <h1 class="title is-5 has-text-white">
+                <!-- title and buttons -->
+                <div class="is-flex is-justify-content-space-between is-align-items-center">
+                    <h1 class="title is-5 has-text-white mb-0">
                         HitBits original &nbsp; <span class="tag is-error">SPECIAL</span>
                     </h1>
 
@@ -27,7 +28,10 @@
                     </div>
                 </div>
 
-                <ul class="is-flex" [ngStyle]="{ columnGap: '32px' }">
+                <br />
+
+                <!-- cards -->
+                <ul class="is-flex" [ngStyle]="{ columnGap: '24px' }">
                     <li *ngFor="let game of games">
                         <a class="box game_box">
                             <h1 class="subtitle is-6 has-text-white has-font-montserrat black has-text-centered mb-0">
@@ -48,8 +52,8 @@
 
             <!-- Live casino -->
             <div class="block" [style]="{ overflow: 'hidden' }">
-                <div class="is-flex is-justify-content-space-between">
-                    <h1 class="title is-5 has-text-white">Live casino &nbsp; <span class="casino_dot"></span></h1>
+                <div class="is-flex is-justify-content-space-between is-align-items-center">
+                    <h1 class="title is-5 has-text-white mb-0">Live casino &nbsp; <span class="casino_dot"></span></h1>
 
                     <div class="buttons">
                         <button class="button is-blue200 is-small">
@@ -66,12 +70,13 @@
                     </div>
                 </div>
 
-                <ul class="is-flex" [ngStyle]="{ columnGap: '32px' }">
+                <br />
+
+                <ul class="is-flex" [ngStyle]="{ columnGap: '24px' }">
                     <li *ngFor="let lcItem of lcItems">
-                        <a class="box game_box p-0">
-                            <figure class="image is-square">
-                                <img [src]="lcItem.img" alt="game image" />
-                            </figure>
+                        <a class="box game_box p-0"
+                            >a
+                            <!-- <img [src]="lcItem.img" alt="game image" /> -->
                         </a>
                     </li>
                 </ul>

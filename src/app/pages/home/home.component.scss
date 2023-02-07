@@ -5,7 +5,7 @@
 }
 
 .game_box {
-    min-width: 200px;
+    min-width: 175px;
 
     background-color: $blue-200;
 
@@ -14,6 +14,7 @@
     &:hover {
         background-color: $blue-500;
         transform: translateY(-10px);
+        box-shadow: unset;
     }
 }
 
@@ -23,4 +24,18 @@
     background-color: $error;
     border-radius: 50%;
     display: inline-block;
+}
+
+// for desktop
+@media screen and (min-width: 768px) {
+    .container {
+        padding: 2.5rem 3.5rem;
+    }
+}
+
+// for mobile
+@media screen and (max-width: 768px) {
+    .container {
+        padding: 1.5rem 1.5rem;
+    }
 }
