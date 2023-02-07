@@ -25,7 +25,6 @@
         .sidebar-link {
             display: flex;
             column-gap: 1rem;
-            margin-bottom: 1.75rem;
             padding: 0 10px;
 
             &:hover {
@@ -62,7 +61,7 @@
             .sidebar-link {
                 display: flex;
                 column-gap: 1rem;
-                margin-bottom: 1.75rem;
+                margin-bottom: 1.5rem;
 
                 &:hover {
                     border-right: 3px solid $blue-600;
@@ -95,11 +94,7 @@
             .sidebar-link {
                 display: flex;
                 column-gap: 1rem;
-                margin-bottom: 1.75rem;
-
-                &:hover {
-                    border-right: 3px solid $blue-600;
-                }
+                margin-bottom: 1.5rem;
             }
         }
     }

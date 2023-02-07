@@ -17,7 +17,7 @@ import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 export class ModalCoreService {
     // variable
 
-    // array of opened modals, current is -> _modals[_modals.length - 1]
+    // array of opened modals, current is the last item -> _modals[_modals.length - 1]
     private _modals: string[] = [];
 
     // observable to notify the modal component to show/hide

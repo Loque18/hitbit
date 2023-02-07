@@ -1,52 +1,6 @@
 @import 'src/scss/vars';
 
 @import 'src/scss/bulma-custom-vars';
-/*
-.custom-navbar {
-    border-bottom: 2px solid #181723;
-
-    width: 100%;
-    min-height: $navbar-height;
-
-    position: fixed;
-    top: 0;
-    left: 0;
-
-    background-color: $blue200;
-
-    .navbar-container {
-        width: 100%;
-        min-height: $navbar-height;
-
-        display: flex;
-
-        > div {
-            border: 1px solid dodgerblue;
-
-            display: flex;
-            align-items: stretch;
-
-            .nav-item {
-                padding: 10px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-        }
-
-        .start {
-        }
-
-        .center {
-            justify-content: center;
-            flex: 1 1 312px;
-        }
-
-        .end {
-            justify-content: flex-end;
-        }
-    }
-}*/
 
 .custom-navbar {
     border-bottom: 2px solid #181723;
@@ -56,6 +10,29 @@
 @media screen and (min-width: 1024px) {
     .custom-navbar {
         z-index: $z-foreground-2;
+
+        display: flex;
+        flex-direction: row;
+
+        > div {
+            width: 33.33%;
+        }
+
+        .navbar-menu {
+            justify-content: center;
+
+            .navbar-start {
+                margin-right: 0px;
+                column-gap: 2.5rem;
+            }
+        }
+
+        .navbar-end-desktop {
+            display: flex;
+            justify-content: flex-end;
+            align-items: stretch;
+            margin-left: auto;
+        }
     }
 }
 

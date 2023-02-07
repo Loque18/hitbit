@@ -30,6 +30,7 @@ export abstract class AbstModalComponent implements IAppModal, OnInit {
     private close(): void {
         this.show = false;
 
+        // if the modal implements IOnModalClose, call the onClose method
         if ('onClose' in this) {
             (this as IOnModalClose).onClose();
         }

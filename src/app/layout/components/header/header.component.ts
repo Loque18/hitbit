@@ -18,6 +18,8 @@ export class HeaderComponent {
         this.menuOpen = !this.menuOpen;
     }
 
+    // ::: open modals ::: //
+
     onLoginClick(): void {
         this.modalService.openModal(AppModals.LOGIN);
     }
@@ -26,7 +28,5 @@ export class HeaderComponent {
         this.modalService.openModal(AppModals.SIGN_UP);
     }
 
-    onLanguageChange(language: string): void {
-        window.location.href = `/${language}`;
-    }
+    // ::: deposit ::: //
 }
