@@ -57,15 +57,17 @@
                 transform: translateX(0);
             }
         }
+    }
+}
 
-        /*
-        .navbar-container {
-            .center,
-            .end {
-                display: none;
-            }
-        }
+// ::: DEPOSIT BTN ::: //
+.deposit-btn {
+    background-color: $ygra;
+    border: 3px solid $bb-0 !important;
+    border-radius: 5px;
+    border-color: $bb-0;
 
-        */
+    &:hover {
+        background-color: lighten($ygra, 5%);
     }
 }

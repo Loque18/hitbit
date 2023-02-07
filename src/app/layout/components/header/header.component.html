@@ -24,55 +24,55 @@
                 <form>
                     <div class="field has-addons">
                         <div class="control">
-                            <div class="dropdown is-hoverable">
-                                <div class="dropdown-trigger">
-                                    <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+                            <div class="dropdown2 is-hoverable">
+                                <div class="dropdown2-trigger">
+                                    <button class="button is-blue0" aria-haspopup="true" aria-controls="dropdown2-menu">
                                         <div class="is-flex is-align-items-center" [style]="{ columnGap: '5px' }">
-                                            <img src="https://picsum.photos/32" alt="" />
-                                            <div>USD</div>
+                                            <img src="https://picsum.photos/32" alt="" width="24" />
+                                            <div>$11.01</div>
 
-                                            <!-- <span class="icon is-small">
-                                                <i class="fas fa-angle-down" aria-hidden="true"></i>
-                                            </span> -->
+                                            <span class="icon is-small">
+                                                <img src="/assets/icons/navbar/arrow-down.svg" alt="" />
+                                            </span>
                                         </div>
                                     </button>
                                 </div>
-                                <div class="dropdown-menu" id="dropdown-menu" role="menu">
-                                    <div class="dropdown-content">
-                                        <a href="#" class="dropdown-item">
+                                <div class="dropdown2-menu" role="menu">
+                                    <div class="dropdown2-content">
+                                        <a href="#" class="dropdown2-item">
                                             <div
                                                 class="is-flex is-flex is-align-items-center"
                                                 [style]="{ columnGap: '5px' }"
                                             >
                                                 <img src="https://picsum.photos/32" alt="" />
-                                                <div>USD</div>
+                                                <div>$0</div>
                                             </div>
                                         </a>
-                                        <a href="#" class="dropdown-item">
+                                        <a href="#" class="dropdown2-item">
                                             <div
                                                 class="is-flex is-flex is-align-items-center"
                                                 [style]="{ columnGap: '5px' }"
                                             >
                                                 <img src="https://picsum.photos/32" alt="" />
-                                                <div>USD</div>
+                                                <div>$0</div>
                                             </div>
                                         </a>
-                                        <a href="#" class="dropdown-item">
+                                        <a href="#" class="dropdown2-item">
                                             <div
                                                 class="is-flex is-flex is-align-items-center"
                                                 [style]="{ columnGap: '5px' }"
                                             >
                                                 <img src="https://picsum.photos/32" alt="" />
-                                                <div>USD</div>
+                                                <div>$0</div>
                                             </div>
                                         </a>
-                                        <a href="#" class="dropdown-item">
+                                        <a href="#" class="dropdown2-item">
                                             <div
                                                 class="is-flex is-flex is-align-items-center"
                                                 [style]="{ columnGap: '5px' }"
                                             >
                                                 <img src="https://picsum.photos/32" alt="" />
-                                                <div>USD</div>
+                                                <div>$0</div>
                                             </div>
                                         </a>
                                     </div>
@@ -80,7 +80,7 @@
                             </div>
                         </div>
                         <div class="control">
-                            <button class="button">DEPOSIT</button>
+                            <button class="button deposit-btn has-font-poppins extrabold">DEPOSIT</button>
                         </div>
                     </div>
                 </form>
@@ -88,25 +88,6 @@
         </div>
 
         <div class="navbar-end is-hidden-desktop">
-            <!-- <div class="navbar-item">
-                <span class="has-text-white mr-2" i18n> Bets Wagered </span>
-                <span class="has-text-amarellow" i18n> 352,458 </span>
-            </div> -->
-
-            <!-- <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link">
-                    <span class="icon">
-                        <i class="fas fa-globe"></i>
-                    </span>
-                    <span i18n> Language </span>
-                </a>
-
-                <div class="navbar-dropdown">
-                    <a class="navbar-item" (click)="onLanguageChange('en')" i18n>English</a>
-                    <a class="navbar-item" (click)="onLanguageChange('es')" i18n>Spanish</a>
-                </div>
-            </div> -->
-
             <div class="navbar-item">
                 <div class="buttons">
                     <a class="button hitbit-btn has-font-poppins extrabold" (click)="onLoginClick()" i18n> LOGIN </a>

@@ -3,13 +3,14 @@
 $blue: #00b2ff;
 $pink: #ff00aa;
 
+$blue--100: #011c31;
 $blue-0: #013156;
 $blue-100: #012745;
 $blue-200: #023a68;
 $blue-300: #034e8a;
-$blue-400: #054d88;
-$blue-500: #0462ad;
-$blue-600: #0575d0;
+$blue-400: #0462ad;
+$blue-500: #0575d0;
+$blue-600: #054d88;
 
 $amarellow: #f2e35a;
 $amarellow-2: #e2d34e;
@@ -21,12 +22,13 @@ $bb-0: #211f30;
 $error: #cc3b3b;
 
 $hgra1: linear-gradient(-45deg, $pink 0%, rgba(#fff, 0) 33%, rgba(#fff, 0) 66%, $blue 100%);
-$ygra: linear-gradient(180deg, #fff492 0%, #faea5f 38.03%, #e2d34e 66.67%, #c5b946 100%);
+$ygra: #ffee56;
 
 $hcolors: (
     blue: $blue,
     pink: $pink,
 
+    blue--100: $blue--100,
     blue-0: $blue-0,
     blue-100: $blue-100,
     blue-200: $blue-200,
@@ -41,13 +43,13 @@ $hcolors: (
 
     amarellow: $amarellow,
     amarellow-2: $amarellow-2,
+    ygra: $ygra,
 
     error: $error,
 );
 
 $hgras: (
     hgra1: $hgra1,
-    ygra: $ygra,
 );
 
 /* *~~*~~*~~*~~*~~* Z-INDEX *~~*~~*~~*~~*~~* */

@@ -6,6 +6,10 @@
 /* *~~*~~*~~*~~*~~* COLORS *~~*~~*~~*~~*~~* */
 
 $custom-colors: (
+    'blue-100': (
+        $blue--100,
+        findColorInvert($blue--100),
+    ),
     'blue0': (
         $blue-0,
         findColorInvert($blue-0),

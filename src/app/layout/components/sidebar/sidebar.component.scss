@@ -20,7 +20,7 @@
         flex-direction: column;
         justify-content: space-between;
 
-        padding: 10px 0;
+        // padding: 10px 0;
 
         .sidebar-link {
             display: flex;
@@ -61,10 +61,14 @@
             .sidebar-link {
                 display: flex;
                 column-gap: 1rem;
-                margin-bottom: 1.5rem;
+                padding-top: 0.75rem;
+                padding-bottom: 0.75rem;
 
-                &:hover {
-                    border-right: 3px solid $blue-600;
+                // margin-bottom: 1.5rem;
+
+                &:hover,
+                .active {
+                    background-color: $blue-600;
                 }
             }
         }

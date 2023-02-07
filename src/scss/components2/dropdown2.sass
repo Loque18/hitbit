@@ -1,0 +1,84 @@
+@import "../../../node_modules/bulma/sass/utilities/mixins"
+@import '../vars.scss'
+
+$dropdown2-menu-min-width: 12rem !default
+
+$dropdown2-content-background-color: $blue-0 !default
+$dropdown2-content-arrow: $link !default
+$dropdown2-content-offset: 4px !default
+$dropdown2-content-padding-bottom: 0.5rem !default
+$dropdown2-content-padding-top: 0.5rem !default
+$dropdown2-content-radius: $radius !default
+$dropdown2-content-shadow: $shadow !default
+$dropdown2-content-z: 20 !default
+
+$dropdown2-item-color: $ww-0 !default
+$dropdown2-item-hover-color: $white !default
+$dropdown2-item-hover-background-color: $blue-500 !default
+$dropdown2-item-active-color: $link-invert !default
+$dropdown2-item-active-background-color: $link !default
+
+$dropdown2-divider-background-color: $border-light !default
+
+.dropdown2
+  display: inline-flex
+  position: relative
+  vertical-align: top
+  &.is-active,
+  &.is-hoverable:hover
+    .dropdown2-menu
+      display: block
+  &.is-right
+    .dropdown2-menu
+      left: auto
+      right: 0
+  &.is-up
+    .dropdown2-menu
+      bottom: 100%
+      padding-bottom: $dropdown2-content-offset
+      padding-top: initial
+      top: auto
+
+.dropdown2-menu
+  display: none
+  +ltr-position(0, false)
+  min-width: $dropdown2-menu-min-width
+  padding-top: $dropdown2-content-offset
+  position: absolute
+  top: 100%
+  z-index: $dropdown2-content-z
+
+.dropdown2-content
+  background-color: $dropdown2-content-background-color
+  border-radius: $dropdown2-content-radius
+  box-shadow: $dropdown2-content-shadow
+  padding-bottom: $dropdown2-content-padding-bottom
+  padding-top: $dropdown2-content-padding-top
+
+.dropdown2-item
+  color: $dropdown2-item-color
+  display: block
+  font-size: 0.875rem
+  line-height: 1.5
+  padding: 0.375rem 1rem
+  position: relative
+
+a.dropdown2-item,
+button.dropdown2-item
+  +ltr-property("padding", 3rem)
+  text-align: inherit
+  white-space: nowrap
+  width: 100%
+  &:hover
+    background-color: $dropdown2-item-hover-background-color
+    color: $dropdown2-item-hover-color
+  &.is-active
+    background-color: $dropdown2-item-active-background-color
+    color: $dropdown2-item-active-color
+
+.dropdown2-divider
+  background-color: $dropdown2-divider-background-color
+  border: none
+  display: block
+  height: 1px
+  margin: 0.5rem 0
