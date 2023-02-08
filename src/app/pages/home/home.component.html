@@ -74,9 +74,39 @@
 
                 <ul class="is-flex" [ngStyle]="{ columnGap: '24px' }">
                     <li *ngFor="let lcItem of lcItems">
-                        <a class="box game_box p-0"
-                            >a
-                            <!-- <img [src]="lcItem.img" alt="game image" /> -->
+                        <a class="box game_box p-0">
+                            <img [src]="lcItem.img" alt="game image" />
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Bonus Battles -->
+            <div class="block" [style]="{ overflow: 'hidden' }">
+                <div class="is-flex is-justify-content-space-between is-align-items-center">
+                    <h1 class="title is-5 has-text-white mb-0">Bonus Battles</h1>
+
+                    <div class="buttons">
+                        <button class="button is-blue200 is-small">
+                            <span class="icon">
+                                <i class="fas fa-chevron-left"></i>
+                            </span>
+                        </button>
+
+                        <button class="button is-blue200 is-small">
+                            <span class="icon">
+                                <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+
+                <br />
+
+                <ul class="is-flex" [ngStyle]="{ columnGap: '24px' }">
+                    <li *ngFor="let lcItem of lcItems">
+                        <a class="box game_box p-0">
+                            <img [src]="lcItem.img" alt="game image" />
                         </a>
                     </li>
                 </ul>

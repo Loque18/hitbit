@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { MainLayoutComponent } from './main-layout/main-layout.component';
+import { NotFoundLayoutComponent } from './not-found-layout/not-found-layout.component';
 
 import { HeaderComponent } from 'src/app/layout/components/header/header.component';
 import { FooterComponent } from 'src/app/layout/components/footer/footer.component';
@@ -11,7 +12,10 @@ import { ChatContainerComponent } from './components/chat-container/chat-contain
 
 @NgModule({
     imports: [CommonModule],
-    exports: [MainLayoutComponent],
+    exports: [
+        MainLayoutComponent,
+        NotFoundLayoutComponent
+    ],
     declarations: [
         MainLayoutComponent,
         HeaderComponent,
@@ -19,6 +23,7 @@ import { ChatContainerComponent } from './components/chat-container/chat-contain
         SidebarComponent,
         BottomBarComponent,
         ChatContainerComponent,
+        NotFoundLayoutComponent,
     ],
 })
 export class LayoutModule {}
