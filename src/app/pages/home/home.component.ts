@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 
-import { liveCasinoItems } from 'src/app/constants/live-casino';
-
 import { config } from 'src/static/app.config';
 
 import { games, IGame } from 'src/app/constants/games';
+import { liveCasinoItems } from 'src/app/constants/live-casino';
+import { bonusBattleItems } from 'src/app/constants/bonus-battle';
 
 @Component({
     selector: 'app-home',
@@ -16,6 +16,7 @@ export class HomeComponent {
     games: IGame[] = games;
 
     lcItems = liveCasinoItems;
+    bbItems = bonusBattleItems;
 
     constructor(private titleService: Title) {
         this.titleService.setTitle($localize`${config.appTitle} · Home`);

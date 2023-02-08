@@ -1,0 +1,56 @@
+<div class="block" [style]="{ overflow: 'hidden' }">
+    <div class="is-flex is-justify-content-space-between is-align-items-center">
+        <h1 class="title is-5 has-text-white mb-0">Events</h1>
+
+        <div class="buttons">
+            <button class="button is-blue200 is-small">
+                <span class="icon">
+                    <i class="fas fa-chevron-left"></i>
+                </span>
+            </button>
+
+            <button class="button is-blue200 is-small">
+                <span class="icon">
+                    <i class="fas fa-chevron-right"></i>
+                </span>
+            </button>
+        </div>
+    </div>
+
+    <br />
+
+    <ul>
+        <ul class="is-flex" [ngStyle]="{ columnGap: '24px' }">
+            <li *ngFor="let item of events" class="box-container">
+                <div class="box event-box" [style]="{ backgorundImg: 'url(' + item.img + ')' }">
+                    <div class="px-3 pb-3">
+                        <div>
+                            <h4 class="subtitle has-text-ygra is-7">
+                                {{ item.date }}
+                            </h4>
+                            <h1 class="title has-text-white is-4 mb-0">
+                                {{ item.title | uppercase }}
+                            </h1>
+                            <p class="has-text-white is-size-6">{{ item.description }}</p>
+                        </div>
+
+                        <br />
+
+                        <div class="is-flex">
+                            <button
+                                class="button is-ygra has-font-poppins extrabold has-text-black has-border-3-bb-0-o-100 py-5"
+                            >
+                                JOIN EVENT
+                            </button>
+
+                            <div class="box py-1 has-background-blue-100">
+                                <span class="has-text-ww1">Starts in</span>
+                                <span class="has-text-white">{{ item.secondsToStart }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </ul>
+</div>

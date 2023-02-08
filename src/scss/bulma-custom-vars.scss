@@ -42,9 +42,21 @@ $custom-colors: (
         $ww-0,
         findColorInvert($ww-0),
     ),
+    'ww1': (
+        $ww-1,
+        findColorInvert($ww-1),
+    ),
     'error': (
         $error,
         findColorInvert($error),
+    ),
+    'ygra': (
+        $ygra,
+        #f0ff19,
+    ),
+    'success': (
+        #71e276,
+        findColorInvert(#71e276),
     ),
 );
 

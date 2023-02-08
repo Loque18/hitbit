@@ -1,0 +1,15 @@
+@import 'src/scss/vars';
+
+.box-container {
+    width: 50%;
+}
+
+.event-box {
+    // img with top gradient
+    background: linear-gradient(to bottom, rgba(#023a68, 0.52), rgba(#0d2941, 0.73)), url(https://picsum.photos/400/200);
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 5px;
+}

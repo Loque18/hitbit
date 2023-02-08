@@ -14,6 +14,8 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { PagenotfoundComponent } from './pages/pagenotfound/pagenotfound.component';
 
+import { CasinoEventsComponent } from './pages/home/(sections)/casino-events/casino-events.component';
+
 import { CarouselComponent } from './components/internal/carousel/carousel.component';
 import { LoginComponent } from './components/modals/login/login.component';
 import { SignupComponent } from './components/modals/signup/signup.component';
@@ -22,10 +24,17 @@ import { SignupComponent } from './components/modals/signup/signup.component';
     declarations: [
         AppComponent,
 
+        // home page
         HomeComponent,
+        
+        // home page sections
+        CasinoEventsComponent,
+        
+        // home page sections
+        // EventsCardComponent,
+
         PagenotfoundComponent,
-
-
+        
         CarouselComponent,
         LoginComponent,
         SignupComponent,
@@ -37,7 +46,6 @@ import { SignupComponent } from './components/modals/signup/signup.component';
         ReactiveFormsModule,
         ModalModule,
         LayoutModule
-        
     ],
     bootstrap: [AppComponent]
 })
