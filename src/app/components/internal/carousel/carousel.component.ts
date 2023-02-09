@@ -26,8 +26,6 @@ export class CarouselComponent implements OnInit {
     ngOnInit() {
         this.offset$.subscribe(offset => {
             if (this.track) {
-                console.log('offset', offset);
-
                 const dir = offset < 0 ? 1 : -1;
                 const track = this.track.nativeElement;
 
