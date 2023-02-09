@@ -1,0 +1,26 @@
+@use 'src/scss/vars' as *;
+@use '../commons.scss' as *;
+
+.live_casino_box {
+    @extend %game-box; // from commons.scss
+
+    height: 219px;
+
+    background-size: cover;
+    background-position: center;
+
+    transition: transform 0.128s cubic-bezier(0.65, 0, 0.35, 1);
+
+    &:hover {
+        transform: translateY(-10px);
+        box-shadow: unset;
+    }
+}
+
+.casino_dot {
+    width: 10px;
+    height: 10px;
+    background-color: $error;
+    border-radius: 50%;
+    display: inline-block;
+}

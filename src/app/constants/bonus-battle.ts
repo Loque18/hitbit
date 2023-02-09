@@ -1,4 +1,4 @@
-interface BonusBattleItem {
+interface IBonusBattleGame {
     id: number;
     players: number;
     maxPlayers: number;
@@ -6,7 +6,7 @@ interface BonusBattleItem {
     img: string;
 }
 
-const bonusBattleItems: BonusBattleItem[] = [
+const bonusBattleGames: IBonusBattleGame[] = [
     {
         id: 1,
         players: 2,
@@ -44,4 +44,4 @@ const bonusBattleItems: BonusBattleItem[] = [
     },
 ];
 
-export { bonusBattleItems, BonusBattleItem };
+export { bonusBattleGames, IBonusBattleGame };

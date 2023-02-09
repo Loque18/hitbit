@@ -23,7 +23,7 @@
                     "error",
                     {
                         "type": "element",
-                        "prefix": "app",
+                        "prefix": ["app", "homepage"],
                         "style": "kebab-case"
                     }
                 ],

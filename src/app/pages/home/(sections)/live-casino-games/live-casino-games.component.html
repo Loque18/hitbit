@@ -1,0 +1,27 @@
+<div class="block" [style]="{ overflow: 'hidden' }">
+    <div class="is-flex is-justify-content-space-between is-align-items-center">
+        <h1 class="title is-5 has-text-white mb-0">Live casino &nbsp; <span class="casino_dot"></span></h1>
+
+        <div class="buttons">
+            <button class="button is-blue200 is-small">
+                <span class="icon">
+                    <i class="fas fa-chevron-left"></i>
+                </span>
+            </button>
+
+            <button class="button is-blue200 is-small">
+                <span class="icon">
+                    <i class="fas fa-chevron-right"></i>
+                </span>
+            </button>
+        </div>
+    </div>
+
+    <br />
+
+    <ul class="is-flex" [ngStyle]="{ columnGap: '24px' }">
+        <li *ngFor="let game of games">
+            <a class="box live_casino_box p-0" [style]="{ backgroundImage: 'url(' + game.img + ')' }"></a>
+        </li>
+    </ul>
+</div>

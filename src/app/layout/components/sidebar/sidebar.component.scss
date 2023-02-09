@@ -26,10 +26,6 @@
             display: flex;
             column-gap: 1rem;
             padding: 0 10px;
-
-            &:hover {
-                border-right: 5px solid $blue-600;
-            }
         }
     }
 }
@@ -84,6 +80,8 @@
         top: 0;
 
         z-index: $z-foreground-2;
+
+        padding: 1rem 0 0 0;
 
         &.collapsed {
             transform: translateX(-100%);

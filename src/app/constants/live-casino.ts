@@ -1,9 +1,9 @@
-interface ILiveCasinoItem {
+interface ILiveCasinoGame {
     id: number;
     img: string;
 }
 
-const liveCasinoItems: ILiveCasinoItem[] = [
+const liveCasinoGames: ILiveCasinoGame[] = [
     {
         id: 1,
         img: '/assets/games/crazytime.png',
@@ -26,4 +26,4 @@ const liveCasinoItems: ILiveCasinoItem[] = [
     },
 ];
 
-export { liveCasinoItems, ILiveCasinoItem };
+export { liveCasinoGames, ILiveCasinoGame };

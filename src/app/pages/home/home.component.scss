@@ -1,56 +1,7 @@
-@import 'src/scss/bulma-custom-vars';
+@use 'src/scss/bulma-custom-vars' as *;
 
 .home_root {
     width: 100%;
-}
-
-%boxi {
-    min-width: 175px;
-    border-radius: 5px !important;
-}
-
-.game_box {
-    @extend %boxi;
-
-    background-color: $blue-200;
-    transition: transform 0.128s cubic-bezier(0.65, 0, 0.35, 1);
-
-    &:hover {
-        background-color: $blue-500;
-        transform: translateY(-10px);
-        box-shadow: unset;
-    }
-}
-
-.live_casino_box {
-    @extend %boxi;
-
-    height: 219px;
-
-    background-size: cover;
-    background-position: center;
-
-    transition: transform 0.128s cubic-bezier(0.65, 0, 0.35, 1);
-
-    &:hover {
-        transform: translateY(-10px);
-        box-shadow: unset;
-    }
-}
-
-.bb_box {
-    @extend %boxi;
-
-    background-color: $blue-200;
-    transition: background-color 0.3s cubic-bezier(0.65, 0, 0.35, 1);
-}
-
-.casino_dot {
-    width: 10px;
-    height: 10px;
-    background-color: $error;
-    border-radius: 50%;
-    display: inline-block;
 }
 
 // for desktop

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-    selector: 'home-casino-events',
+    selector: 'homepage-casino-events',
     templateUrl: './casino-events.component.html',
     styleUrls: ['./casino-events.component.scss'],
 })
