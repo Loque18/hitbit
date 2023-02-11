@@ -84,7 +84,11 @@
                     <br />
 
                     <div class="field">
-                        <button class="button hitbit-btn has-font-poppins extrabold is-fullwidth" type="submit">
+                        <button
+                            class="button hitbit-btn has-font-poppins extrabold is-fullwidth"
+                            type="submit"
+                            [ngClass]="{ 'is-loading': loading }"
+                        >
                             Login
                         </button>
                     </div>

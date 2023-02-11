@@ -5,6 +5,8 @@ import { IOnModalClose } from 'src/app/modal/IOnModalClose';
 
 import { AppModals } from 'src/static/app.modals';
 import { AbstModalComponent } from 'src/app/modal/AbstractModal';
+import { ModalCoreService } from 'src/app/modal/services/modal-core.service';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
     selector: 'app-login',
@@ -12,6 +14,11 @@ import { AbstModalComponent } from 'src/app/modal/AbstractModal';
     styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent extends AbstModalComponent implements OnInit, IOnModalClose {
+    // *~~*~~*~~ Injections ~~*~~*~~* //
+    constructor(private _modalService: ModalCoreService, private authService: AuthService) {
+        super(_modalService);
+    }
+
     /* *~~*~~*~~ Modal logic *~~*~~*~~ */
     override id: string = AppModals.LOGIN;
 
@@ -25,11 +32,12 @@ export class LoginComponent extends AbstModalComponent implements OnInit, IOnMod
     }
     /* *~~*~~*~~ Login logic *~~*~~*~~ */
 
+    loading: boolean = false;
     showPass: boolean = false;
 
     loginForm: FormGroup = new FormGroup({
-        email: new FormControl('', [Validators.required, Validators.email]),
-        password: new FormControl('', [Validators.required]),
+        email: new FormControl('admin@admin.com', [Validators.required, Validators.email]),
+        password: new FormControl('admin123', [Validators.required]),
     });
 
     submitted: boolean = false;
@@ -44,8 +52,20 @@ export class LoginComponent extends AbstModalComponent implements OnInit, IOnMod
 
         if (this.loginForm.invalid) return;
 
+        // show loading
+        this.loading = true;
+
+        const data = {
+            email: this.lf['email'].value,
+            password: this.lf['password'].value,
+        };
+
+        this.authService.login(data);
+
+        this.loading = false;
+
         // log values
-        window.alert(JSON.stringify(this.loginForm.value, null, 4));
+        // window.alert(JSON.stringify(this.loginForm.value, null, 4));
     }
 
     resetForm(): void {

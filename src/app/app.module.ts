@@ -1,9 +1,11 @@
+// *~~*~~*~~ Angular ~~*~~*~~* //
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
+// *~~*~~*~~ Root ~~*~~*~~* //
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 
@@ -57,12 +59,15 @@ import { CarouselComponent } from './components/internal/carousel/carousel.compo
         CarouselComponent,
     ],
     imports: [
+        HttpClientModule,
         BrowserModule,
         AppRoutingModule,
         ReactiveFormsModule,
         ModalModule,
         LayoutModule
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [
+        AppComponent
+    ]
 })
 export class AppModule { }
