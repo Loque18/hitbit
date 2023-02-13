@@ -4,10 +4,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from 'src/app/pages/home/home.component';
 import { PagenotfoundComponent } from './pages/pagenotfound/pagenotfound.component';
 
+import { VerifyEmailComponent } from './pages/verify-email/verify-email.component';
+
 const routes: Routes = [
     // redirect / -> /home
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home', component: HomeComponent },
+
+    // auth.verifyEmail
+    { path: 'verifyemail', component: VerifyEmailComponent },
 
     // otherwise redirect to 404
     { path: '**', component: PagenotfoundComponent },

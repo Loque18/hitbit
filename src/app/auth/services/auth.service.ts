@@ -1,105 +1,116 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
-import { map, Observable, switchMap, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
+
+import { BehaviorSubject } from 'rxjs';
+import { Observable, throwError, catchError, switchMap } from 'rxjs';
+
+import { LoginResponse } from 'src/api/responses/login-res';
+import { VerifyEmailResponse } from 'src/api/responses/verify-email-res';
 
 import { environment } from 'src/environments/environment';
 
-interface LoginResponse {
-    token: string;
+import { api } from 'src/api';
+import { CookieService } from 'src/app/utils/services/cookie.service';
+
+interface SessionData {
+    isAuthenticated: boolean;
+    token: string | null;
 }
 
 @Injectable({
     providedIn: 'root',
 })
 export class AuthService {
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient, private toastr: ToastrService, private cookieService: CookieService) {}
 
-    private _isAuthenticated = false;
+    // *~~*~~*~~ Session data ~~*~~*~~* //
+    private _sessionData: SessionData = {
+        isAuthenticated: false,
+        token: null,
+    };
 
-    get isAuthenticated() {
-        return this._isAuthenticated;
+    private _authState = new BehaviorSubject<boolean>(this._sessionData.isAuthenticated);
+    public authState$ = this._authState.asObservable();
+
+    public set_token(token: string) {
+        this._sessionData = {
+            ...this._sessionData,
+            token,
+        };
+
+        this.cookieService.setCookie('0x786a7sd', token, 1); // token
+    }
+
+    public set_auth(isAuthenticated: boolean) {
+        this._sessionData = {
+            ...this._sessionData,
+            isAuthenticated,
+        };
+
+        this._authState.next(isAuthenticated);
+    }
+
+    get token() {
+        return this._sessionData.token;
     }
 
     // *~~*~~*~~ METHODS ~~*~~*~~* //
-    signUp(params: any): any {
+    signUp(params: any): Observable<LoginResponse> | Observable<never> {
         const { email, password } = params;
 
-        const url = `${environment.apiUrl}/signup/?email=${email}&pass=${password}`;
+        const url = `${api.url}${api.auth.signup}/?email=${email}&pass=${password}`;
 
-        return this.http.post(url, {}).pipe(catchError(this.handleError));
+        return (this.http.post(url, null) as Observable<LoginResponse>).pipe(catchError(this.handleError));
     }
 
-    async login(params: any) {
+    login(params: { email: string; password: string }): Observable<LoginResponse> | Observable<never> {
         const { email, password } = params;
+        const url = `${api.url}${api.auth.login}/?email=${email}&pass=${password}`;
 
-        const data = {
-            email,
-            password,
-        };
-
-        const url = `${environment.apiUrl}/sanctum/csrf-cookie`;
-
-        const options = {
-            headers: new HttpHeaders({
-                Accept: 'application/json',
-            }),
-            withCredentials: true,
-        };
-
-        this.http.get(url, options).subscribe(res => {
-            console.log('csrf-cookie', res);
-
-            const url = `${environment.apiUrl}/login`;
-
-            this.http.post(url, data, options).subscribe(res2 => {
-                console.log('login', res2);
-            });
-        });
-        // const res = await this.http
-        //     .post<any>(`${environment.apiUrl}/login`, data, { withCredentials: true })
-        //     .toPromise();
-
-        // console.log(res);
-
-        // return this.getCSRFToken().pipe(
-        //     switchMap(() => {
-        //         return this.http
-        //             .post<LoginResponse>(url, data, {
-        //                 withCredentials: true,
-        //             })
-        //             .pipe(catchError(this.handleError));
-        //     })
-        // );
+        return (this.http.post(url, { email, password }) as Observable<LoginResponse>).pipe(
+            catchError(this.handleError)
+        );
     }
 
-    private getCSRFToken(): Observable<void> {
-        const url = `${environment.apiUrl}/sanctum/csrf-cookie`;
+    verifyEmail(params: any): Observable<VerifyEmailResponse> {
+        const { email, token } = params;
 
-        return this.http
-            .get(url, {
-                withCredentials: true,
-            })
-            .pipe(
-                retry(2),
-                catchError(this.handleError),
-                // eslint-disable-next-line @typescript-eslint/no-empty-function
-                map(() => {})
-            );
+        const url = `${api.url}${api.auth.verifyEmail}/?email=${email}&verificationToken=${token}`;
+
+        return this.http.post(url, null) as Observable<VerifyEmailResponse>;
     }
+
+    // private getCSRFToken(): Observable<any> {
+    //     const url = `${environment.apiUrl}/sanctum/csrf-cookie`;
+
+    //     return this.http.get(url).pipe(
+    //         retry(2),
+    //         catchError(this.handleError)
+    //         // eslint-disable-next-line @typescript-eslint/no-empty-function
+    //     );
+    // }
 
     private handleError(error: HttpErrorResponse) {
+        if (!environment.production) {
+            console.error('Auth service error: ', error);
+        }
+
+        let errorMessage = '';
+
         if (error.status === 0) {
             // A client-side or network error occurred. Handle it accordingly.
-            console.error('An error occurred:', error.error);
+            // console.error('An error occurred:', error.error);
+            errorMessage = 'An error occurred. Please try again later.';
         } else {
             // The backend returned an unsuccessful response code.
             // The response body may contain clues as to what went wrong,
-            console.error(`Backend returned code ${error.status}, ` + `body was: ${error.error}`);
+            // console.error(`Backend returned code ${error.status}, ` + `body was: ${error.error}`);
+            errorMessage = 'We are not capable of handling your request at this time. Please try again later.';
         }
 
         // return an observable with a user-facing error message
-        return throwError(() => new Error('Something bad happened; please try again later.'));
+        return throwError(() => new Error(errorMessage));
     }
 }

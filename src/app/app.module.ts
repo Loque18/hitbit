@@ -1,8 +1,12 @@
 // *~~*~~*~~ Angular ~~*~~*~~* //
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+
+// *~~*~~*~~ 3rd party modules ~~*~~*~~* //
+import { ToastrModule } from 'ngx-toastr';
 
 // *~~*~~*~~ Root ~~*~~*~~* //
 import { AppRoutingModule } from './app-routing.module';
@@ -25,6 +29,10 @@ import { CasinoOriginalGamesComponent } from './pages/home/(sections)/casino-ori
 import { LiveCasinoGamesComponent } from './pages/home/(sections)/live-casino-games/live-casino-games.component';
 import { BonusBattlesComponent } from './pages/home/(sections)/bonus-battles/bonus-battles.component';
 import { CasinoEventsComponent } from './pages/home/(sections)/casino-events/casino-events.component';
+
+
+// *~~*~~*~~ Verify email ~~*~~*~~* //
+import { VerifyEmailComponent } from './pages/verify-email/verify-email.component';
 
 
 // *~~*~~*~~ 404 ~~*~~*~~* //
@@ -51,6 +59,9 @@ import { CarouselComponent } from './components/internal/carousel/carousel.compo
         BonusBattlesComponent,
         CasinoOriginalGamesComponent,
 
+        // *~~*~~*~~ Verify email ~~*~~*~~* //
+        VerifyEmailComponent,
+
         // *~~*~~*~~ 404 ~~*~~*~~* //
         PagenotfoundComponent,
         
@@ -61,10 +72,13 @@ import { CarouselComponent } from './components/internal/carousel/carousel.compo
     imports: [
         HttpClientModule,
         BrowserModule,
+        BrowserAnimationsModule,
         AppRoutingModule,
         ReactiveFormsModule,
         ModalModule,
-        LayoutModule
+        LayoutModule,
+
+        ToastrModule.forRoot(),
     ],
     bootstrap: [
         AppComponent

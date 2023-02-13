@@ -1,0 +1,13 @@
+<app-not-found-layout>
+    <section class="root">
+        <div class="container py-6">
+            <h1 class="has-text-white has-text-centered">
+                {{ verifying ? 'We are verifying your email, please hold on' : message }}
+            </h1>
+
+            <h1 class="has-text-white has-text-centered">
+                {{ !verified ? failure_reason : 'redirecting you to home' }}
+            </h1>
+        </div>
+    </section>
+</app-not-found-layout>

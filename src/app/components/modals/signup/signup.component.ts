@@ -2,11 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 import { AbstModalComponent } from 'src/app/modal/AbstractModal';
 import { ModalCoreService } from 'src/app/modal/services/modal-core.service';
 
 import { AppModals } from 'src/static/app.modals';
+
+import { LoginResponse } from 'src/api/responses/login-res';
+import { catchError } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
     selector: 'app-signup',
@@ -15,7 +20,11 @@ import { AppModals } from 'src/static/app.modals';
 })
 export class SignupComponent extends AbstModalComponent implements OnInit {
     // *~~*~~*~~ injections *~~*~~*~~ //
-    constructor(private _modalService: ModalCoreService, private authService: AuthService) {
+    constructor(
+        private _modalService: ModalCoreService,
+        private authService: AuthService,
+        private toastr: ToastrService
+    ) {
         super(_modalService);
     }
 
@@ -48,6 +57,16 @@ export class SignupComponent extends AbstModalComponent implements OnInit {
         this.showPass = !this.showPass;
     }
 
+    resetForm(): void {
+        this.submitted = false;
+        this.loading = false;
+        this.signupForm.reset();
+    }
+
+    get sf(): { [key: string]: AbstractControl } {
+        return this.signupForm.controls;
+    }
+
     signup(): void {
         // mark form as submitted
         this.submitted = true;
@@ -60,25 +79,47 @@ export class SignupComponent extends AbstModalComponent implements OnInit {
         // log values
         // window.alert(JSON.stringify(this.signupForm.value, null, 4));
 
-        // send http request
         this.authService
             .signUp({
                 email: this.sf['email'].value,
                 password: this.sf['password'].value,
             })
-            .subscribe((res: any) => {
-                this.loading = false;
-                console.log(res);
+            .subscribe({
+                next: (res: LoginResponse) => {
+                    this.loading = false;
+
+                    if (res.success) {
+                        this.toastr.success(
+                            'You have successfully signed up, please check your email to verify your account'
+                        );
+
+                        this.modalService.closeModal(this.id);
+                        this.modalService.openModal(AppModals.LOGIN);
+                    } else {
+                        this._handleErrorCodes(res);
+                    }
+                },
+                error: error => {
+                    this.loading = false;
+
+                    this.toastr.error(error.message);
+                },
             });
     }
 
-    resetForm(): void {
-        this.submitted = false;
-        this.loading = false;
-        this.signupForm.reset();
-    }
+    private _handleErrorCodes(res: LoginResponse): void {
+        switch (res.statusCode) {
+            case 600:
+                this.toastr.error('Email is invalid');
+                break;
 
-    get sf(): { [key: string]: AbstractControl } {
-        return this.signupForm.controls;
+            case 605:
+                this.toastr.error('Email is already registered');
+                break;
+
+            default:
+                this.toastr.error('Something went wrong, please try again later');
+                break;
+        }
     }
 }

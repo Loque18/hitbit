@@ -1,12 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 
+import { ToastrService } from 'ngx-toastr';
+
 import { IOnModalClose } from 'src/app/modal/IOnModalClose';
 
 import { AppModals } from 'src/static/app.modals';
 import { AbstModalComponent } from 'src/app/modal/AbstractModal';
 import { ModalCoreService } from 'src/app/modal/services/modal-core.service';
 import { AuthService } from 'src/app/auth/services/auth.service';
+
+import { LoginResponse } from 'src/api/responses/login-res';
+import { CookieService } from 'src/app/utils/services/cookie.service';
 
 @Component({
     selector: 'app-login',
@@ -15,11 +20,16 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 })
 export class LoginComponent extends AbstModalComponent implements OnInit, IOnModalClose {
     // *~~*~~*~~ Injections ~~*~~*~~* //
-    constructor(private _modalService: ModalCoreService, private authService: AuthService) {
+    constructor(
+        private _modalService: ModalCoreService,
+        private toastr: ToastrService,
+        private authService: AuthService,
+        private cookieService: CookieService
+    ) {
         super(_modalService);
     }
 
-    /* *~~*~~*~~ Modal logic *~~*~~*~~ */
+    // *~~*~~*~~ Modal logic *~~*~~*~~ //
     override id: string = AppModals.LOGIN;
 
     signUpClick(): void {
@@ -30,7 +40,7 @@ export class LoginComponent extends AbstModalComponent implements OnInit, IOnMod
     onClose(): void {
         this.resetForm();
     }
-    /* *~~*~~*~~ Login logic *~~*~~*~~ */
+    // *~~*~~*~~ Login logic *~~*~~*~~ //
 
     loading: boolean = false;
     showPass: boolean = false;
@@ -44,6 +54,15 @@ export class LoginComponent extends AbstModalComponent implements OnInit, IOnMod
 
     toggleShowPass(): void {
         this.showPass = !this.showPass;
+    }
+
+    resetForm(): void {
+        this.submitted = false;
+        this.loginForm.reset();
+    }
+
+    get lf(): { [key: string]: AbstractControl } {
+        return this.loginForm.controls;
     }
 
     login(): void {
@@ -60,20 +79,55 @@ export class LoginComponent extends AbstModalComponent implements OnInit, IOnMod
             password: this.lf['password'].value,
         };
 
-        this.authService.login(data);
+        this.authService
+            // send request
+            .login(data)
 
-        this.loading = false;
+            // handle response
+            .subscribe({
+                next: (res: LoginResponse) => {
+                    this.loading = false;
 
-        // log values
-        // window.alert(JSON.stringify(this.loginForm.value, null, 4));
+                    if (true) {
+                        console.log('login');
+
+                        this.modalService.closeModal(this.id);
+
+                        this.authService.set_auth(true);
+                        this.authService.set_token(res.message);
+                    } else {
+                        this._handleErrorCodes(res);
+                    }
+                },
+                error: (err: Error) => {
+                    this.loading = false;
+
+                    this.toastr.error(err.message);
+                },
+            });
     }
 
-    resetForm(): void {
-        this.submitted = false;
-        this.loginForm.reset();
-    }
+    private _handleErrorCodes(res: LoginResponse): void {
+        switch (res.statusCode) {
+            case 600:
+                this.toastr.error('Email is invalid');
+                break;
 
-    get lf(): { [key: string]: AbstractControl } {
-        return this.loginForm.controls;
+            case 601:
+                this.toastr.error('Email is not signed up');
+                break;
+
+            case 602:
+                this.toastr.error('Email is not verified');
+                break;
+
+            case 606:
+                this.toastr.error('Invalid email or password');
+                break;
+
+            default:
+                this.toastr.error('Something went wrong');
+                break;
+        }
     }
 }
