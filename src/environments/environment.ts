@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    apiUrl: 'https://api.casino.com',
+    apiUrl: 'https://hitbit.orcania.io',
 };
