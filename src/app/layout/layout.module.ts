@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { NotFoundLayoutComponent } from './not-found-layout/not-found-layout.component';
@@ -11,7 +12,10 @@ import { BottomBarComponent } from './components/bottom-bar/bottom-bar.component
 import { ChatContainerComponent } from './components/chat-container/chat-container.component';
 
 @NgModule({
-    imports: [CommonModule],
+    imports: [
+        CommonModule,
+        RouterModule
+    ],
     exports: [
         MainLayoutComponent,
         NotFoundLayoutComponent
