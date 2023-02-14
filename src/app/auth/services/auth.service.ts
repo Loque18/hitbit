@@ -40,12 +40,25 @@ export class AuthService {
     // *~~*~~*~~ Auth events ~~*~~*~~* //
 
     private onLoginSuccess(token: string): void {
+        // create session and serialize it to json
         this._sessionData = new SessionData(true, token);
-
         const sessionJson = this._sessionData.toJson();
 
+        // store session in cookie
         this.cookieService.setCookie('session', sessionJson, 5);
 
+        // notify new auth state
+        this._authState.next(this._sessionData.isAuthenticated);
+    }
+
+    private onLogout(): void {
+        // create empty session
+        this._sessionData = new SessionData();
+
+        // delete session cookie
+        this.cookieService.deleteCookie('session');
+
+        // notify new auth state
         this._authState.next(this._sessionData.isAuthenticated);
     }
 
@@ -102,11 +115,7 @@ export class AuthService {
     }
 
     logout(): void {
-        this._sessionData = new SessionData(false, null);
-
-        this.cookieService.deleteCookie('session');
-
-        this._authState.next(this._sessionData.isAuthenticated);
+        this.onLogout();
 
         this.router.navigate(['/']);
 
