@@ -95,10 +95,18 @@
         </div>
 
         <div class="navbar-end is-hidden-desktop">
-            <div class="navbar-item">
-                <div *ngIf="userAuthenticated; else loginButtons">user</div>
+            <div class="navbar-item has-dropdown is-hoverable" *ngIf="userAuthenticated; else loginButtons">
+                <a class="navbar-link" style="column-gap: 0.5rem">
+                    <img src="https://picsum.photos/48" alt="" style="border-radius: 50%" />
+                    <span>User</span>
+                </a>
 
-                <ng-template #loginButtons>
+                <div class="navbar-dropdown is-right">
+                    <button class="navbar-item unstyled-button" (click)="onLogoutClick()">Logout</button>
+                </div>
+            </div>
+            <ng-template #loginButtons>
+                <div class="navbar-item">
                     <div class="buttons">
                         <button
                             class="button hitbit-btn has-font-poppins extrabold"
@@ -117,16 +125,25 @@
                             SIGN UP
                         </button>
                     </div>
-                </ng-template>
-            </div>
+                </div>
+            </ng-template>
         </div>
     </div>
 
     <div class="navbar-end-desktop is-hidden-touch">
-        <div class="navbar-item">
-            <div *ngIf="userAuthenticated; else loginButtonsDesktop">user</div>
+        <div class="navbar-item has-dropdown is-hoverable" *ngIf="userAuthenticated; else loginButtonsDesktop">
+            <a class="navbar-link" style="column-gap: 0.5rem">
+                <img src="https://picsum.photos/48" alt="" style="border-radius: 50%" />
+                <span>User</span>
+            </a>
 
-            <ng-template #loginButtonsDesktop>
+            <div class="navbar-dropdown is-right">
+                <button class="navbar-item unstyled-button" (click)="onLogoutClick()">Logout</button>
+            </div>
+        </div>
+
+        <ng-template #loginButtonsDesktop>
+            <div class="navbar-item">
                 <div class="buttons">
                     <button
                         class="button hitbit-btn has-font-poppins extrabold"
@@ -140,7 +157,7 @@
                         SIGN UP
                     </a>
                 </div>
-            </ng-template>
-        </div>
+            </div>
+        </ng-template>
     </div>
 </nav>
