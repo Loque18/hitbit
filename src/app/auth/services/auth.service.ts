@@ -4,10 +4,11 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 
 import { BehaviorSubject } from 'rxjs';
-import { Observable, throwError, catchError, switchMap } from 'rxjs';
+import { Observable, throwError, catchError } from 'rxjs';
 
-import { LoginResponse } from 'src/api/responses/login-res';
-import { VerifyEmailResponse } from 'src/api/responses/verify-email-res';
+import { LoginRequest, SignupRequest } from 'src/api/requests';
+
+import { ApiResponse } from 'src/api/responses/response';
 
 import { environment } from 'src/environments/environment';
 
@@ -56,41 +57,29 @@ export class AuthService {
         return this._sessionData.token;
     }
 
-    // *~~*~~*~~ METHODS ~~*~~*~~* //
-    signUp(params: any): Observable<LoginResponse> | Observable<never> {
+    // *~~*~~*~~ Http requests ~~*~~*~~* //
+    signUp(params: SignupRequest): Observable<ApiResponse> | Observable<never> {
         const { email, password } = params;
 
         const url = `${api.url}${api.auth.signup}/?email=${email}&pass=${password}`;
 
-        return (this.http.post(url, null) as Observable<LoginResponse>).pipe(catchError(this.handleError));
+        return (this.http.post(url, null) as Observable<ApiResponse>).pipe(catchError(this.handleError));
     }
 
-    login(params: { email: string; password: string }): Observable<LoginResponse> | Observable<never> {
-        const { email, password } = params;
+    login(data: LoginRequest): Observable<ApiResponse> | Observable<never> {
+        const { email, password } = data;
         const url = `${api.url}${api.auth.login}/?email=${email}&pass=${password}`;
 
-        return (this.http.post(url, { email, password }) as Observable<LoginResponse>).pipe(
-            catchError(this.handleError)
-        );
+        return (this.http.post(url, { email, password }) as Observable<ApiResponse>).pipe(catchError(this.handleError));
     }
 
-    verifyEmail(params: any): Observable<VerifyEmailResponse> {
+    verifyEmail(params: any): Observable<ApiResponse> {
         const { email, token } = params;
 
         const url = `${api.url}${api.auth.verifyEmail}/?email=${email}&verificationToken=${token}`;
 
-        return this.http.post(url, null) as Observable<VerifyEmailResponse>;
+        return this.http.post(url, null) as Observable<ApiResponse>;
     }
-
-    // private getCSRFToken(): Observable<any> {
-    //     const url = `${environment.apiUrl}/sanctum/csrf-cookie`;
-
-    //     return this.http.get(url).pipe(
-    //         retry(2),
-    //         catchError(this.handleError)
-    //         // eslint-disable-next-line @typescript-eslint/no-empty-function
-    //     );
-    // }
 
     private handleError(error: HttpErrorResponse) {
         if (!environment.production) {

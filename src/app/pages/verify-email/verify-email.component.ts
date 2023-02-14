@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/services/auth.service';
 
 import { config } from 'src/static/app.config';
-import { VerifyEmailResponse } from 'src/api/responses/verify-email-res';
+import { ApiResponse } from 'src/api/responses/response';
 
 @Component({
     selector: 'app-verify-email',
@@ -39,7 +39,7 @@ export class VerifyEmailComponent implements OnInit {
             })
 
             // handle response
-            .subscribe((res: VerifyEmailResponse) => {
+            .subscribe((res: ApiResponse) => {
                 this.verifying = false;
 
                 if (res.success) {

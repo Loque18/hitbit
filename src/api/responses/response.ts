@@ -1,7 +1,7 @@
-interface VerifyEmailResponse {
+interface ApiResponse {
     success: boolean;
     message: string;
     statusCode: number;
 }
 
-export { VerifyEmailResponse };
+export { ApiResponse };

@@ -9,9 +9,7 @@ import { ModalCoreService } from 'src/app/modal/services/modal-core.service';
 
 import { AppModals } from 'src/static/app.modals';
 
-import { LoginResponse } from 'src/api/responses/login-res';
-import { catchError } from 'rxjs';
-import { HttpErrorResponse } from '@angular/common/http';
+import { ApiResponse } from 'src/api/responses/response';
 
 @Component({
     selector: 'app-signup',
@@ -85,7 +83,7 @@ export class SignupComponent extends AbstModalComponent implements OnInit {
                 password: this.sf['password'].value,
             })
             .subscribe({
-                next: (res: LoginResponse) => {
+                next: (res: ApiResponse) => {
                     this.loading = false;
 
                     if (res.success) {
@@ -107,7 +105,7 @@ export class SignupComponent extends AbstModalComponent implements OnInit {
             });
     }
 
-    private _handleErrorCodes(res: LoginResponse): void {
+    private _handleErrorCodes(res: ApiResponse): void {
         switch (res.statusCode) {
             case 600:
                 this.toastr.error('Email is invalid');

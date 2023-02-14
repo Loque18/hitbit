@@ -41,6 +41,8 @@
         &.collapsed {
             width: 50px;
 
+            overflow: hidden;
+
             .sidebar-container {
                 .sidebar-link div {
                     display: none;
