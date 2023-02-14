@@ -36,16 +36,22 @@
 
                         <br />
 
-                        <div class="is-flex">
+                        <div class="is-flex" style="column-gap: 1rem">
                             <button
-                                class="button is-ygra has-font-poppins extrabold has-text-black has-border-3-bb-0-o-100 py-5"
+                                class="button is-ygra has-font-poppins extrabold has-text-black has-border-3-bb-0-o-100 py-5 is-size-6"
                             >
                                 JOIN EVENT
                             </button>
 
-                            <div class="box py-1 has-background-blue-100">
+                            <div
+                                class="box py-1 has-background-blue-100 is-flex is-align-items-center"
+                                style="column-gap: 0.5rem"
+                            >
+                                <span class="icon has-text-white is-size-4">
+                                    <i class="far fa-clock"></i>
+                                </span>
                                 <span class="has-text-ww1">Starts in</span>
-                                <span class="has-text-white">{{ item.secondsToStart }}</span>
+                                <span class="has-text-white">00:00:00</span>
                             </div>
                         </div>
                     </div>

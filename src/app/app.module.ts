@@ -28,7 +28,9 @@ import { HomeComponent } from './pages/home/home.component';
 import { CasinoOriginalGamesComponent } from './pages/home/(sections)/casino-original-games/casino-original-games.component';
 import { LiveCasinoGamesComponent } from './pages/home/(sections)/live-casino-games/live-casino-games.component';
 import { BonusBattlesComponent } from './pages/home/(sections)/bonus-battles/bonus-battles.component';
+import { ProvidersGamesComponent } from './pages/home/(sections)/providers-games/providers-games.component';
 import { CasinoEventsComponent } from './pages/home/(sections)/casino-events/casino-events.component';
+
 
 
 // *~~*~~*~~ Verify email ~~*~~*~~* //
@@ -54,10 +56,11 @@ import { CarouselComponent } from './components/internal/carousel/carousel.compo
         HomeComponent,
         
         // home page sections
-        CasinoEventsComponent,
+        CasinoOriginalGamesComponent,
         LiveCasinoGamesComponent,
         BonusBattlesComponent,
-        CasinoOriginalGamesComponent,
+        ProvidersGamesComponent,
+        CasinoEventsComponent,
 
         // *~~*~~*~~ Verify email ~~*~~*~~* //
         VerifyEmailComponent,

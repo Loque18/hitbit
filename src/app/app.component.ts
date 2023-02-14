@@ -6,12 +6,12 @@ import { ModalCoreService } from './modal/services/modal-core.service';
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent /* implements OnInit */ {
     title = 'hitbit';
 
     constructor(private modalService: ModalCoreService) {}
 
-    ngOnInit() {
-        this.modalService.openModal('sign-up');
-    }
+    // ngOnInit() {
+    //     this.modalService.openModal('sign-up');
+    // }
 }
