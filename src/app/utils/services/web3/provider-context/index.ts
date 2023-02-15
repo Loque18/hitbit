@@ -1,8 +1,12 @@
 import IProviderStrategy from './strategies/IProviderStrategy';
-import { Rpc } from '../interfaces';
+import { Rpc } from '../types';
 
 class ProviderContext {
     private _strategy: IProviderStrategy;
+
+    constructor(strategy: IProviderStrategy) {
+        this._strategy = strategy;
+    }
 
     setStrategy(strategy: IProviderStrategy): void {
         this._strategy = strategy;
@@ -17,17 +21,17 @@ class ProviderContext {
         return this._strategy.requestConnection(provider);
     }
 
-    async requestDisconnection(provider: any): Promise<void> {
-        return this._strategy.requestDisconnection(provider);
-    }
+    // async requestDisconnection(provider: any): Promise<void> {
+    //     return this._strategy.requestDisconnection(provider);
+    // }
 
-    async requestChangeNetwork(provider: any, chainId: number): Promise<void> {
-        return this._strategy.requestChangeNetwork(provider, chainId);
-    }
+    // async requestChangeNetwork(provider: any, chainId: number): Promise<void> {
+    //     return this._strategy.requestChangeNetwork(provider, chainId);
+    // }
 
-    async getPreviosSession(provider: any): Promise<any> {
-        return this._strategy.getPreviosSession(provider);
-    }
+    // async getPreviosSession(provider: any): Promise<any> {
+    //     return this._strategy.getPreviosSession(provider);
+    // }
 }
 
 export default ProviderContext;

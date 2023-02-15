@@ -23,20 +23,18 @@
     <br />
 
     <!-- cards -->
-    <ul class="is-flex" [ngStyle]="{ columnGap: '24px' }">
+    <ul class="cards_container">
         <li *ngFor="let game of games">
             <a class="box game_box">
-                <h1 class="subtitle is-6 has-text-white has-font-montserrat black has-text-centered mb-0">
+                <h1 class="subtitle is-4 has-text-white has-font-montserrat black has-text-centered mb-0">
                     {{ game.name | uppercase }}
                 </h1>
 
-                <div class="p-5">
-                    <figure class="image is-square">
-                        <img [src]="game.icon" alt="game image" />
-                    </figure>
+                <div class="p-5" style="display: grid; place-items: center">
+                    <img [src]="game.icon" alt="game image" style="width: 110px; height: 110px" />
                 </div>
 
-                <h2 class="has-text-centered has-text-warning">Play Now</h2>
+                <h2 class="has-text-centered has-text-warning is-size-5">Play Now</h2>
             </a>
         </li>
     </ul>

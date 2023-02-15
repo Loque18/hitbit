@@ -30,6 +30,16 @@ const games: IGame[] = [
         name: 'Blackjack',
         icon: '/assets/games/blackjack.png',
     },
+    {
+        id: 6,
+        name: 'Roulette',
+        icon: '/assets/games/roulette.png',
+    },
+    {
+        id: 7,
+        name: 'Towers',
+        icon: '/assets/games/towers.png',
+    },
 ];
 
 export { IGame, games };

@@ -1,4 +1,9 @@
 %game-box {
-    min-width: 175px;
+    min-width: 225px;
     border-radius: 5px !important;
+}
+
+.cards_container {
+    display: flex;
+    column-gap: 32px;
 }
