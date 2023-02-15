@@ -1,7 +1,7 @@
 @import 'src/scss/vars';
 
 .carousel {
-    height: 332px;
+    height: 250px;
 
     position: relative;
 
@@ -35,7 +35,7 @@
 
     .carousel-controls {
         position: absolute;
-        right: 30px;
+        right: 20px;
         top: 30%;
 
         transform: translateY(-50%);

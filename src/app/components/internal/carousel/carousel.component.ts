@@ -18,7 +18,7 @@ export class CarouselComponent implements OnInit {
 
     @ViewChild('carouselTrack') track: ElementRef | undefined;
 
-    private C_HEIGHT: number = 332;
+    private C_HEIGHT: number = 250;
     private TIMER: number = 50 * 1000;
 
     private interval: ReturnType<typeof setInterval> | undefined;

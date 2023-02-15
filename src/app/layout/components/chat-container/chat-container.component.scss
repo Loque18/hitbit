@@ -14,7 +14,7 @@
 // for desktop
 @media screen and (min-width: 1024px) {
     .chat-container {
-        width: $chat-open-width-desktop;
+        width: 350px;
         height: calc(100vh - $navbar-height);
 
         right: 0;

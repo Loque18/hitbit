@@ -39,7 +39,7 @@
         z-index: $z-foreground-1;
 
         &.collapsed {
-            width: $sidebar-closed-width-desktop;
+            width: 50px;
 
             overflow: hidden;
 

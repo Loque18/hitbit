@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './auth/services/auth.service';
 import { ModalCoreService } from './modal/services/modal-core.service';
-import { Web3Service } from './utils/services/web3/web3.service';
+// import { Web3Service } from './utils/services/web3/web3.service';
 
 @Component({
     selector: 'app-root',
@@ -13,9 +13,9 @@ export class AppComponent implements OnInit {
 
     constructor(
         private modalService: ModalCoreService,
-        private authService: AuthService,
-        private web3Service: Web3Service
-    ) {}
+        private authService: AuthService
+    ) // private web3Service: Web3Servicek
+    {}
 
     ngOnInit() {
         // this.modalService.openModal('sign-up');
