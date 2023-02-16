@@ -1,0 +1,32 @@
+.text{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: -15px;
+}
+.last{
+    color: hsl(141, 71%, 48%)
+}
+table, tr, td, th{
+    padding: 20px;
+    padding-bottom: 15px;
+    }
+    tr{
+        border: solid 20px #012745;
+    }
+    th, td {
+  padding-left: 100px;
+}
+.yelow{
+    color: yellow;
+}
+hr{
+  height: 1px;
+  background-color: gray;
+  margin-bottom: 7px;
+}
+.fl{
+    display: flex;
+}
+.medium{
+    font-weight: 100;
+}
