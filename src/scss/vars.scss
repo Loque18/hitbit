@@ -14,6 +14,7 @@ $blue-600: #054d88;
 
 $amarellow: #f2e35a;
 $amarellow-2: #e2d34e;
+$amarellow-3: #ffef5d;
 
 $ww-0: #dedede;
 $ww-1: #bad1e4;
@@ -45,6 +46,7 @@ $hcolors: (
 
     amarellow: $amarellow,
     amarellow-2: $amarellow-2,
+    amarellow-3: $amarellow-3,
     ygra: $ygra,
 
     error: $error,
@@ -72,7 +74,7 @@ $z-modal-2: 12;
 /* *~~*~~*~~*~~*~~* lAYOUT *~~*~~*~~*~~*~~* */
 
 $sidebar-open-width-desktop: 200px;
-$sidebar-closed-width-desktop: 50px;
+$sidebar-closed-width-desktop: 70px;
 
 $chat-open-width-desktop: 350px;
 $chat-closed-width-desktop: 0px;

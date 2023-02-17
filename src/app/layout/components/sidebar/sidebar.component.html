@@ -3,21 +3,21 @@
         <ul>
             <li>
                 <a class="sidebar-link" (click)="toggleSidebar()" id="collapse-sidebar-button">
-                    <span class="icon">
+                    <div class="sidebar-link-icon">
                         <img [src]="collapsed ? arrowRightIcon : arrowLeftIcon" alt="" />
-                    </span>
+                    </div>
 
-                    <div class="has-text-white medium">Collapse</div>
+                    <div class="sidebar-link-text has-text-ww1 medium">Collapse</div>
                 </a>
             </li>
 
             <li *ngFor="let link of topLinks">
                 <a class="sidebar-link" [routerLink]="link.url">
-                    <span class="icon">
+                    <div class="sidebar-link-icon">
                         <img [src]="link.icon" alt="" />
-                    </span>
+                    </div>
 
-                    <div class="has-text-white medium">
+                    <div class="sidebar-link-text has-text-ww1 medium">
                         {{ link.label }}
                     </div>
                 </a>
@@ -27,10 +27,10 @@
         <ul>
             <li *ngFor="let link of bottomLinks">
                 <a class="sidebar-link" [routerLink]="link.url">
-                    <span class="icon">
+                    <div class="sidebar-link-icon">
                         <img [src]="link.icon" alt="" />
-                    </span>
-                    <div class="has-text-white medium">
+                    </div>
+                    <div class="sidebar-link-text has-text-ww1 medium">
                         {{ link.label }}
                     </div>
                 </a>
