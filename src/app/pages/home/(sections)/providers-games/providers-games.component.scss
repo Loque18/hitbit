@@ -1,6 +1,14 @@
 @use 'src/scss/vars' as *;
 @use '../commons.scss' as *;
 
+@use 'node_modules/bulma/sass/utilities/initial-variables.sass' as vars;
+@use 'node_modules/bulma/sass/utilities/mixins.sass' as mixins;
+
+$card-sizes: (
+    'small': 220px,
+    'fullhd': 260px,
+);
+
 .provider_game_box {
     @extend %game-box; // from commons.scss
 
@@ -14,5 +22,17 @@
     &:hover {
         transform: translateY(-10px);
         box-shadow: unset;
+    }
+}
+
+@include until($fullhd) {
+    .provider_game_box {
+        height: map-get($card-sizes, 'small');
+    }
+}
+
+@include from($fullhd) {
+    .provider_game_box {
+        height: map-get($card-sizes, 'fullhd');
     }
 }

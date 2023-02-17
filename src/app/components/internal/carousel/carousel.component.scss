@@ -1,9 +1,19 @@
+@use 'sass:map';
+
 @import 'src/scss/vars';
 
-.carousel {
-    height: 332px;
+$carousel-heights: (
+    'default': 200px,
+    'touch': 200px,
+    'desktop': 230px,
+    'widescreen': 230px,
+    'fullhd': 332px,
+);
 
+.carousel {
     position: relative;
+
+    height: map-get($carousel-heights, 'default');
 
     .carousel-container {
         height: 100%;
@@ -66,8 +76,30 @@
     }
 }
 
+// for mobile
 @media screen and (max-width: 768px) {
     .carousel {
-        height: 200px;
+        height: map-get($carousel-heights, 'touch');
+    }
+}
+
+// for desktop
+@media screen and (min-width: 1024px) and (max-width: 1215px) {
+    .carousel {
+        height: map-get($carousel-heights, 'desktop');
+    }
+}
+
+// for widescreen
+@media screen and (min-width: 1216px) and (max-width: 1407px) {
+    .carousel {
+        height: map-get($carousel-heights, 'widescreen');
+    }
+}
+
+// for fullhd
+@media screen and (min-width: 1408px) {
+    .carousel {
+        height: map-get($carousel-heights, 'fullhd');
     }
 }

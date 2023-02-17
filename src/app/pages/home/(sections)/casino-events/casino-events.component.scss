@@ -1,7 +1,19 @@
+@use 'sass:map';
+
+@use 'node_modules/bulma/sass/utilities/initial-variables.sass' as vars;
+@use 'node_modules/bulma/sass/utilities/mixins.sass' as mixins;
+
 @import 'src/scss/vars';
 
-.box-container {
-    width: 50%;
+$box-sizes: (
+    mobile: auto,
+    small: 230px,
+    fullhd: 280px,
+);
+
+.track {
+    display: flex;
+    column-gap: 24px;
 }
 
 .event-box {
@@ -12,4 +24,40 @@
     background-position: center;
     background-repeat: no-repeat;
     border-radius: 5px;
+
+    width: 100%;
+    height: 100%;
+
+    .box_content {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@include mixins.mobile {
+    .box-container {
+        flex: 1 0 100%;
+        height: map-get($box-sizes, 'mobile');
+    }
+
+    // .box-container {
+    //     width: 100%;
+    //     height: map-get($box-sizes, 'mobile');
+    // }
+}
+
+@include mixins.between(vars.$tablet, vars.$fullhd) {
+    .box-container {
+        flex: 1 0 calc(50% - 24px / 2);
+        height: map-get($box-sizes, 'small');
+    }
+}
+
+@include mixins.from(vars.$fullhd) {
+    .box-container {
+        flex: 1 0 calc(50% - 24px / 2);
+        height: map-get($box-sizes, 'fullhd');
+    }
 }

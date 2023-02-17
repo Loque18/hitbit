@@ -7,13 +7,13 @@
 // for desktop
 @media screen and (min-width: 768px) {
     .home_container {
-        padding: 76px 60px;
+        padding: 60px 70px;
     }
 }
 
 // for mobile
 @media screen and (max-width: 768px) {
-    .container {
+    .home_container {
         padding: 1.5rem 1.5rem;
     }
 }

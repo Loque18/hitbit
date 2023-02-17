@@ -26,15 +26,17 @@
     <ul class="cards_container">
         <li *ngFor="let game of games">
             <a class="box game_box">
-                <h1 class="subtitle is-4 has-text-white has-font-montserrat black has-text-centered mb-0">
+                <h1
+                    class="subtitle is-size-4-fullhd is-size-5-widescreen has-text-white has-font-montserrat black has-text-centered mb-0"
+                >
                     {{ game.name | uppercase }}
                 </h1>
 
                 <div class="p-5" style="display: grid; place-items: center">
-                    <img [src]="game.icon" alt="game image" style="width: 110px; height: 110px" />
+                    <img [src]="game.icon" alt="game image" class="game_icon" />
                 </div>
 
-                <h2 class="has-text-centered has-text-warning is-size-5">Play Now</h2>
+                <h2 class="has-text-centered has-text-warning is-size-5-fullhd is-size-6-widescreen">Play Now</h2>
             </a>
         </li>
     </ul>

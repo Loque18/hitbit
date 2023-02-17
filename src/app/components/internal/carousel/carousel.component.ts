@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 
 import { BehaviorSubject } from 'rxjs';
 
@@ -9,21 +9,27 @@ import { news, INew } from 'src/app/constants/news';
     templateUrl: './carousel.component.html',
     styleUrls: ['./carousel.component.scss'],
 })
-export class CarouselComponent implements OnInit {
+export class CarouselComponent implements AfterViewInit {
     slides: INew[] = news;
 
+    // offset is the index of the slide that is currently displayed
     offset: number = 0;
     private offsetSub: BehaviorSubject<number> = new BehaviorSubject(this.offset);
     private offset$ = this.offsetSub.asObservable();
 
-    @ViewChild('carouselTrack') track: ElementRef | undefined;
+    // track is the element that contains all the slides, we use it to translate the slides
+    @ViewChild('carouselTrack') track!: ElementRef;
+
+    @ViewChild('carouselRoot') carouselRoot!: ElementRef;
 
     private C_HEIGHT: number = 332;
     private TIMER: number = 50 * 1000;
 
     private interval: ReturnType<typeof setInterval> | undefined;
 
-    ngOnInit() {
+    ngAfterViewInit() {
+        this.C_HEIGHT = this.carouselRoot.nativeElement.offsetHeight;
+
         this.offset$.subscribe(offset => {
             if (this.track) {
                 const dir = offset < 0 ? 1 : -1;

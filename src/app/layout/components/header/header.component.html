@@ -9,20 +9,6 @@
             <span class="has-text-amarellow" i18n> 352,458 </span>
         </div>
 
-        <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link">
-                <span class="icon">
-                    <i class="fas fa-globe"></i>
-                </span>
-                <span i18n> Language </span>
-            </a>
-
-            <div class="navbar-dropdown">
-                <a class="navbar-item" i18n>English</a>
-                <a class="navbar-item" i18n>Spanish</a>
-            </div>
-        </div>
-
         <a
             role="button"
             class="navbar-burger has-text-white"
@@ -150,6 +136,21 @@
     </div>
 
     <div class="navbar-end-desktop is-hidden-touch">
+        <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">
+                <!-- <span class="icon">
+                    <i class="fas fa-globe"></i>
+                </span> -->
+                <span i18n> <img src="https://picsum.photos/32/20" alt="" /> </span> &nbsp;
+                <span i18n>Language</span>
+            </a>
+
+            <div class="navbar-dropdown">
+                <a class="navbar-item" i18n>English</a>
+                <a class="navbar-item" i18n>Spanish</a>
+            </div>
+        </div>
+
         <div class="navbar-item has-dropdown is-hoverable" *ngIf="userAuthenticated; else loginButtonsDesktop">
             <a class="navbar-link" style="column-gap: 0.5rem">
                 <img src="https://picsum.photos/48" alt="" style="border-radius: 50%" />
