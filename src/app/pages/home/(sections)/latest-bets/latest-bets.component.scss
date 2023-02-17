@@ -1,0 +1,37 @@
+.text{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: -15px;
+}
+.last{
+    color: hsl(141, 71%, 48%)
+}
+table, tr, td, th{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    }
+    th, td {
+        padding-left: 80px;
+     }
+.yelow{
+    color: yellow;
+}
+hr{
+  height: 1px;
+  background-color: gray;
+  margin-bottom: 7px;
+}
+.fl{
+    display: flex;
+}
+.medium{
+    font-weight: 100;
+}
+ tr:hover {
+    border: solid 3px white;
+}
+.hoverTable{
+    border-collapse:separate;
+    border-spacing:0 15px;
+    border-collapse: collapse;
+}
