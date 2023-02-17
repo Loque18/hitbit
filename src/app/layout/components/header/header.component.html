@@ -4,6 +4,13 @@
             <h1 class="title is-4 has-text-white has-font-montserrat black">HITBIT</h1>
         </a>
 
+        <<<<<<< HEAD =======
+        <div class="navbar-item is-hidden-touch">
+            <span class="has-text-white mr-2" i18n> Bets Wagered </span>
+            <span class="has-text-amarellow" i18n> 352,458 </span>
+        </div>
+
+        >>>>>>> 130f34b0c78c8963fe922589296e88775325d138
         <a
             role="button"
             class="navbar-burger has-text-white"
@@ -95,10 +102,18 @@
         </div>
 
         <div class="navbar-end is-hidden-desktop">
-            <div class="navbar-item">
-                <div *ngIf="userAuthenticated; else loginButtons">user</div>
+            <div class="navbar-item has-dropdown is-hoverable" *ngIf="userAuthenticated; else loginButtons">
+                <a class="navbar-link" style="column-gap: 0.5rem">
+                    <img src="https://picsum.photos/48" alt="" style="border-radius: 50%" />
+                    <span>User</span>
+                </a>
 
-                <ng-template #loginButtons>
+                <div class="navbar-dropdown is-right">
+                    <button class="navbar-item unstyled-button" (click)="onLogoutClick()">Logout</button>
+                </div>
+            </div>
+            <ng-template #loginButtons>
+                <div class="navbar-item">
                     <div class="buttons">
                         <button
                             class="button hitbit-btn has-font-poppins extrabold"
@@ -117,16 +132,40 @@
                             SIGN UP
                         </button>
                     </div>
-                </ng-template>
-            </div>
+                </div>
+            </ng-template>
         </div>
     </div>
 
     <div class="navbar-end-desktop is-hidden-touch">
-        <div class="navbar-item">
-            <div *ngIf="userAuthenticated; else loginButtonsDesktop">user</div>
+        <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">
+                <!-- <span class="icon">
+                    <i class="fas fa-globe"></i>
+                </span> -->
+                <span i18n> <img src="https://picsum.photos/32/20" alt="" /> </span> &nbsp;
+                <span i18n>Language</span>
+            </a>
 
-            <ng-template #loginButtonsDesktop>
+            <div class="navbar-dropdown">
+                <a class="navbar-item" i18n>English</a>
+                <a class="navbar-item" i18n>Spanish</a>
+            </div>
+        </div>
+
+        <div class="navbar-item has-dropdown is-hoverable" *ngIf="userAuthenticated; else loginButtonsDesktop">
+            <a class="navbar-link" style="column-gap: 0.5rem">
+                <img src="https://picsum.photos/48" alt="" style="border-radius: 50%" />
+                <span>User</span>
+            </a>
+
+            <div class="navbar-dropdown is-right">
+                <button class="navbar-item unstyled-button" (click)="onLogoutClick()">Logout</button>
+            </div>
+        </div>
+
+        <ng-template #loginButtonsDesktop>
+            <div class="navbar-item">
                 <div class="buttons">
                     <button
                         class="button hitbit-btn has-font-poppins extrabold"
@@ -140,7 +179,7 @@
                         SIGN UP
                     </a>
                 </div>
-            </ng-template>
-        </div>
+            </div>
+        </ng-template>
     </div>
 </nav>

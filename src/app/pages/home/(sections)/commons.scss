@@ -1,4 +1,29 @@
+@import 'node_modules/bulma/sass/utilities/initial-variables.sass';
+@import 'node_modules/bulma/sass/utilities/mixins.sass';
+
+$box-sizes: (
+    'small': 180px,
+    'fullhd': 225px,
+);
+
 %game-box {
     min-width: 175px;
     border-radius: 5px !important;
+}
+
+.cards_container {
+    display: flex;
+    column-gap: 32px;
+}
+
+@include between(0px, $fullhd) {
+    %game-box {
+        min-width: map-get($box-sizes, 'small');
+    }
+}
+
+@include fullhd {
+    %game-box {
+        min-width: map-get($box-sizes, 'fullhd');
+    }
 }

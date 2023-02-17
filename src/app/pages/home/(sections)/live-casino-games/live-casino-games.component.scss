@@ -1,13 +1,20 @@
 @use 'src/scss/vars' as *;
 @use '../commons.scss' as *;
 
+@use 'node_modules/bulma/sass/utilities/initial-variables.sass' as vars;
+@use 'node_modules/bulma/sass/utilities/mixins.sass' as mixins;
+
+$card-sizes: (
+    'small': 220px,
+    'fullhd': 260px,
+);
+
 .live_casino_box {
     @extend %game-box; // from commons.scss
 
-    height: 219px;
-
     background-size: cover;
-    background-position: center;
+    background-position: center center;
+    background-repeat: no-repeat;
 
     transition: transform 0.128s cubic-bezier(0.65, 0, 0.35, 1);
 
@@ -23,4 +30,16 @@
     background-color: $error;
     border-radius: 50%;
     display: inline-block;
+}
+
+@include until($fullhd) {
+    .live_casino_box {
+        height: map-get($card-sizes, 'small');
+    }
+}
+
+@include from($fullhd) {
+    .live_casino_box {
+        height: map-get($card-sizes, 'fullhd');
+    }
 }

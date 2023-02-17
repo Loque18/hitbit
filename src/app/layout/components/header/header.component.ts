@@ -21,8 +21,6 @@ export class HeaderComponent implements OnInit {
     ngOnInit(): void {
         this.authService.authState$.subscribe((isAuthenticated: boolean) => {
             this.userAuthenticated = isAuthenticated;
-
-            console.log('user authenticated: ', this.userAuthenticated);
         });
     }
 
@@ -39,6 +37,11 @@ export class HeaderComponent implements OnInit {
 
     onSignupClick(): void {
         this.modalService.openModal(AppModals.SIGN_UP);
+    }
+
+    // *~~*~~*~~ actions ~~*~~*~~* //
+    onLogoutClick(): void {
+        this.authService.logout();
     }
 
     // *~~*~~*~~ deposit ~~*~~*~~* //

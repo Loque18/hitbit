@@ -29,18 +29,25 @@ export class VerifyEmailComponent implements OnInit {
     }
 
     ngOnInit() {
+        console.log({
+            email: this._activedRoute.snapshot.queryParams['email'],
+            token: this._activedRoute.snapshot.queryParams['verificationToken'],
+        });
+
         // get query params
         this.authService
 
             // send request to verify email
             .verifyEmail({
                 email: this._activedRoute.snapshot.queryParams['email'],
-                token: this._activedRoute.snapshot.queryParams['token'],
+                token: this._activedRoute.snapshot.queryParams['verificationToken'],
             })
 
             // handle response
             .subscribe((res: ApiResponse) => {
                 this.verifying = false;
+
+                console.log('res', res);
 
                 if (res.success) {
                     this.verified = true;

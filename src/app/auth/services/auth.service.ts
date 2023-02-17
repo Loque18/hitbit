@@ -1,60 +1,65 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-
-import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 import { BehaviorSubject } from 'rxjs';
 import { Observable, throwError, catchError } from 'rxjs';
 
 import { LoginRequest, SignupRequest } from 'src/api/requests';
 
-import { ApiResponse } from 'src/api/responses/response';
+import { ApiResponse, LoginResponse } from 'src/api/responses/response';
 
 import { environment } from 'src/environments/environment';
 
 import { api } from 'src/api';
 import { CookieService } from 'src/app/utils/services/cookie.service';
 
-interface SessionData {
-    isAuthenticated: boolean;
-    token: string | null;
+class SessionData {
+    constructor(public isAuthenticated: boolean = false, public token: string | null = null) {}
+
+    public toJson(): string {
+        return JSON.stringify({
+            token: this.token,
+        });
+    }
 }
 
 @Injectable({
     providedIn: 'root',
 })
 export class AuthService {
-    constructor(private http: HttpClient, private toastr: ToastrService, private cookieService: CookieService) {}
+    constructor(private http: HttpClient, private router: Router, private cookieService: CookieService) {}
 
     // *~~*~~*~~ Session data ~~*~~*~~* //
-    private _sessionData: SessionData = {
-        isAuthenticated: false,
-        token: null,
-    };
+    private _sessionData: SessionData = new SessionData();
 
+    // observable to notify the other modules about the auth state
     private _authState = new BehaviorSubject<boolean>(this._sessionData.isAuthenticated);
     public authState$ = this._authState.asObservable();
 
-    public set_token(token: string) {
-        this._sessionData = {
-            ...this._sessionData,
-            token,
-        };
+    // *~~*~~*~~ Auth events ~~*~~*~~* //
 
-        this.cookieService.setCookie('0x786a7sd', token, 1); // token
+    private onLoginSuccess(token: string): void {
+        // create session and serialize it to json
+        this._sessionData = new SessionData(true, token);
+        const sessionJson = this._sessionData.toJson();
+
+        // store session in cookie
+        this.cookieService.setCookie('session', sessionJson, 5);
+
+        // notify new auth state
+        this._authState.next(this._sessionData.isAuthenticated);
     }
 
-    public set_auth(isAuthenticated: boolean) {
-        this._sessionData = {
-            ...this._sessionData,
-            isAuthenticated,
-        };
+    private onLogout(): void {
+        // create empty session
+        this._sessionData = new SessionData();
 
-        this._authState.next(isAuthenticated);
-    }
+        // delete session cookie
+        this.cookieService.deleteCookie('session');
 
-    get token() {
-        return this._sessionData.token;
+        // notify new auth state
+        this._authState.next(this._sessionData.isAuthenticated);
     }
 
     // *~~*~~*~~ Http requests ~~*~~*~~* //
@@ -66,11 +71,39 @@ export class AuthService {
         return (this.http.post(url, null) as Observable<ApiResponse>).pipe(catchError(this.handleError));
     }
 
-    login(data: LoginRequest): Observable<ApiResponse> | Observable<never> {
+    login(data: LoginRequest): Observable<LoginResponse> | Observable<never> {
         const { email, password } = data;
         const url = `${api.url}${api.auth.login}/?email=${email}&pass=${password}`;
 
-        return (this.http.post(url, { email, password }) as Observable<ApiResponse>).pipe(catchError(this.handleError));
+        // process response data before returning it, store token in cookie and set auth state to true
+        const response = this.http.post(url, { email, password }) as Observable<LoginResponse>;
+
+        response.subscribe((res: LoginResponse) => {
+            if (res.success) {
+                const token = res.token as string;
+                this.onLoginSuccess(token);
+            }
+        });
+
+        return response.pipe(catchError(this.handleError));
+
+        // return (this.http.post(url, { email, password }) as Observable<ApiResponse>).pipe(catchError(this.handleError));
+    }
+
+    restoreSession(): boolean {
+        const sessionJson = this.cookieService.getCookie('session');
+
+        if (sessionJson) {
+            const sessionData = JSON.parse(sessionJson);
+
+            this._sessionData = new SessionData(true, sessionData.token);
+
+            this._authState.next(this._sessionData.isAuthenticated);
+
+            return true;
+        }
+
+        return false;
     }
 
     verifyEmail(params: any): Observable<ApiResponse> {
@@ -79,6 +112,14 @@ export class AuthService {
         const url = `${api.url}${api.auth.verifyEmail}/?email=${email}&verificationToken=${token}`;
 
         return this.http.post(url, null) as Observable<ApiResponse>;
+    }
+
+    logout(): void {
+        this.onLogout();
+
+        this.router.navigate(['/']);
+
+        // this.router.navigate(['/'], { queryParams: { logout: true } });
     }
 
     private handleError(error: HttpErrorResponse) {

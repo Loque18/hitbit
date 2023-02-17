@@ -1,6 +1,14 @@
 @use 'src/scss/vars' as *;
 @use '../commons.scss' as *;
 
+@use 'node_modules/bulma/sass/utilities/initial-variables.sass' as vars;
+@use 'node_modules/bulma/sass/utilities/mixins.sass' as mixins;
+
+$icon-sizes: (
+    'small': 80px,
+    'fullhd': 110px,
+);
+
 .game_box {
     @extend %game-box; // from commons.scss
 
@@ -11,5 +19,17 @@
         background-color: $blue-500;
         transform: translateY(-10px);
         box-shadow: unset;
+    }
+}
+
+@include mixins.until($fullhd) {
+    .game_icon {
+        width: map-get($icon-sizes, 'small');
+    }
+}
+
+@include mixins.fullhd {
+    .game_icon {
+        width: map-get($icon-sizes, 'fullhd');
     }
 }

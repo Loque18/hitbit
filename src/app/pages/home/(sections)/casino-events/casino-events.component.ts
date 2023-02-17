@@ -28,10 +28,10 @@ export class CasinoEventsComponent implements OnInit {
     ];
 
     ngOnInit() {
-        const interval = setInterval(() => {
-            this.events.forEach(event => {
-                event.secondsToStart = Math.floor((new Date(event.date).getTime() - new Date().getTime()) / 1000);
-            });
-        }, 1000);
+        // const interval = setInterval(() => {
+        //     this.events.forEach(event => {
+        //         event.secondsToStart = Math.floor((new Date(event.date).getTime() - new Date().getTime()) / 1000);
+        //     });
+        // }, 1000);
     }
 }

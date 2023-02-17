@@ -11,7 +11,7 @@ import { ModalCoreService } from 'src/app/modal/services/modal-core.service';
 import { AuthService } from 'src/app/auth/services/auth.service';
 
 import { type LoginRequest } from 'src/api/requests';
-import { ApiResponse } from 'src/api/responses/response';
+import { LoginResponse } from 'src/api/responses/response';
 import { CookieService } from 'src/app/utils/services/cookie.service';
 
 @Component({
@@ -86,16 +86,11 @@ export class LoginComponent extends AbstModalComponent implements OnInit, IOnMod
 
             // handle response
             .subscribe({
-                next: (res: ApiResponse) => {
+                next: (res: LoginResponse) => {
                     this.loading = false;
 
                     if (res.success) {
-                        console.log('login');
-
                         this.modalService.closeModal(this.id);
-
-                        this.authService.set_auth(true);
-                        this.authService.set_token(res.message);
                     } else {
                         this._handleErrorCodes(res);
                     }
@@ -108,7 +103,7 @@ export class LoginComponent extends AbstModalComponent implements OnInit, IOnMod
             });
     }
 
-    private _handleErrorCodes(res: ApiResponse): void {
+    private _handleErrorCodes(res: LoginResponse): void {
         switch (res.statusCode) {
             case 600:
                 this.toastr.error('Email is invalid');
