@@ -1,27 +1,36 @@
-<div class="header mt-6">
-    <div class="text">
-        <p class="is-size-4 has-text-white">Latest Bets</p>
-        <a class="yelow">View All</a>
+<div class="mt-6">
+    <div class="is-flex is-justify-content-space-between is-align-items-center">
+        <h1 class="title is-5 has-text-white mb-0">Latest Bets</h1>
+        <a class="has-text-amarellow2">View All</a>
     </div>
-    <hr>
-    <table class="hoverTable mb-6" width="80%">
-        
-            <th class="has-text-white medium">Player</th>
-            <th class="has-text-white medium">Game</th>
-            <th class="has-text-white medium pr-6">Time</th>
-            <th class="has-text-white medium">Wager</th>
-            <th class="has-text-white medium ">Multiplier</th>
-            <th class="has-text-white medium ">Payout</th>
-       
-        
-        <tr *ngFor="let link of links" class="has-background-blue200">
-            <td class="has-text-white">{{link.player}}</td>
-            <td class="fl has-text-white"><img [src]="link.img" width="25px" class="mr-2"/> {{link.game}}</td>
-            <td class="has-text-white">{{link.time}}</td>
-            <td class="has-text-white">{{link.wager}}</td>
-            <td class="yelow">{{link.multiplier}}</td>
-            <td class="has-text-success">{{link.payout}}</td>
-        </tr> 
-    </table>
 
+    <hr />
+
+    <div class="table_container">
+        <table class="tablee hoverTable mb-6">
+            <thead>
+                <tr>
+                    <th class="has-text-white medium">Player</th>
+                    <th class="has-text-white medium">Game</th>
+                    <th class="has-text-white medium pr-6">Time</th>
+                    <th class="has-text-white medium">Wager</th>
+                    <th class="has-text-white medium">Multiplier</th>
+                    <th class="has-text-white medium">Payout</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let link of links" class="has-background-blue200">
+                    <td class="has-text-white">{{ link.player }}</td>
+                    <td class="fl has-text-white">
+                        <img [src]="link.img" width="25px" class="mr-2" /> {{ link.game }}
+                    </td>
+                    <td class="has-text-white">{{ link.time }}</td>
+                    <td class="has-text-white">{{ link.wager }}</td>
+                    <td class="has-text-amarellow2">{{ link.multiplier }}</td>
+                    <td class="has-text-success">{{ link.payout }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
