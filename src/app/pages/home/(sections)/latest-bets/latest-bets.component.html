@@ -4,27 +4,24 @@
         <a class="yelow">View All</a>
     </div>
     <hr>
-    <table class="mb-6" width="100%">
+    <table class="hoverTable mb-6" width="80%">
         
             <th class="has-text-white medium">Player</th>
             <th class="has-text-white medium">Game</th>
-            <th class="has-text-white medium">Time</th>
+            <th class="has-text-white medium pr-6">Time</th>
             <th class="has-text-white medium">Wager</th>
-            <th class="has-text-white medium">Multiplier</th>
-            <th class="has-text-white medium">Payout</th>
+            <th class="has-text-white medium ">Multiplier</th>
+            <th class="has-text-white medium ">Payout</th>
        
         
         <tr *ngFor="let link of links" class="has-background-blue200">
             <td class="has-text-white">{{link.player}}</td>
-            <td class="fl has-text-white"><img [src]="link.img" width="25px" class="mr-2"/>
-              {{link.game}}
-            </td>
+            <td class="fl has-text-white"><img [src]="link.img" width="25px" class="mr-2"/> {{link.game}}</td>
             <td class="has-text-white">{{link.time}}</td>
             <td class="has-text-white">{{link.wager}}</td>
             <td class="yelow">{{link.multiplier}}</td>
             <td class="has-text-success">{{link.payout}}</td>
-         </tr>
-       
+        </tr> 
     </table>
 
 </div>

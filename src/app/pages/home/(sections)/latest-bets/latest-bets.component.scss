@@ -7,15 +7,12 @@
     color: hsl(141, 71%, 48%)
 }
 table, tr, td, th{
-    padding: 20px;
-    padding-bottom: 15px;
-    }
-    tr{
-        border: solid 20px #012745;
+    padding-top: 20px;
+    padding-bottom: 20px;
     }
     th, td {
-  padding-left: 100px;
-}
+        padding-left: 80px;
+     }
 .yelow{
     color: yellow;
 }
@@ -29,4 +26,12 @@ hr{
 }
 .medium{
     font-weight: 100;
+}
+ tr:hover {
+    border: solid 3px white;
+}
+.hoverTable{
+    border-collapse:separate;
+    border-spacing:0 15px;
+    border-collapse: collapse;
 }
