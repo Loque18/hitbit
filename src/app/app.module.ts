@@ -42,8 +42,8 @@ import { PagenotfoundComponent } from './pages/pagenotfound/pagenotfound.compone
 
 // *~~*~~*~~ Components ~~*~~*~~* //
 import { CarouselComponent } from './components/internal/carousel/carousel.component';
-import { LatestBetsComponent } from './pages/home/(sections)/latest-bets/latest-bets.component';
-
+import { LatestBetsComponent } from './components/internal/latest-bets/latest-bets.component';
+import { BetsComponent } from './components/internal/bets/bets.component';
 
 @NgModule({
     declarations: [
@@ -72,7 +72,9 @@ import { LatestBetsComponent } from './pages/home/(sections)/latest-bets/latest-
 
         // *~~*~~*~~ Components ~~*~~*~~* //
         CarouselComponent,
-                    LatestBetsComponent,
+        LatestBetsComponent,
+        BetsComponent
+                    
     ],
     imports: [
         HttpClientModule,

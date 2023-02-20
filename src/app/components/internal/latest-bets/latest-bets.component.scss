@@ -4,25 +4,18 @@
 //     margin-bottom: -15px;
 // }
 
-.last {
-    color: hsl(141, 71%, 48%);
-}
-
 .tablee {
-    width: 100%;
+    width: 100%; 
 }
 
-table,
-tr,
-td,
-th {
+td{
     padding-top: 20px;
     padding-bottom: 20px;
 }
 
 th,
 td {
-    padding-left: 80px;
+    padding-left: 20px;
 }
 
 hr {
@@ -35,12 +28,8 @@ hr {
     display: flex;
 }
 
-.medium {
-    font-weight: 100;
-}
-
 $br: 5px;
-tr {
+.row {
     position: relative;
 
     &::after {
@@ -66,15 +55,35 @@ tr {
     }
 
     td:last-child {
-        border-radius: #{$br} #{$br} 0 0;
+        border-radius: 0 #{$br} #{$br}  0;
     }
 }
 
 .hoverTable {
-    border-spacing: 0 1em;
+    border-spacing: 0em 1em;
     border-collapse: separate;
 }
 
 .table_container {
     overflow: hidden;
+}
+
+.players{
+    padding-right: 2.5rem;
+}
+
+.games{
+    padding-right: 3rem;
+}
+
+.times{
+    padding-right: 4rem;
+}
+
+.wagers{
+    padding-right: 5rem;
+}
+
+.multiplier{
+    padding-right: 4.5rem;
 }
