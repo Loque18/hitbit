@@ -44,6 +44,7 @@ import { PagenotfoundComponent } from './pages/pagenotfound/pagenotfound.compone
 import { CarouselComponent } from './components/internal/carousel/carousel.component';
 import { LatestBetsComponent } from './components/internal/latest-bets/latest-bets.component';
 import { BetsComponent } from './components/internal/bets/bets.component';
+import { RouletteComponent } from './pages/roulette/roulette.component';
 
 @NgModule({
     declarations: [
@@ -73,7 +74,8 @@ import { BetsComponent } from './components/internal/bets/bets.component';
         // *~~*~~*~~ Components ~~*~~*~~* //
         CarouselComponent,
         LatestBetsComponent,
-        BetsComponent
+        BetsComponent,
+        RouletteComponent
                     
     ],
     imports: [
