@@ -1,7 +1,7 @@
 import { IProviderStrategy } from './strategies/IProviderStrategy';
 import { Rpc } from '../types';
 
-import { type Observable } from 'rxjs';
+import type EthereumProvider from '@walletconnect/ethereum-provider/dist/types/EthereumProvider';
 import { MetaMaskInpageProvider } from '@metamask/providers';
 
 class ProviderContext {
@@ -19,16 +19,16 @@ class ProviderContext {
     //     this._strategy = strategy;
     // }
 
-    getProvider(rpcs: Rpc[]): Observable<unknown> | void {
+    getProvider(rpcs: Rpc[]): Promise<EthereumProvider> | MetaMaskInpageProvider | void {
         return this._strategy.getProvider(rpcs);
     }
 
     // *~~*~~*~~ Wallet methods *~~*~~*~~* //
-    requestConnection(provider: unknown): Observable<unknown> | void {
+    requestConnection(provider: unknown): Promise<unknown> | void {
         return this._strategy.requestConnection(provider);
     }
 
-    requestDisconnection(provider: unknown): void {
+    requestDisconnection(provider: unknown): Promise<unknown> | void {
         return this._strategy.requestDisconnection(provider);
     }
 

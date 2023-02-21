@@ -5,10 +5,12 @@ import { IProviderStrategy } from '../provider-context/strategies/IProviderStrat
 
 // import { validateProviderType } from '../validators';
 
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { type Rpc, type ProviderType } from '../types';
 
 import { providers } from '../constants';
+import { MetaMaskInpageProvider } from '@metamask/providers';
+import type EthereumProvider from '@walletconnect/ethereum-provider/dist/types/EthereumProvider';
 
 const StrategiesMap: {
     [key: string]: IProviderStrategy;
@@ -32,45 +34,31 @@ class ProviderProxy {
         linked: undefined,
     };
 
-    constructor(rpcs: Rpc[]) {
+    constructor() {
         this.currentType = providers.INJECTED;
 
         // create a context with the injected strategy as default
         this.context = new ProviderContext(StrategiesMap[this.currentType]);
 
-        // get all type of providers
-        Object.values(providers).forEach((providerType: string, idx: number) => {
-            // instantiate strategies
-            // this.context.setStrategy(StrategiesMap[providerType]());
-
-            const strategy: IProviderStrategy = StrategiesMap[providerType];
-
-            try {
-                const providerObs = strategy.getProvider(rpcs);
-
-                if (providerObs) {
-                    providerObs.subscribe(provider => {
-                        this._providers[providerType] = provider;
-
-                        if (idx === Object.values(providers).length - 1) {
-                            // notify the app when the provider is read
-
-                            this.onReadySub.next(true);
-                        }
-                    });
-                }
-
-                // instantiate providers
-            } catch (e) {
-                // handle error
-                console.warn(`Provider of type ${providerType} not found`);
-            }
-        });
-
         // notify the app when the provider is ready
     }
 
-    getProvider(type: ProviderType): unknown | void {
+    async init(rpcs: Rpc[]): Promise<void> {
+        const injectedStrategy = StrategiesMap[providers.INJECTED];
+        const linkedStrategy = StrategiesMap[providers.LINKED];
+
+        // get injected provider
+        try {
+            this._providers[providers.INJECTED] = await injectedStrategy.getProvider(rpcs);
+        } catch (e) {
+            console.warn('Injected provider not found');
+        }
+
+        // get linked provider
+        this._providers[providers.LINKED] = await linkedStrategy.getProvider(rpcs);
+    }
+
+    getProvider(type: ProviderType): unknown {
         return this._providers[type];
     }
 
@@ -81,11 +69,11 @@ class ProviderProxy {
     }
 
     // *~~*~~*~~ Wallet methods ~~*~~*~~* //
-    requestConnection(): Observable<unknown> | void {
+    requestConnection(): Promise<unknown> | void {
         return this.context.requestConnection(this._providers[this.currentType]);
     }
 
-    requestDisconnection(): void {
+    requestDisconnection(): Promise<unknown> | void {
         // prettier-ignore
         this.context.requestDisconnection(this._providers[this.currentType]);
     }
@@ -99,9 +87,8 @@ class ProviderProxy {
     //     await this.context.requestChangeNetwork(this._providers[this.currentType], chainId);
     // }
 
-    async getPreviousSession(): Promise<unknown> {
-        const connection = await this.context.getPreviosSession(this._providers[this.currentType]);
-        return connection;
+    getPreviousSession(): Promise<unknown> | void {
+        return this.context.getPreviosSession(this._providers[this.currentType]);
     }
 }
 

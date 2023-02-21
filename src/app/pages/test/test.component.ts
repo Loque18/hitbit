@@ -25,6 +25,10 @@ export class TestComponent implements OnInit {
         this.web3Service.requestDisconnection();
     }
 
+    signMessage(): void {
+        this.web3Service.signMessage('test');
+    }
+
     ngOnInit(): void {
         this.web3Service.walletData$.subscribe((data: WalletData) => {
             this.wData = data;

@@ -10,20 +10,24 @@ import { Rpc, Web3Config, ProviderType } from './types';
 import { config } from './web3.config';
 
 import { WalletData } from './wallet-data';
+import { Web3Wrapper } from './we3-wrapper';
 
 import { providers } from './constants';
 import { MetaMaskInpageProvider } from '@metamask/providers';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root',
 })
 export class Web3Service {
-    private _web3: Web3 | null = null;
-
+    private _web3Wrapper: Web3Wrapper = new Web3Wrapper();
     private _walletData: WalletData = new WalletData();
 
     private _walletDataSubject: BehaviorSubject<WalletData> = new BehaviorSubject<WalletData>(this._walletData);
     public walletData$: Observable<WalletData> = this._walletDataSubject.asObservable();
+
+    private _web3WrapperSub: BehaviorSubject<Web3Wrapper> = new BehaviorSubject<Web3Wrapper>(this._web3Wrapper);
+    public web3Wrapper$: Observable<Web3Wrapper> = this._web3WrapperSub.asObservable();
 
     private _providerProxy!: ProviderProxy;
 
@@ -39,7 +43,9 @@ export class Web3Service {
         // });
 
         // instantiate provider proxy
-        this._providerProxy = new ProviderProxy(Object.values(config.rpcs));
+        this._providerProxy = new ProviderProxy();
+
+        this._providerProxy.init(Object.values(config.rpcs));
 
         this._providerProxy.onReady.subscribe((ready: boolean) => {
             if (ready) {
@@ -67,24 +73,14 @@ export class Web3Service {
             provider: await this._providerProxy.getPreviousSession(),
         };
 
-        // const injectedSession = {
-        //     providerType: providers.INJECTED,
-        //     provider: this._providerProxy.getPreviosSession().s
-        // };
+        // connected
+        this._providerProxy.setType(providers.LINKED);
+        const linkedSession: _Session = {
+            providerType: providers.LINKED,
+            provider: await this._providerProxy.getPreviousSession(),
+        };
 
-        // const sessions = await Promise.all(
-        //     listOfProviders.map(async providerType => {
-        //         this.providerProxy.setType(providerType);
-        //         const provider = await this.providerProxy.getPreviousSession();
-
-        //         return {
-        //             providerType,
-        //             provider,
-        //         };
-        //     })
-        // );
-
-        const s = [injectedSession].find(s => s.provider !== undefined);
+        const s = [injectedSession, linkedSession].find(s => s.provider !== undefined);
 
         if (s) {
             this.storeWalletData(s.providerType, s.provider);
@@ -125,6 +121,20 @@ export class Web3Service {
         // this.storeWalletData(WalletData.EmptyWallet());
     }
 
+    public signMessage(message: string): Observable<unknown> | void {
+        if (!this._walletData.isLoggedIn) return;
+
+        const type = this._walletData.provider as ProviderType;
+
+        const provider = this._providerProxy.getProvider(type) as any;
+
+        if (!provider) return;
+
+        const obs = from(provider.request({ method: 'personal_sign', params: [message, this._walletData.address] }));
+
+        return obs;
+    }
+
     // *~~*~~*~~ Web3 Events ~~*~~*~~* //
 
     private _listenForProviderEvents(): void {
@@ -156,8 +166,11 @@ export class Web3Service {
         }
 
         if (wcProvider) {
+            // eslint-disable-next-line @typescript-eslint/no-empty-function
             wcProvider.removeListener('accountsChanged', () => {});
+            // eslint-disable-next-line @typescript-eslint/no-empty-function
             wcProvider.removeListener('chainChanged', () => {});
+            // eslint-disable-next-line @typescript-eslint/no-empty-function
             wcProvider.removeListener('disconnect', () => {});
 
             wcProvider.on('accountsChanged', (acc: string[]) => {
@@ -169,14 +182,16 @@ export class Web3Service {
                 // this.events.chainChanged && this.events.chainChanged(chainId);
             });
 
-            wcProvider.on('disconnect', (code: number, reason: string) => {
-                console.log('bye bye');
+            wcProvider.on('disconnect', (stream: any) => {
+                const { code, message } = stream;
 
-                if (code === 1000) {
+                if (code === 6000) {
                     this.accountsChanged([]);
                 } else {
                     // eslint-disable-next-line no-console
-                    console.error('Wallet disconnected', code, reason);
+                    if (!environment.production) console.error('Wallet disconnected', code, message);
+
+                    this.accountsChanged([]);
                 }
 
                 // this.events.disconnect && this.events.disconnect(code, reason);
@@ -219,11 +234,18 @@ export class Web3Service {
 
         const walletData: WalletData = new WalletData(address, chainId, providerType, loggedIn);
 
+        this._walletData = walletData;
         this._walletDataSubject.next(walletData);
+
+        this._web3Wrapper.setWeb3Instance(_web3);
+        this._web3Subject.next(this._web3Wrapper);
     }
 
     private removeWalletData(): void {
         this._walletData.reset();
         this._walletDataSubject.next(this._walletData);
+
+        this._web3Wrapper.removeWeb3Instance();
+        this._web3WrapperSub.next(this._web3Wrapper);
     }
 }
