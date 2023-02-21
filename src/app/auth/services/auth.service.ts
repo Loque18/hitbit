@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, from, lastValueFrom } from 'rxjs';
 import { Observable, throwError, catchError } from 'rxjs';
 
 import { LoginRequest, SignupRequest } from 'src/api/requests';
@@ -13,6 +13,8 @@ import { environment } from 'src/environments/environment';
 
 import { api } from 'src/api';
 import { CookieService } from 'src/app/utils/services/cookie.service';
+import { Web3Service } from 'src/app/utils/services/web3/web3.service';
+import { ProviderType } from 'src/app/utils/services/web3/types';
 
 class SessionData {
     constructor(public isAuthenticated: boolean = false, public token: string | null = null) {}
@@ -28,7 +30,12 @@ class SessionData {
     providedIn: 'root',
 })
 export class AuthService {
-    constructor(private http: HttpClient, private router: Router, private cookieService: CookieService) {}
+    constructor(
+        private http: HttpClient,
+        private router: Router,
+        private cookieService: CookieService,
+        private web3Service: Web3Service
+    ) {}
 
     // *~~*~~*~~ Session data ~~*~~*~~* //
     private _sessionData: SessionData = new SessionData();
@@ -88,6 +95,35 @@ export class AuthService {
         return response.pipe(catchError(this.handleError));
 
         // return (this.http.post(url, { email, password }) as Observable<ApiResponse>).pipe(catchError(this.handleError));
+    }
+
+    async loginWithWallet(providerType: ProviderType): Promise<any> {
+        // 1. if web3 wallet is not connected, request connection
+
+        if (!this.web3Service.walletData.isLoggedIn)
+            await lastValueFrom(this.web3Service.requestConnection(providerType));
+
+        // 2. once wallet is connected fetch web3 nonce
+        console.log('wallet data', this.web3Service.walletData);
+
+        const nonceUrl = `${api.url}${api.others.nonce}/?address=${this.web3Service.walletData.address}`;
+        const { nonce } = (await lastValueFrom(this.http.get(nonceUrl))) as any;
+
+        // 3. request signtature to the wallet with the nonce
+        const message = `HitBit Sign In With Nonce 0`;
+        const signature = await lastValueFrom(this.web3Service.signMessage(message));
+
+        // 4. send signature to the server and get the token
+        const url = `${api.url}${api.auth.loginWithWallet}/?message=${message}&signature=${signature}`;
+        const res = (await lastValueFrom(this.http.post(url, null))) as any;
+
+        // 5. if token is received, store it in cookie and set auth state to true
+        if (res.success) {
+            const token = res.token as string;
+            this.onLoginSuccess(token);
+        }
+
+        return res;
     }
 
     restoreSession(): boolean {

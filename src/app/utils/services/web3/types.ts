@@ -6,8 +6,11 @@ type Rpc = {
 
 type Web3Config = {
     rpcs: {
+        // at least one
         [rpcName: string]: Rpc;
     };
 };
 
-export { Rpc, Web3Config };
+type ProviderType = 'injected' | 'linked';
+
+export { Rpc, Web3Config, ProviderType };

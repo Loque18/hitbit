@@ -5,14 +5,18 @@ import { ToastrService } from 'ngx-toastr';
 
 import { IOnModalClose } from 'src/app/modal/IOnModalClose';
 
-import { AppModals } from 'src/static/app.modals';
-import { AbstModalComponent } from 'src/app/modal/AbstractModal';
 import { ModalCoreService } from 'src/app/modal/services/modal-core.service';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { Web3Service } from 'src/app/utils/services/web3/web3.service';
+
+import { AbstModalComponent } from 'src/app/modal/AbstractModal';
+import { AppModals } from 'src/static/app.modals';
 
 import { type LoginRequest } from 'src/api/requests';
 import { LoginResponse } from 'src/api/responses/response';
-import { CookieService } from 'src/app/utils/services/cookie.service';
+
+import { ProviderType } from 'src/app/utils/services/web3/types';
+import { providers } from 'src/app/utils/services/web3/constants';
 
 @Component({
     selector: 'app-login',
@@ -25,7 +29,7 @@ export class LoginComponent extends AbstModalComponent implements OnInit, IOnMod
         private _modalService: ModalCoreService,
         private toastr: ToastrService,
         private authService: AuthService,
-        private cookieService: CookieService
+        private web3Service: Web3Service
     ) {
         super(_modalService);
     }
@@ -42,6 +46,9 @@ export class LoginComponent extends AbstModalComponent implements OnInit, IOnMod
         this.resetForm();
     }
     // *~~*~~*~~ Login logic *~~*~~*~~ //
+
+    injectedProvider: ProviderType = providers.INJECTED;
+    linkedProvider: ProviderType = providers.LINKED;
 
     loading: boolean = false;
     showPass: boolean = false;
@@ -101,6 +108,14 @@ export class LoginComponent extends AbstModalComponent implements OnInit, IOnMod
                     this.toastr.error(err.message);
                 },
             });
+    }
+
+    async loginWithWallet(providerType: ProviderType) {
+        // show loading
+        this.loading = true;
+
+        // handle response
+        await this.authService.loginWithWallet(providerType);
     }
 
     private _handleErrorCodes(res: LoginResponse): void {

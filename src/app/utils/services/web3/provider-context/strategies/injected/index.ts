@@ -1,51 +1,48 @@
-import Web3 from 'web3';
+import { MetaMaskInpageProvider } from '@metamask/providers/dist/MetaMaskInpageProvider';
 
-import { Rpc } from '../../../types';
-
-import IProviderStrategy from '../IProviderStrategy';
+import { IProviderStrategy } from '../IProviderStrategy';
 
 class InjectedProviderStrategy implements IProviderStrategy {
-    getProvider(rpcs: Rpc[]): any {
+    protected provider!: MetaMaskInpageProvider;
+
+    init(): void {
         const injected = window.ethereum;
 
         if (!injected) {
             throw new Error('No injected provider found');
         }
 
-        return injected;
+        this.provider = injected;
     }
 
-    async requestConnection(provider: any): Promise<void> {
-        if (provider == null) {
+    getProvider(): MetaMaskInpageProvider | undefined {
+        return this.provider;
+    }
+
+    requestConnection(): Promise<unknown> | void {
+        if (!this.provider) {
             window.open('https://metamask.io/', '_blank');
             return;
         }
 
-        await provider.request({
-            method: 'eth_requestAccounts',
-        });
+        return this.provider.request({ method: 'eth_requestAccounts' });
     }
 
-    async requestDisconnection(provider: any): Promise<void> {}
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    requestDisconnection(): void {}
 
-    async requestChangeNetwork(provider: any, chainId: number): Promise<void> {
-        await provider.request({
-            method: 'wallet_switchEthereumChain',
-            params: [{ chainId: `0x${chainId.toString(16)}` }], // chainId must be in hexadecimal numbers
-        });
-    }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    getPreviosSession(): Promise<string[]> | string[] {
+        if (!this.provider) return [];
 
-    async getPreviosSession(provider: any): Promise<any> {
-        if (provider == null) return null;
+        return this.provider.request({ method: 'eth_accounts' }) as Promise<string[]>;
 
-        const web3 = new Web3(provider);
+        // const accounts = (await this.provider.request({ method: 'eth_accounts' })) as string[];
 
-        const accounts = await web3.eth.getAccounts();
+        // if (accounts.length === 0) return;
 
-        if (accounts.length === 0) return null;
-
-        return provider;
+        // return accounts;
     }
 }
 
-export default InjectedProviderStrategy;
+export { InjectedProviderStrategy };

@@ -1,89 +1,95 @@
-import ProviderContext from '../provider-context';
-import InjectedProviderStrategy from '../provider-context/strategies/injected';
-import LinkedProviderStrategy from '../provider-context/strategies/linked';
+import { ProviderContext } from '../provider-context';
+import { InjectedProviderStrategy } from '../provider-context/strategies/injected';
+import { LinkedProviderStrategy } from '../provider-context/strategies/linked';
+import { IProviderStrategy } from '../provider-context/strategies/IProviderStrategy';
+
+// import { validateProviderType } from '../validators';
+
+import { BehaviorSubject, Observable } from 'rxjs';
+import { type Rpc, type ProviderType } from '../types';
 
 import { providers } from '../constants';
-import { Rpc } from '../types';
+import { MetaMaskInpageProvider } from '@metamask/providers';
+import type EthereumProvider from '@walletconnect/ethereum-provider/dist/types/EthereumProvider';
 
-import { validateProviderType } from '../validators';
-
-const StrategiesMap = {
+const StrategiesMap: {
+    [key: string]: IProviderStrategy;
+} = {
     [providers.INJECTED]: new InjectedProviderStrategy(),
-    [providers.CONNECTED]: new LinkedProviderStrategy(),
+    [providers.LINKED]: new LinkedProviderStrategy(),
 };
 
-interface IProviders {
-    INJECTED: null;
-    CONNECTED: null;
-}
-
 class ProviderProxy {
-    private currentType: string;
+    private currentType: ProviderType;
     private context: ProviderContext;
-    private _providers: IProviders = {
-        INJECTED: null,
-        CONNECTED: null,
+
+    // observable to subscribe to when the provider is ready
+    private onReadySub = new BehaviorSubject<boolean>(false);
+    public onReady: Observable<boolean> = this.onReadySub.asObservable();
+
+    private _providers: {
+        [key: string]: unknown;
+    } = {
+        injected: undefined,
+        linked: undefined,
     };
 
-    constructor(rpcs: Rpc[]) {
+    constructor() {
         this.currentType = providers.INJECTED;
 
-        this.context = new ProviderContext();
+        // create a context with the injected strategy as default
+        this.context = new ProviderContext(StrategiesMap[this.currentType]);
 
-        // get all type of providers
-        Object.values(providers).forEach(providerType => {
-            // instantiate strategies
-            // this.context.setStrategy(StrategiesMap[providerType]());
-
-            const provider: any = StrategiesMap[providerType];
-
-            try {
-                // instantiate providers
-                this._providers[providerType] = provider.getProvider(rpcs);
-            } catch (e) {
-                // handle error
-                // eslint-disable-next-line no-console
-                console.warn(`Provider of type ${providerType} not found`);
-
-                this._providers[providerType] = null;
-            }
-        });
-
-        // set injected provider as default
-        this.context.setStrategy(StrategiesMap[providers.INJECTED]);
+        // notify the app when the provider is ready
     }
 
-    getProvider(type: string): any {
-        validateProviderType(type);
+    async init(rpcs: Rpc[]): Promise<void> {
+        const injectedStrategy = StrategiesMap[providers.INJECTED];
+        const linkedStrategy = StrategiesMap[providers.LINKED];
+
+        // get injected provider
+        try {
+            this._providers[providers.INJECTED] = await injectedStrategy.getProvider(rpcs);
+        } catch (e) {
+            console.warn('Injected provider not found');
+        }
+
+        // get linked provider
+        this._providers[providers.LINKED] = await linkedStrategy.getProvider(rpcs);
+    }
+
+    getProvider(type: ProviderType): unknown {
         return this._providers[type];
     }
 
     // api
-    setType(type: string): void {
-        validateProviderType(type);
+    setType(type: ProviderType): void {
         this.currentType = type;
         this.context.setStrategy(StrategiesMap[type]);
     }
 
-    // *~~*~~*~~*~~*~~* Wallet methods *~~*~~*~~*~~*~~* //
-    async requestConnection(): Promise<void> {
-        await this.context.requestConnection(this._providers[this.currentType]);
+    // *~~*~~*~~ Wallet methods ~~*~~*~~* //
+    requestConnection(): Promise<unknown> | void {
+        return this.context.requestConnection(this._providers[this.currentType]);
     }
 
-    async requestDisconnection(): Promise<void> {
+    requestDisconnection(): Promise<unknown> | void {
         // prettier-ignore
-        await this.context.requestDisconnection(this._providers[this.currentType]);
+        this.context.requestDisconnection(this._providers[this.currentType]);
     }
 
-    async requestChangeNetwork(chainId: number): Promise<void> {
-        // prettier-ignore
-        await this.context.requestChangeNetwork(this._providers[this.currentType], chainId);
-    }
+    // getPreviosSession(): Observable<unknown> | void {
+    //     return this.context.getPreviosSession(this._providers[this.currentType]);
+    // }
 
-    async getPreviousSession(): Promise<any> {
-        const connection = await this.context.getPreviosSession(this._providers[this.currentType]);
-        return connection;
+    // async requestChangeNetwork(chainId: number): Promise<void> {
+    //     // prettier-ignore
+    //     await this.context.requestChangeNetwork(this._providers[this.currentType], chainId);
+    // }
+
+    getPreviousSession(): Promise<unknown> | void {
+        return this.context.getPreviosSession(this._providers[this.currentType]);
     }
 }
 
-export default ProviderProxy;
+export { ProviderProxy };

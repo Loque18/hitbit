@@ -1,15 +1,20 @@
 import { Rpc } from '../../../types';
 
-import { Observable } from 'rxjs';
+// import type EthereumProvider from '@walletconnect/ethereum-provider/dist/types/EthereumProvider';
+import { MetaMaskInpageProvider } from '@metamask/providers';
 
 interface IProviderStrategy {
-    getProvider(rpcs: Rpc[]): unknown;
+    // provider: MetaMaskInpageProvider | EthereumProvider | undefined;
 
-    requestConnection(provider: unknown): Promise<void>;
-    requestDisconnection(provider: any): Promise<void>;
-    requestChangeNetwork(provider: any, chainId: number): Promise<void>;
+    init(rpcs: Rpc[]): Promise<void> | void;
 
-    getPreviosSession(provider: any): Promise<any>;
+    getProvider(): MetaMaskInpageProvider | unknown | undefined;
+
+    requestConnection(): Promise<unknown> | void;
+    requestDisconnection(): Promise<unknown> | void;
+    getPreviosSession(): Promise<string[]> | string[];
+
+    // requestChangeNetwork(provider: any, chainId: number): Promise<void>;
 }
 
-export default IProviderStrategy;
+export { IProviderStrategy };

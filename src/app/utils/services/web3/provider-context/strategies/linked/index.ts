@@ -1,43 +1,47 @@
-import WalletConnectProvider from '@walletconnect/web3-provider';
+// import type EthereumProviderT from '@walletconnect/ethereum-provider/dist/types/EthereumProvider';
+// import { EthereumProvider } from '@walletconnect/ethereum-provider';
 
-import IProviderStrategy from '../IProviderStrategy';
+import { IProviderStrategy } from '../IProviderStrategy';
 
 import { Rpc } from '../../../types';
+import { environment } from 'src/environments/environment';
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { EthereumProvider } = require('@walletconnect/ethereum-provider');
 
 class LinkedProviderStrategy implements IProviderStrategy {
-    getProvider(rpcs: Rpc[]) {
-        const rpcObject = {};
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    protected provider!: any;
 
-        rpcs.forEach(rpc => {
-            const { chainId, url } = rpc;
-            rpcObject[chainId] = url;
-        });
-
-        const provider = new WalletConnectProvider({
-            rpc: rpcObject,
-        });
-
-        return provider;
+    async init(rpcs: Rpc[]): Promise<void> {
+        try {
+            this.provider = await EthereumProvider.init({
+                projectId: environment.wcProjectId,
+                chains: [1, 56],
+            });
+        } catch (e) {
+            console.log(e);
+        }
     }
 
-    async requestConnection(provider: any): Promise<void> {
-        await provider.enable();
+    getProvider(): unknown | undefined {
+        return this.provider;
     }
 
-    async requestDisconnection(provider: any): Promise<void> {
-        await provider.disconnect();
+    requestConnection(): Promise<unknown> {
+        return this.provider?.enable();
     }
 
-    async requestChangeNetwork(provider: any, chainId: number): Promise<void> {
-        console.warn(`Please change to network ${chainId}`);
+    requestDisconnection(): Promise<void> {
+        return this.provider?.disconnect();
     }
 
-    async getPreviosSession(provider: any): Promise<any> {
-        if (!provider.connector.connected) return null;
-        await provider.enable();
+    getPreviosSession(): Promise<string[]> | string[] {
+        if (this.provider?.accounts.length === 0) return [];
 
-        return provider;
+        // return provider;
+        return this.provider.enable();
     }
 }
 
-export default LinkedProviderStrategy;
+export { LinkedProviderStrategy };

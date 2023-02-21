@@ -42,6 +42,7 @@ import { PagenotfoundComponent } from './pages/pagenotfound/pagenotfound.compone
 
 // *~~*~~*~~ Components ~~*~~*~~* //
 import { CarouselComponent } from './components/internal/carousel/carousel.component';
+import { TestComponent } from './pages/test/test.component';
 
 
 @NgModule({
@@ -71,6 +72,7 @@ import { CarouselComponent } from './components/internal/carousel/carousel.compo
 
         // *~~*~~*~~ Components ~~*~~*~~* //
         CarouselComponent,
+                    TestComponent,
     ],
     imports: [
         HttpClientModule,

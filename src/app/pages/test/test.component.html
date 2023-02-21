@@ -1,0 +1,32 @@
+<app-not-found-layout>
+    <section class="section">
+        <h1 class="has-text-white">Wallet data</h1>
+
+        <div class="is-flex">
+            <div class="has-text-white box has-background-blue100">Address: {{ web3Service.walletData.address }}</div>
+            <div class="has-text-white box has-background-blue100">Chain id: {{ web3Service.walletData.chainId }}</div>
+            <div class="has-text-white box has-background-blue100">
+                Provider type: {{ web3Service.walletData.provider }}
+            </div>
+            <div class="has-text-white box has-background-blue100">
+                Connected: {{ web3Service.walletData.isLoggedIn }}
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="is-flex">
+            <button class="button" (click)="metamaskConnect()" [ngClass]="{ 'is-loading': mmLoading }">
+                Connect Metamask
+            </button>
+            <button class="button" (click)="wcConnect()">Connect WC</button>
+        </div>
+
+        <hr />
+        <button class="button" (click)="signMessage()">Sign message</button>
+
+        <hr />
+
+        <button class="button" (click)="disconnect()">Disconnect</button>
+    </section>
+</app-not-found-layout>
