@@ -66,7 +66,7 @@
                             <button
                                 class="button is-blue0 alternative-login-btn is-size-7"
                                 type="button"
-                                (click)="metamaskLogin()"
+                                (click)="loginWithWallet(injectedProvider)"
                             >
                                 <span class="icon">
                                     <img src="/assets/logos/metamask.svg" alt="" />
@@ -75,7 +75,11 @@
                             </button>
                         </div>
                         <div class="control">
-                            <button class="button is-blue0 alternative-login-btn is-size-7" type="button">
+                            <button
+                                class="button is-blue0 alternative-login-btn is-size-7"
+                                type="button"
+                                (click)="loginWithWallet(linkedProvider)"
+                            >
                                 <span class="icon">
                                     <img src="/assets/logos/walletconnect.png" alt="" />
                                 </span>

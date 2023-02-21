@@ -1,14 +1,18 @@
 import { Rpc } from '../../../types';
 
-import type EthereumProvider from '@walletconnect/ethereum-provider/dist/types/EthereumProvider';
+// import type EthereumProvider from '@walletconnect/ethereum-provider/dist/types/EthereumProvider';
 import { MetaMaskInpageProvider } from '@metamask/providers';
 
 interface IProviderStrategy {
-    getProvider(rpcs: Rpc[]): Promise<EthereumProvider> | MetaMaskInpageProvider | void;
+    // provider: MetaMaskInpageProvider | EthereumProvider | undefined;
 
-    requestConnection(provider: unknown): Promise<unknown> | void;
-    requestDisconnection(provider: unknown): Promise<unknown> | void;
-    getPreviosSession(provider: unknown): Promise<unknown> | void;
+    init(rpcs: Rpc[]): Promise<void> | void;
+
+    getProvider(): MetaMaskInpageProvider | unknown | undefined;
+
+    requestConnection(): Promise<unknown> | void;
+    requestDisconnection(): Promise<unknown> | void;
+    getPreviosSession(): Promise<string[]> | string[];
 
     // requestChangeNetwork(provider: any, chainId: number): Promise<void>;
 }

@@ -34,6 +34,10 @@ class WalletData {
     public setIsLoggedIn(isLoggedIn: boolean): void {
         this.isLoggedIn = isLoggedIn;
     }
+
+    // public clone(): WalletData {
+    //     return new WalletData(this.address, this.chainId, this.provider, this.isLoggedIn);
+    // }
 }
 
 export { WalletData };

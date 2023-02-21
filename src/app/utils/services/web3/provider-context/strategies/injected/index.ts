@@ -3,45 +3,46 @@ import { MetaMaskInpageProvider } from '@metamask/providers/dist/MetaMaskInpageP
 import { IProviderStrategy } from '../IProviderStrategy';
 
 class InjectedProviderStrategy implements IProviderStrategy {
-    getProvider(): MetaMaskInpageProvider | void {
+    protected provider!: MetaMaskInpageProvider;
+
+    init(): void {
         const injected = window.ethereum;
 
         if (!injected) {
             throw new Error('No injected provider found');
         }
 
-        return injected;
+        this.provider = injected;
     }
 
-    requestConnection(provider: MetaMaskInpageProvider): Promise<unknown> | void {
-        if (provider == null) {
+    getProvider(): MetaMaskInpageProvider | undefined {
+        return this.provider;
+    }
+
+    requestConnection(): Promise<unknown> | void {
+        if (!this.provider) {
             window.open('https://metamask.io/', '_blank');
             return;
         }
 
-        return provider.request({ method: 'eth_requestAccounts' });
+        return this.provider.request({ method: 'eth_requestAccounts' });
     }
 
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     requestDisconnection(): void {}
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    async getPreviosSession(provider: MetaMaskInpageProvider): Promise<unknown> {
-        if (provider == null) return;
+    getPreviosSession(): Promise<string[]> | string[] {
+        if (!this.provider) return [];
 
-        const accounts = (await provider.request({ method: 'eth_accounts' })) as string[];
+        return this.provider.request({ method: 'eth_accounts' }) as Promise<string[]>;
 
-        if (accounts.length === 0) return;
+        // const accounts = (await this.provider.request({ method: 'eth_accounts' })) as string[];
 
-        return provider;
+        // if (accounts.length === 0) return;
+
+        // return accounts;
     }
-
-    // async requestChangeNetwork(provider: any, chainId: number): Promise<void> {
-    //     await provider.request({
-    //         method: 'wallet_switchEthereumChain',
-    //         params: [{ chainId: `0x${chainId.toString(16)}` }], // chainId must be in hexadecimal numbers
-    //     });
-    // }
 }
 
 export { InjectedProviderStrategy };

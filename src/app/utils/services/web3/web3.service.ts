@@ -1,9 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, from, map, Observable, switchMap } from 'rxjs';
+import { BehaviorSubject, from, Observable, throwError } from 'rxjs';
 import Web3 from 'web3';
-
-import { ProviderProxy } from './provider-proxy';
 
 import { Rpc, Web3Config, ProviderType } from './types';
 
@@ -14,48 +12,87 @@ import { Web3Wrapper } from './we3-wrapper';
 
 import { providers } from './constants';
 import { MetaMaskInpageProvider } from '@metamask/providers';
+// import type EthereumProvider from '@walletconnect/ethereum-provider/dist/types/EthereumProvider';
 import { environment } from 'src/environments/environment';
+import { ProviderContext } from './provider-context';
+
+import { type IProviderStrategy } from './provider-context/strategies/IProviderStrategy';
+import { InjectedProviderStrategy } from './provider-context/strategies/injected';
+import { LinkedProviderStrategy } from './provider-context/strategies/linked';
+
+const StrategiesMap: {
+    [key: string]: IProviderStrategy;
+} = {
+    [providers.INJECTED]: new InjectedProviderStrategy(),
+    [providers.LINKED]: new LinkedProviderStrategy(),
+};
 
 @Injectable({
     providedIn: 'root',
 })
 export class Web3Service {
+    // *~~*~~*~~ External ~~*~~*~~* //
+    public ready: boolean = false;
+
     private _web3Wrapper: Web3Wrapper = new Web3Wrapper();
     private _walletData: WalletData = new WalletData();
 
-    private _walletDataSubject: BehaviorSubject<WalletData> = new BehaviorSubject<WalletData>(this._walletData);
-    public walletData$: Observable<WalletData> = this._walletDataSubject.asObservable();
+    get walletData(): Readonly<WalletData> {
+        return this._walletData;
+    }
 
     private _web3WrapperSub: BehaviorSubject<Web3Wrapper> = new BehaviorSubject<Web3Wrapper>(this._web3Wrapper);
     public web3Wrapper$: Observable<Web3Wrapper> = this._web3WrapperSub.asObservable();
 
-    private _providerProxy!: ProviderProxy;
+    // *~~*~~*~~ Internal ~~*~~*~~* //
+
+    // create new provider context with injected strategy as default
+    private _providerContext: ProviderContext = new ProviderContext(StrategiesMap[providers.INJECTED]);
+
+    private _providerInstances: {
+        injected: MetaMaskInpageProvider | undefined;
+        linked: any | undefined;
+    } = {
+        injected: undefined,
+        linked: undefined,
+    };
 
     constructor() {
-        this._initWeb3(config);
+        this._initWeb3(config).then(() => {
+            this.ready = true;
+        });
     }
 
-    private _initWeb3(config: Web3Config): void {
-        // 2. create readonly web3 for each rpc instance
-        // const { rpcs } = config;
-        // Object.values(rpcs).forEach((rpc: Rpc) => {
-        //     const web3 = new Web3(rpc.url);
-        // });
+    private async _initWeb3(config: Web3Config): Promise<void> {
+        const { rpcs: rpcsObj } = config;
 
-        // instantiate provider proxy
-        this._providerProxy = new ProviderProxy();
+        const rpcs: Rpc[] = Object.values(rpcsObj);
 
-        this._providerProxy.init(Object.values(config.rpcs));
+        // 1. init strategies
+        const injectedStrategy = StrategiesMap[providers.INJECTED];
+        const linkedStrategy = StrategiesMap[providers.LINKED];
 
-        this._providerProxy.onReady.subscribe((ready: boolean) => {
-            if (ready) {
-                // listen for provider events
-                this._listenForProviderEvents();
+        // get injected provider
+        try {
+            await injectedStrategy.init(rpcs);
+            this._providerInstances.injected = injectedStrategy.getProvider() as MetaMaskInpageProvider;
+        } catch (e) {
+            console.warn('Injected provider not found');
+        }
 
-                // try to get previous session
-                this.getPreviousSession();
-            }
-        });
+        // get linked provider
+        try {
+            await linkedStrategy.init(rpcs);
+            this._providerInstances.linked = linkedStrategy.getProvider();
+        } catch (e) {
+            console.warn('Linked provider not found');
+        }
+
+        // 2. try recovering existing session
+        await this.getPreviousSession();
+
+        // 3. listen for provider events
+        this._listenForProviderEvents();
     }
 
     private async getPreviousSession(): Promise<void> {
@@ -63,87 +100,89 @@ export class Web3Service {
 
         type _Session = {
             providerType: ProviderType;
-            provider: unknown | undefined;
+            accounts: string[];
         };
 
         // injected
-        this._providerProxy.setType(providers.INJECTED);
+        this._providerContext.setStrategy(StrategiesMap[providers.INJECTED]);
         const injectedSession: _Session = {
             providerType: providers.INJECTED,
-            provider: await this._providerProxy.getPreviousSession(),
+            accounts: await this._providerContext.getPreviosSession(),
         };
 
-        // connected
-        this._providerProxy.setType(providers.LINKED);
+        // linked
+        this._providerContext.setStrategy(StrategiesMap[providers.LINKED]);
         const linkedSession: _Session = {
             providerType: providers.LINKED,
-            provider: await this._providerProxy.getPreviousSession(),
+            accounts: await this._providerContext.getPreviosSession(),
         };
 
-        const s = [injectedSession, linkedSession].find(s => s.provider !== undefined);
+        const s = [injectedSession, linkedSession].find(s => s.accounts.length > 0);
 
         if (s) {
-            this.storeWalletData(s.providerType, s.provider);
+            this.storeWalletData(s.providerType, this._providerInstances[s.providerType]);
         }
     }
 
     // *~~*~~*~~ Wallet Methods ~~*~~*~~* //
 
-    public requestConnection(providerType: ProviderType): Observable<unknown> | void {
-        if (this._walletData.isLoggedIn) return; // if user is already logged in, do nothing
+    public requestConnection(providerType: ProviderType): Observable<any> {
+        if (this._walletData.isLoggedIn) return throwError(() => new Error('User is already logged in'));
 
-        this._providerProxy.setType(providerType);
+        this._providerContext.setStrategy(StrategiesMap[providerType]);
 
-        const connectionObservable: Observable<unknown> | void = this._providerProxy.requestConnection();
+        const connectionPromise = this._providerContext.requestConnection();
 
-        if (connectionObservable) {
-            connectionObservable.subscribe(() => {
-                this.storeWalletData(providerType, this._providerProxy.getProvider(providerType));
-            });
-        }
+        if (!connectionPromise) return throwError(() => new Error(''));
 
-        return connectionObservable;
+        const obs = from(connectionPromise);
 
-        // await storeWalletData(providerType, this.providerProxy.getProvider(providerType), this.config);
+        obs?.subscribe(() => {
+            this.storeWalletData(providerType, this._providerContext.getProvider());
+        });
+
+        return obs;
     }
 
-    public requestDisconnection() {
+    public requestDisconnection(): Observable<unknown> | void {
         if (!this._walletData.isLoggedIn) return; // if user is not logged in, do nothing
 
-        const providerType = this._walletData.provider as ProviderType;
+        this._providerContext.setStrategy(StrategiesMap[this._walletData.provider as ProviderType]);
 
-        this._providerProxy.setType(providerType);
+        const dPromise = this._providerContext.requestDisconnection();
 
-        this._providerProxy.requestDisconnection();
+        if (!dPromise) {
+            this.removeWalletData();
+            return;
+        }
 
-        this.removeWalletData();
+        const obs = from(dPromise);
 
-        // this.storeWalletData(WalletData.EmptyWallet());
+        obs?.subscribe(() => {
+            this.removeWalletData();
+        });
+
+        return obs;
     }
 
-    public signMessage(message: string): Observable<unknown> | void {
-        if (!this._walletData.isLoggedIn) return;
-
+    public signMessage(message: string): Observable<unknown> {
+        if (!this._walletData.isLoggedIn) return throwError(() => new Error('User is not logged in'));
         const type = this._walletData.provider as ProviderType;
 
-        const provider = this._providerProxy.getProvider(type) as any;
+        const provider = this._providerInstances[type];
 
-        if (!provider) return;
+        if (!provider) return throwError(() => new Error('Provider not found'));
 
         const obs = from(provider.request({ method: 'personal_sign', params: [message, this._walletData.address] }));
-
         return obs;
     }
 
     // *~~*~~*~~ Web3 Events ~~*~~*~~* //
 
     private _listenForProviderEvents(): void {
-        const injectedProvider: MetaMaskInpageProvider = this._providerProxy.getProvider(
-            providers.INJECTED
-        ) as MetaMaskInpageProvider;
+        const injectedProvider: MetaMaskInpageProvider | undefined = this._providerInstances.injected;
 
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const wcProvider: any = this._providerProxy.getProvider(providers.LINKED);
+        const wcProvider: any | undefined = this._providerInstances.linked;
 
         if (injectedProvider) {
             injectedProvider.removeAllListeners();
@@ -160,9 +199,9 @@ export class Web3Service {
                 this.chainChanged(chainId_decimal);
             });
 
-            injectedProvider.on('disconnect', () => {
-                // this.disconnect();
-            });
+            // injectedProvider.on('disconnect', () => {
+            //     // this.disconnect();
+            // });
         }
 
         if (wcProvider) {
@@ -177,8 +216,9 @@ export class Web3Service {
                 this.accountsChanged(acc);
             });
 
-            wcProvider.on('chainChanged', (chainId: number) => {
-                this.chainChanged(chainId);
+            wcProvider.on('chainChanged', (chainId: string) => {
+                const chainIdNum: number = parseInt(chainId);
+                this.chainChanged(chainIdNum);
                 // this.events.chainChanged && this.events.chainChanged(chainId);
             });
 
@@ -206,7 +246,6 @@ export class Web3Service {
             if (!this._walletData.isLoggedIn) return;
 
             this._walletData.setAddress(accounts[0]);
-            this._walletDataSubject.next(this._walletData);
             // celesteStore.dispatch(set_address(accounts[0]));
         }
     }
@@ -215,14 +254,9 @@ export class Web3Service {
         if (!this._walletData.isLoggedIn) return;
 
         this._walletData.setChainId(chainId);
-        this._walletDataSubject.next(this._walletData);
     }
 
     // *~~*~~*~~ Utility Methods ~~*~~*~~* //
-
-    // public storeWalletData(walletData: WalletData): void {
-    //     this._walletDataSubject.next(walletData);
-    // }
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     private async storeWalletData(providerType: ProviderType, provider: any): Promise<void> {
@@ -235,15 +269,13 @@ export class Web3Service {
         const walletData: WalletData = new WalletData(address, chainId, providerType, loggedIn);
 
         this._walletData = walletData;
-        this._walletDataSubject.next(walletData);
 
         this._web3Wrapper.setWeb3Instance(_web3);
-        this._web3Subject.next(this._web3Wrapper);
+        // this._web3Subject.next(this._web3Wrapper);
     }
 
     private removeWalletData(): void {
         this._walletData.reset();
-        this._walletDataSubject.next(this._walletData);
 
         this._web3Wrapper.removeWeb3Instance();
         this._web3WrapperSub.next(this._web3Wrapper);

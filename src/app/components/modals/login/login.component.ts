@@ -15,6 +15,9 @@ import { AppModals } from 'src/static/app.modals';
 import { type LoginRequest } from 'src/api/requests';
 import { LoginResponse } from 'src/api/responses/response';
 
+import { ProviderType } from 'src/app/utils/services/web3/types';
+import { providers } from 'src/app/utils/services/web3/constants';
+
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
@@ -43,6 +46,9 @@ export class LoginComponent extends AbstModalComponent implements OnInit, IOnMod
         this.resetForm();
     }
     // *~~*~~*~~ Login logic *~~*~~*~~ //
+
+    injectedProvider: ProviderType = providers.INJECTED;
+    linkedProvider: ProviderType = providers.LINKED;
 
     loading: boolean = false;
     showPass: boolean = false;
@@ -104,8 +110,12 @@ export class LoginComponent extends AbstModalComponent implements OnInit, IOnMod
             });
     }
 
-    metamaskLogin(): void {
-        this.web3Service.requestConnection('injected');
+    async loginWithWallet(providerType: ProviderType) {
+        // show loading
+        this.loading = true;
+
+        // handle response
+        await this.authService.loginWithWallet(providerType);
     }
 
     private _handleErrorCodes(res: LoginResponse): void {

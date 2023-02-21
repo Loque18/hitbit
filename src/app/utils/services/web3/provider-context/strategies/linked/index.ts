@@ -1,7 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
-import type EthereumProviderT from '@walletconnect/ethereum-provider/dist/types/EthereumProvider';
-import { EthereumProvider } from '@walletconnect/ethereum-provider';
+// import type EthereumProviderT from '@walletconnect/ethereum-provider/dist/types/EthereumProvider';
+// import { EthereumProvider } from '@walletconnect/ethereum-provider';
 
 import { IProviderStrategy } from '../IProviderStrategy';
 
@@ -9,35 +7,40 @@ import { Rpc } from '../../../types';
 import { environment } from 'src/environments/environment';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-// const { EthereumProvider } = require('@walletconnect/ethereum-provider');
+const { EthereumProvider } = require('@walletconnect/ethereum-provider');
 
 class LinkedProviderStrategy implements IProviderStrategy {
-    getProvider(rpcs: Rpc[]): Promise<EthereumProviderT> {
-        // const rpcObject = {};
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    protected provider!: any;
 
-        return EthereumProvider.init({
-            projectId: environment.wcProjectId,
-            chains: [1, 97],
-        });
+    async init(rpcs: Rpc[]): Promise<void> {
+        try {
+            this.provider = await EthereumProvider.init({
+                projectId: environment.wcProjectId,
+                chains: [1, 56],
+            });
+        } catch (e) {
+            console.log(e);
+        }
     }
 
-    requestConnection(provider: EthereumProviderT): Promise<unknown> {
-        return provider.enable();
+    getProvider(): unknown | undefined {
+        return this.provider;
     }
 
-    requestDisconnection(provider: EthereumProviderT): Promise<void> {
-        return provider.disconnect();
+    requestConnection(): Promise<unknown> {
+        return this.provider?.enable();
     }
 
-    // async requestChangeNetwork(provider: any, chainId: number): Promise<void> {
-    //     console.warn(`Please change to network ${chainId}`);
-    // }
+    requestDisconnection(): Promise<void> {
+        return this.provider?.disconnect();
+    }
 
-    getPreviosSession(provider: EthereumProviderT): Promise<unknown> | void {
-        if (provider.accounts.length === 0) return;
+    getPreviosSession(): Promise<string[]> | string[] {
+        if (this.provider?.accounts.length === 0) return [];
 
         // return provider;
-        return provider.enable();
+        return this.provider.enable();
     }
 }
 

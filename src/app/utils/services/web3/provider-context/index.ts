@@ -1,7 +1,7 @@
 import { IProviderStrategy } from './strategies/IProviderStrategy';
 import { Rpc } from '../types';
 
-import type EthereumProvider from '@walletconnect/ethereum-provider/dist/types/EthereumProvider';
+// import type EthereumProvider from '@walletconnect/ethereum-provider/dist/types/EthereumProvider';
 import { MetaMaskInpageProvider } from '@metamask/providers';
 
 class ProviderContext {
@@ -15,34 +15,23 @@ class ProviderContext {
         this._strategy = strategy;
     }
 
-    // set strategy(strategy: IProviderStrategy) {
-    //     this._strategy = strategy;
-    // }
+    // *~~*~~*~~ interface methods *~~*~~*~~* //
 
-    getProvider(rpcs: Rpc[]): Promise<EthereumProvider> | MetaMaskInpageProvider | void {
-        return this._strategy.getProvider(rpcs);
+    getProvider(): MetaMaskInpageProvider | unknown | undefined {
+        return this._strategy.getProvider();
     }
 
-    // *~~*~~*~~ Wallet methods *~~*~~*~~* //
-    requestConnection(provider: unknown): Promise<unknown> | void {
-        return this._strategy.requestConnection(provider);
+    requestConnection(): Promise<unknown> | void {
+        return this._strategy.requestConnection();
     }
 
-    requestDisconnection(provider: unknown): Promise<unknown> | void {
-        return this._strategy.requestDisconnection(provider);
+    requestDisconnection(): Promise<unknown> | void {
+        return this._strategy.requestDisconnection();
     }
 
-    getPreviosSession(provider: unknown): Promise<unknown> | void {
-        return this._strategy.getPreviosSession(provider);
+    getPreviosSession(): Promise<string[]> | string[] {
+        return this._strategy.getPreviosSession();
     }
-
-    // async requestChangeNetwork(provider: any, chainId: number): Promise<void> {
-    //     return this._strategy.requestChangeNetwork(provider, chainId);
-    // }
-
-    // async getPreviosSession(provider: any): Promise<any> {
-    //     return this._strategy.getPreviosSession(provider);
-    // }
 }
 
 export { ProviderContext };

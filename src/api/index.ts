@@ -60,7 +60,12 @@ const api = {
     auth: {
         signup: '/signup',
         login: '/login',
+        loginWithWallet: '/loginwithwallet',
         verifyEmail: '/verifyEmail',
+    },
+
+    others: {
+        nonce: '/addressnonce',
     },
 };
 
