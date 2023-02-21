@@ -2,22 +2,26 @@ import Web3 from 'web3';
 
 import { MetaMaskInpageProvider } from '@metamask/providers/dist/MetaMaskInpageProvider';
 
-import { Rpc } from '../../../types';
+// import { Rpc } from '../../../types';
 
 import { IProviderStrategy } from '../IProviderStrategy';
 
-import { from, switchMap } from 'rxjs';
-import { type Observable } from 'rxjs';
+import { from } from 'rxjs';
+import { Observable } from 'rxjs';
 
 class InjectedProviderStrategy implements IProviderStrategy {
-    getProvider(): MetaMaskInpageProvider {
+    getProvider(): Observable<MetaMaskInpageProvider> | void {
         const injected = window.ethereum;
 
         if (!injected) {
             throw new Error('No injected provider found');
         }
 
-        return injected;
+        const obs = new Observable<MetaMaskInpageProvider>(observer => {
+            observer.next(injected);
+        });
+
+        return obs;
     }
 
     requestConnection(provider: MetaMaskInpageProvider): Observable<unknown> | void {

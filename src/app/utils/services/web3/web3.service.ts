@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, from, map, Observable, switchMap } from 'rxjs';
 import Web3 from 'web3';
@@ -28,10 +29,6 @@ export class Web3Service {
 
     constructor() {
         this._initWeb3(config);
-
-        this.walletData$.subscribe(data => {
-            this._walletData = data;
-        });
     }
 
     private _initWeb3(config: Web3Config): void {
@@ -44,11 +41,15 @@ export class Web3Service {
         // instantiate provider proxy
         this._providerProxy = new ProviderProxy(Object.values(config.rpcs));
 
-        // lister for wallet events
-        this._listenForProviderEvents();
+        this._providerProxy.onReady.subscribe((ready: boolean) => {
+            if (ready) {
+                // listen for provider events
+                this._listenForProviderEvents();
 
-        // try to get previous session
-        this.getPreviousSession();
+                // try to get previous session
+                this.getPreviousSession();
+            }
+        });
     }
 
     private async getPreviousSession(): Promise<void> {
@@ -131,6 +132,9 @@ export class Web3Service {
             providers.INJECTED
         ) as MetaMaskInpageProvider;
 
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const wcProvider: any = this._providerProxy.getProvider(providers.LINKED);
+
         if (injectedProvider) {
             injectedProvider.removeAllListeners();
 
@@ -148,6 +152,34 @@ export class Web3Service {
 
             injectedProvider.on('disconnect', () => {
                 // this.disconnect();
+            });
+        }
+
+        if (wcProvider) {
+            wcProvider.removeListener('accountsChanged', () => {});
+            wcProvider.removeListener('chainChanged', () => {});
+            wcProvider.removeListener('disconnect', () => {});
+
+            wcProvider.on('accountsChanged', (acc: string[]) => {
+                this.accountsChanged(acc);
+            });
+
+            wcProvider.on('chainChanged', (chainId: number) => {
+                this.chainChanged(chainId);
+                // this.events.chainChanged && this.events.chainChanged(chainId);
+            });
+
+            wcProvider.on('disconnect', (code: number, reason: string) => {
+                console.log('bye bye');
+
+                if (code === 1000) {
+                    this.accountsChanged([]);
+                } else {
+                    // eslint-disable-next-line no-console
+                    console.error('Wallet disconnected', code, reason);
+                }
+
+                // this.events.disconnect && this.events.disconnect(code, reason);
             });
         }
     }

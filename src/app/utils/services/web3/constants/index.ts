@@ -2,9 +2,10 @@ import { ProviderType } from '../types';
 
 const providers: {
     INJECTED: ProviderType;
+    LINKED: ProviderType;
 } = {
     INJECTED: 'injected',
-    // CONNECTED: 'CONNECTED',
+    LINKED: 'linked',
 };
 
 const events = {

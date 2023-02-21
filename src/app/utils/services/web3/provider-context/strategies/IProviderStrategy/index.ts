@@ -1,9 +1,10 @@
 import { Rpc } from '../../../types';
 
 import { Observable } from 'rxjs';
+import { MetaMaskInpageProvider } from '@metamask/providers';
 
 interface IProviderStrategy {
-    getProvider(rpcs: Rpc[]): unknown;
+    getProvider(rpcs: Rpc[]): Observable<unknown> | void;
 
     requestConnection(provider: unknown): Observable<unknown> | void;
     requestDisconnection(provider: unknown): void;

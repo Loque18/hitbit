@@ -1,7 +1,8 @@
 import { IProviderStrategy } from './strategies/IProviderStrategy';
-import { Rpc, ProviderType } from '../types';
+import { Rpc } from '../types';
 
 import { type Observable } from 'rxjs';
+import { MetaMaskInpageProvider } from '@metamask/providers';
 
 class ProviderContext {
     private _strategy: IProviderStrategy;
@@ -18,7 +19,7 @@ class ProviderContext {
     //     this._strategy = strategy;
     // }
 
-    getProvider(rpcs: Rpc[]): unknown {
+    getProvider(rpcs: Rpc[]): Observable<unknown> | void {
         return this._strategy.getProvider(rpcs);
     }
 
@@ -31,7 +32,7 @@ class ProviderContext {
         return this._strategy.requestDisconnection(provider);
     }
 
-    async getPreviosSession(provider: unknown): Promise<unknown> {
+    getPreviosSession(provider: unknown): Promise<unknown> | void {
         return this._strategy.getPreviosSession(provider);
     }
 

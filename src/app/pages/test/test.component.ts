@@ -17,6 +17,10 @@ export class TestComponent implements OnInit {
         this.web3Service.requestConnection('injected');
     }
 
+    wcConnect(): void {
+        this.web3Service.requestConnection('linked');
+    }
+
     disconnect(): void {
         this.web3Service.requestDisconnection();
     }

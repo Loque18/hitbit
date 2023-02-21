@@ -1,43 +1,46 @@
-import WalletConnectProvider from '@walletconnect/web3-provider';
-
-import IProviderStrategy from '../IProviderStrategy';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { IProviderStrategy } from '../IProviderStrategy';
 
 import { Rpc } from '../../../types';
+import { from, Observable } from 'rxjs';
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { EthereumProvider } = require('@walletconnect/ethereum-provider');
 
 class LinkedProviderStrategy implements IProviderStrategy {
-    getProvider(rpcs: Rpc[]) {
-        const rpcObject = {};
+    getProvider(rpcs: Rpc[]): Observable<unknown> {
+        // const rpcObject = {};
 
-        rpcs.forEach(rpc => {
-            const { chainId, url } = rpc;
-            rpcObject[chainId] = url;
-        });
+        const obs = from(
+            EthereumProvider.init({
+                projectId: '2dca332c410c1ef9156430369d7459a9',
+                chains: [1],
+            })
+        );
 
-        const provider = new WalletConnectProvider({
-            rpc: rpcObject,
-        });
-
-        return provider;
+        return obs;
     }
 
-    async requestConnection(provider: any): Promise<void> {
-        await provider.enable();
+    requestConnection(provider: any): Observable<unknown> | void {
+        const obs = from(provider.enable());
+        return obs;
     }
 
     async requestDisconnection(provider: any): Promise<void> {
         await provider.disconnect();
     }
 
-    async requestChangeNetwork(provider: any, chainId: number): Promise<void> {
-        console.warn(`Please change to network ${chainId}`);
-    }
+    // async requestChangeNetwork(provider: any, chainId: number): Promise<void> {
+    //     console.warn(`Please change to network ${chainId}`);
+    // }
 
-    async getPreviosSession(provider: any): Promise<any> {
-        if (!provider.connector.connected) return null;
-        await provider.enable();
+    getPreviosSession(provider: any): Promise<unknown> | void {
+        // if (!provider.connector.connected) return null;
+        // await provider.enable();
 
-        return provider;
+        // return provider;
+        return;
     }
 }
 
-export default LinkedProviderStrategy;
+export { LinkedProviderStrategy };
