@@ -1,0 +1,31 @@
+<app-not-found-layout>
+    <section class="section">
+        <h1 class="has-text-white">Wallet data</h1>
+
+        <div class="is-flex">
+            <div class="has-text-white box has-background-blue100">
+                Address: {{ (web3Service.walletData$ | async)?.address }}
+            </div>
+            <div class="has-text-white box has-background-blue100">
+                Chain id: {{ (web3Service.walletData$ | async)?.chainId }}
+            </div>
+            <div class="has-text-white box has-background-blue100">
+                Provider type: {{ (web3Service.walletData$ | async)?.provider }}
+            </div>
+            <div class="has-text-white box has-background-blue100">
+                Connected: {{ (web3Service.walletData$ | async)?.isLoggedIn }}
+            </div>
+        </div>
+
+        <hr />
+
+        <button class="button" (click)="metamaskConnect()">Connect Metamask</button>
+
+        <hr />
+        <button class="button">Sign message</button>
+
+        <hr />
+
+        <button class="button" (click)="disconnect()">Disconnect</button>
+    </section>
+</app-not-found-layout>

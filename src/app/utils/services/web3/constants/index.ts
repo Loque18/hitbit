@@ -1,6 +1,10 @@
-const providers = {
-    INJECTED: 'INJECTED',
-    CONNECTED: 'CONNECTED',
+import { ProviderType } from '../types';
+
+const providers: {
+    INJECTED: ProviderType;
+} = {
+    INJECTED: 'injected',
+    // CONNECTED: 'CONNECTED',
 };
 
 const events = {
