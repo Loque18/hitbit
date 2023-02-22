@@ -7,7 +7,7 @@
     transition: $fast-bezier;
 }
 
-// tablet and mobile
+// tablet and desktop
 @media screen and (min-width: 1024px) {
     .main-layout {
         margin-left: $sidebar-closed-width-desktop;

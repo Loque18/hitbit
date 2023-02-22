@@ -44,6 +44,9 @@ import { PagenotfoundComponent } from './pages/pagenotfound/pagenotfound.compone
 import { CarouselComponent } from './components/internal/carousel/carousel.component';
 import { TestComponent } from './pages/test/test.component';
 
+import { LatestBetsComponent } from './components/internal/latest-bets/latest-bets.component';
+import { BetsComponent } from './components/internal/bets/bets.component';
+import { RouletteComponent } from './pages/roulette/roulette.component';
 
 @NgModule({
     declarations: [
@@ -63,6 +66,9 @@ import { TestComponent } from './pages/test/test.component';
         ProvidersGamesComponent,
         CasinoEventsComponent,
 
+        // *~~*~~*~~ Test ~~*~~*~~* //
+        TestComponent,
+
         // *~~*~~*~~ Verify email ~~*~~*~~* //
         VerifyEmailComponent,
 
@@ -72,7 +78,11 @@ import { TestComponent } from './pages/test/test.component';
 
         // *~~*~~*~~ Components ~~*~~*~~* //
         CarouselComponent,
-                    TestComponent,
+                
+        LatestBetsComponent,
+        BetsComponent,
+        RouletteComponent
+                    
     ],
     imports: [
         HttpClientModule,

@@ -54,6 +54,14 @@ $custom-colors: (
         $ygra,
         #f0ff19,
     ),
+    'amarellow': (
+        $amarellow,
+        findColorInvert($amarellow),
+    ),
+    'amarellow2': (
+        $amarellow-2,
+        findColorInvert($amarellow-2),
+    ),
     'success': (
         #71e276,
         findColorInvert(#71e276),

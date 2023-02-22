@@ -1,0 +1,55 @@
+a{
+    color: white;
+    font-weight: 200;
+    position: relative;
+}
+
+a:after {
+
+    content: "";
+    position: absolute;
+    background-color: #ffef5d;
+    height: 2px;
+    width: 0;
+    left: 5;
+    right: 0;
+    bottom: -26px;
+    transition: 0.3s;
+  }
+
+  a:hover:after{
+    width: 110%;
+ }
+
+ a:hover{
+    color: #ffef5d;
+ }
+
+hr{
+    height: 2px;
+    background-color: gray;
+    margin-bottom: 1rem;
+}
+
+td{
+    padding-left: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+$br: 5px;
+.row {
+    td:first-child {
+        border-radius: #{$br} 0 0 #{$br};
+    }
+
+    td:last-child {
+        border-radius: 0 #{$br} #{$br}  0;
+    }
+}
+
+table {
+    border-spacing: 0em 1em;
+    border-collapse: separate;
+    width: 100%;
+}
