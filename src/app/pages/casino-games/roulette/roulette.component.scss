@@ -48,7 +48,8 @@ a {
 
 .button {
     width: 100%;
-    border-radius: 0px;
+    border: solid black 3px;
+    border-radius: 5px;
     color: black;
     font-weight: 900;
     box-shadow: 0 10px black;
@@ -62,6 +63,10 @@ a {
 .mar {
     position: relative;
     bottom: 7px;
+}
+
+.animation :hover {
+    background-color: white;
 }
 
 // *~~*~~*~~ Roulette ~~*~~*~~* //
