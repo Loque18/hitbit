@@ -10,24 +10,27 @@
     <table class="">
         <tbody>
             <tr *ngFor="let item of items" class="row has-background-blue-100">
-                <td><img  [src]="item.img"  width="52px"/></td>
-                <td class="has-text-amarellow-3">{{item.player}}
-                    <p class="has-text-ww-1 is-size-7">
+                <td><img class="" [src]="item.img"  width="52px"/></td>
+                <td class="has-text-amarellow-3 ">
+                    <span>
+                     <p class="pr-6">{{item.player}}</p>
+                     <p class="has-text-ww-1 is-size-7">
                     {{item._player}}
-                </p></td>
-                <td class="has-text-white pr-5 is-hidden-touch">{{item.date}}
+                    </p></span>
+                </td>
+                <td class="has-text-white is-hidden-touch pr-6">{{item.date}}
                     <p class="has-text-ww-1 is-size-7">
                     {{item._date}}
                 </p></td>
-                <td class="has-text-white pr-5">{{item.wager}}
+                <td class="has-text-white pr-6">{{item.wager}}
                     <p class="has-text-ww-1 is-size-7">
                     {{item._wager}}
                 </p></td>
-                <td class="has-text-amarellow pr-5 is-hidden-touch">{{item.multiplier}}
+                <td class="has-text-amarellow pr-6 is-hidden-touch">{{item.multiplier}}
                     <p class="has-text-ww-1 is-size-7">
                     {{item._multiplier}}
                 </p></td>
-                <td class="has-text-success pl-1 ">{{item.payout}}
+                <td class="has-text-success pl-6 ">{{item.payout}}
                     <p class="has-text-ww-1 is-size-7">
                     {{item._payout}}
                 </p></td>
