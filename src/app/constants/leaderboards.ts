@@ -14,7 +14,7 @@ interface Lbets{
 
 const leaderBoards: Lbets[] = [
     {
-        img : '/assets/',
+        img : '/assets/icons/crown (2) 4.png',
         player: 'JackUser',
         _player : 'Player',
         date:'1/17/2023',
@@ -27,7 +27,7 @@ const leaderBoards: Lbets[] = [
         _payout : 'Payout',
     },
     {
-        img : '/assets/',
+        img : '/assets/icons/medal 2.png',
         player: 'EmilyUser',
         _player : 'Player',
         date:'1/17/2023',

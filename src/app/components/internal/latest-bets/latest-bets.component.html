@@ -10,24 +10,24 @@
         <table class="tablee hoverTable mb-6">
             <thead>
                 <tr>
-                    <th class="has-text-white light players">Player</th>
+                    <th class="has-text-white light players is-hidden-touch">Player</th>
                     <th class="has-text-white light games">Game</th>
-                    <th class="has-text-white light pl-3 times">Time</th>
+                    <th class="has-text-white light pl-3 times is-hidden-touch">Time</th>
                     <th class="has-text-white light wagers">Wager</th>
-                    <th class="has-text-white light multiplier pl-0">Multiplier</th>
+                    <th class="has-text-white light multiplier is-hidden-touch pl-0">Multiplier</th>
                     <th class="has-text-white light pl-1 payouts">Payout</th>
                 </tr>
             </thead>
 
             <tbody>
                 <tr *ngFor="let link of links" class="row has-background-blue200">
-                    <td class="has-text-white">{{ link.player }}</td>
+                    <td class="has-text-white is-hidden-touch">{{ link.player }}</td>
                     <td class="fl has-text-white">
                         <img [src]="link.img" width="25px" class="mr-2" /> {{ link.game }}
                     </td>
-                    <td class="has-text-white">{{ link.time }}</td>
+                    <td class="has-text-white is-hidden-touch">{{ link.time }}</td>
                     <td class="has-text-white">{{ link.wager }}</td>
-                    <td class="has-text-amarellow2">{{ link.multiplier }}</td>
+                    <td class="has-text-amarellow2 is-hidden-touch">{{ link.multiplier }}</td>
                     <td class="has-text-success payouts pl-2">{{ link.payout }}</td>
                 </tr>
             </tbody>
