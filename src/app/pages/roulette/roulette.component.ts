@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { Iroulette , image } from 'src/app/constants/roulette-game';
+import { Iroulette, image } from 'src/app/constants/roulette-game';
 
 @Component({
-  selector: 'app-roulette',
-  templateUrl: './roulette.component.html',
-  styleUrls: ['./roulette.component.scss']
+    templateUrl: './roulette.component.html',
+    styleUrls: ['./roulette.component.scss'],
 })
 export class RouletteComponent {
- images : Iroulette[] = image;
+    images: Iroulette[] = image;
 }

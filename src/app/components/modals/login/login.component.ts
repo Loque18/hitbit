@@ -101,11 +101,15 @@ export class LoginComponent extends AbstModalComponent implements OnInit, IOnMod
                     } else {
                         this._handleErrorCodes(res);
                     }
+
+                    console.log(res);
                 },
                 error: (err: Error) => {
                     this.loading = false;
 
                     this.toastr.error(err.message);
+
+                    console.log(err);
                 },
             });
     }

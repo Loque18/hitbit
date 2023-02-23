@@ -7,7 +7,6 @@ import { config } from 'src/static/app.config';
 import { AppModals } from 'src/static/app.modals';
 
 @Component({
-    selector: 'app-home',
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.scss'],
 })

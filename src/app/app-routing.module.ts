@@ -1,11 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+// *~~*~~*~~ Home ~~*~~*~~* //
 import { HomeComponent } from 'src/app/pages/home/home.component';
-import { PagenotfoundComponent } from './pages/pagenotfound/pagenotfound.component';
+
+// *~~*~~*~~ Auth ~~*~~*~~* //
+import { VerifyEmailComponent } from './pages/verify-email/verify-email.component';
+
+// *~~*~~*~~ Casino original games ~~*~~*~~* //
 import { TestComponent } from './pages/test/test.component';
 
-import { VerifyEmailComponent } from './pages/verify-email/verify-email.component';
+// *~~*~~*~~ States ~~*~~*~~* //
+
+import { PagenotfoundComponent } from './pages/pagenotfound/pagenotfound.component';
 
 const routes: Routes = [
     // redirect / -> /home
@@ -16,10 +23,19 @@ const routes: Routes = [
     { path: 'verifyemail', component: VerifyEmailComponent },
 
     // delete this route
-    { path: 'test', component: TestComponent },
+    // { path: 'test', component: TestComponent },
+
+    // *~~*~~*~~ Casino original games ~~*~~*~~* //
+    {
+        path: 'roulette',
+        loadChildren: () => import('src/app/pages/roulette/roulette.module').then(m => m.RouletteModule),
+    },
 
     // otherwise redirect to 404
-    { path: '**', component: PagenotfoundComponent },
+    {
+        path: '**',
+        loadChildren: () => import('src/app/pages/pagenotfound/pagenotfound.module').then(m => m.PagenotfoundModule),
+    },
 ];
 
 @NgModule({

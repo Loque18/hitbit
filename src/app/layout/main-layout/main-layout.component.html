@@ -5,6 +5,8 @@
 <app-chat-container></app-chat-container>
 
 <div class="main-layout" [ngClass]="{ 'sidebar-open': !sidebarCollapsed, 'chat-open': !chatCollapsed }">
-    <ng-content></ng-content>
+    <div class="main-layout-container">
+        <ng-content></ng-content>
+    </div>
     <app-footer></app-footer>
 </div>

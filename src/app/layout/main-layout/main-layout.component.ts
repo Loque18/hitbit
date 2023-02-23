@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { LayoutService } from 'src/app/layout/services/layout.service';
 
 @Component({
-    selector: 'app-main-layout',
+    selector: 'layout-main',
     templateUrl: './main-layout.component.html',
     styleUrls: ['./main-layout.component.scss'],
 })

@@ -12,15 +12,15 @@ import { ToastrModule } from 'ngx-toastr';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-
 // *~~*~~*~~ Modules ~~*~~*~~* //
 import { ModalModule } from './modal/modal.module';
 import { LayoutModule } from './layout/layout.module';
 
+import { PagenotfoundModule } from './pages/pagenotfound/pagenotfound.module';
+
 // *~~*~~*~~ Modals ~~*~~*~~* //
 import { LoginComponent } from './components/modals/login/login.component';
 import { SignupComponent } from './components/modals/signup/signup.component';
-
 
 // *~~*~~*~~ Home page ~~*~~*~~* //
 import { HomeComponent } from './pages/home/home.component';
@@ -31,14 +31,8 @@ import { BonusBattlesComponent } from './pages/home/(sections)/bonus-battles/bon
 import { ProvidersGamesComponent } from './pages/home/(sections)/providers-games/providers-games.component';
 import { CasinoEventsComponent } from './pages/home/(sections)/casino-events/casino-events.component';
 
-
-
 // *~~*~~*~~ Verify email ~~*~~*~~* //
 import { VerifyEmailComponent } from './pages/verify-email/verify-email.component';
-
-
-// *~~*~~*~~ 404 ~~*~~*~~* //
-import { PagenotfoundComponent } from './pages/pagenotfound/pagenotfound.component';
 
 // *~~*~~*~~ Components ~~*~~*~~* //
 import { CarouselComponent } from './components/internal/carousel/carousel.component';
@@ -46,7 +40,9 @@ import { TestComponent } from './pages/test/test.component';
 
 import { LatestBetsComponent } from './components/internal/latest-bets/latest-bets.component';
 import { BetsComponent } from './components/internal/bets/bets.component';
-import { RouletteComponent } from './pages/roulette/roulette.component';
+
+// *~~*~~*~~ Games modules ~~*~~*~~* //
+import { RouletteModule } from './pages/roulette/roulette.module';
 
 @NgModule({
     declarations: [
@@ -58,7 +54,7 @@ import { RouletteComponent } from './pages/roulette/roulette.component';
 
         // *~~*~~*~~ Home page ~~*~~*~~* //
         HomeComponent,
-        
+
         // home page sections
         CasinoOriginalGamesComponent,
         LiveCasinoGamesComponent,
@@ -72,17 +68,11 @@ import { RouletteComponent } from './pages/roulette/roulette.component';
         // *~~*~~*~~ Verify email ~~*~~*~~* //
         VerifyEmailComponent,
 
-        // *~~*~~*~~ 404 ~~*~~*~~* //
-        PagenotfoundComponent,
-        
-
         // *~~*~~*~~ Components ~~*~~*~~* //
         CarouselComponent,
-                
+
         LatestBetsComponent,
         BetsComponent,
-        RouletteComponent
-                    
     ],
     imports: [
         HttpClientModule,
@@ -94,9 +84,13 @@ import { RouletteComponent } from './pages/roulette/roulette.component';
         LayoutModule,
 
         ToastrModule.forRoot(),
+
+        // *~~*~~*~~ State Modules ~~*~~*~~* //
+        PagenotfoundModule,
+
+        // *~~*~~*~~ Games modules ~~*~~*~~* //
+        RouletteModule,
     ],
-    bootstrap: [
-        AppComponent
-    ]
+    bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
