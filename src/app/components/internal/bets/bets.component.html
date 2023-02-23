@@ -9,31 +9,41 @@
     <hr>
     <table class="">
         <tbody>
-            <tr *ngFor="let item of items" class="row has-background-blue-100">
-                <td><img class="" [src]="item.img"  width="52px"/></td>
-                <td class="has-text-amarellow-3 ">
+            <tr *ngFor="let item of items" class="has-background-blue-100">
+                <td><img [src]="item.img" class=""  width="70px"/></td>
+                <td class="has-text-amarellow-3">
                     <span>
-                     <p class="pr-6">{{item.player}}</p>
-                     <p class="has-text-ww-1 is-size-7">
-                    {{item._player}}
-                    </p></span>
+                     <p class="pr-6 mt-4 is-hidden-mobile">{{item.player}}</p>
+                     <p class="is-hidden-tablet">{{item.player}}</p>
+                     <p class="has-text-ww-1 is-size-7">{{item._player}}</p>
+                    </span>
                 </td>
-                <td class="has-text-white is-hidden-touch pr-6">{{item.date}}
-                    <p class="has-text-ww-1 is-size-7">
-                    {{item._date}}
-                </p></td>
-                <td class="has-text-white pr-6">{{item.wager}}
-                    <p class="has-text-ww-1 is-size-7">
-                    {{item._wager}}
-                </p></td>
-                <td class="has-text-amarellow pr-6 is-hidden-touch">{{item.multiplier}}
-                    <p class="has-text-ww-1 is-size-7">
-                    {{item._multiplier}}
-                </p></td>
-                <td class="has-text-success pl-6 ">{{item.payout}}
-                    <p class="has-text-ww-1 is-size-7">
-                    {{item._payout}}
-                </p></td>
+                <td class="has-text-white is-hidden-mobile pr-6">
+                    <span>
+                     <p class="mt-4">{{item.date}}</p>
+                     <p class="has-text-ww-1 is-size-7">{{item._date}}</p>
+                    </span>
+                </td>
+                <td class="has-text-white pr-6">
+                    <span>
+                     <p class="mt-4 is-hidden-mobile">{{item.wager}}</p>
+                     <p class="is-hidden-tablet">{{item.wager}}</p>
+                     <p class="has-text-ww-1 is-size-7">{{item._wager}}</p>
+                    </span>
+                </td>
+                <td class="has-text-amarellow pr-6 is-hidden-mobile">
+                    <span>
+                     <p class="mt-4">{{item.multiplier}}</p>
+                     <p class="has-text-ww-1 is-size-7">{{item._multiplier}}</p>
+                    </span>
+                </td>
+                <td class="has-text-success pl-5 pr-4 ">
+                    <span >
+                      <p class="mt-4 is-hidden-mobile">{{item.payout}}</p>
+                      <p class="is-hidden-tablet">{{item.payout}}</p>
+                      <p class="has-text-ww-1 is-size-7">{{item._payout}}</p>
+                    </span>
+                    </td>
             </tr>
         </tbody>
     </table>
