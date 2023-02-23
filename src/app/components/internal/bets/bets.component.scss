@@ -11,14 +11,14 @@ a:after {
     background-color: #ffef5d;
     height: 2px;
     width: 0;
-    left: 5;
+    left: 1;
     right: 0;
     bottom: -25px;
     transition: 0.3s;
   }
 
   a:hover:after{
-    width: 110%;
+    width: 112%;
  }
 
  a:hover{
@@ -34,7 +34,7 @@ hr{
 td{
     padding-left: 20px;
     padding-top: 25px;
-    padding-bottom: 10px;
+    padding-bottom: 15px;
 }
 
 $br: 5px;
