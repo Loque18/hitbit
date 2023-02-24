@@ -8,14 +8,31 @@ $amarellow-2: #e2d34e;
     font-weight: 100;
   }
 
- .input{
+.ox{
+    width: 489px;
+    height: 680px;
+}
+
+.butto{
+    width: 100%;
+    border: solid black 3px;
+    border-radius: 5px;
+    color: black;
+    padding: 15px 0px;
+    background-color: $amarellow-2;
+    font-weight: 900;
+    font-size: 24px;
+    box-shadow: 0 10px black;
+    transition: none !important;
+  }
+
+  .input{
     border: none;
     font-size: 15px;
     padding: 32px 6px 32px 26px;
     color: white;
     font-weight: 100;
     padding-right:30px;
-
  }
 
  .i1{
@@ -46,46 +63,27 @@ $amarellow-2: #e2d34e;
     border: none;
     color: white;
  }
+
+ .tag{
+    padding: 5px 20px;
+    background-color: #CC3B3B;
+ }
+
+ .text{
+    font-weight: 900;
+ }
+
+ .nox{
+    width: 50.36px;
+    height: 50px;
+    justify-content: center;
+ }
  
- .ox{
-   height: 280px;
+ .wox{
+    width: 60px;
+    height: 60px;
  }
 
- .butto{
-   width: 100%;
-   border: solid black 3px;
-   border-radius: 5px;
-   color: black;
-   padding: 15px 0px;
-   background-color: $amarellow-2;
-   font-weight: 900;
-   font-size: 24px;
-   box-shadow: 0 10px black;
-   transition: none !important;
+ img{
+    max-width: none;
  }
-
- .mar{
-   position: relative;
-   bottom: 7px;
- }
-
- .animation{
-  background-color: $blue-300;
- }
-
- .animation:hover{
-  background-color: $blue-400;
-  animation: 0.5s anim ease-in-out;
-  animation-fill-mode: forwards;
- }
-
- @keyframes anim {
-  from {
-    transform: translateY(0);
-  }
-
-  to {
-    transform: translateY(-10px);
-  }
-}
-

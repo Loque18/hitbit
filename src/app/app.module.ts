@@ -47,6 +47,7 @@ import { TestComponent } from './pages/test/test.component';
 import { LatestBetsComponent } from './components/internal/latest-bets/latest-bets.component';
 import { BetsComponent } from './components/internal/bets/bets.component';
 import { RouletteComponent } from './pages/roulette/roulette.component';
+import { MinesComponent } from './pages/mines/mines.component';
 
 @NgModule({
     declarations: [
@@ -81,7 +82,8 @@ import { RouletteComponent } from './pages/roulette/roulette.component';
                 
         LatestBetsComponent,
         BetsComponent,
-        RouletteComponent
+        RouletteComponent,
+        MinesComponent
                     
     ],
     imports: [
