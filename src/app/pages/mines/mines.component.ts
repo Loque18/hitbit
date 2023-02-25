@@ -9,4 +9,10 @@ import { Imines , nums } from 'src/app/constants/mines-numbers';
 export class MinesComponent {
   numbers : Imines[] = nums;
   
+  showPass: boolean = false;
+
+  toggleShowPass(): void {
+    this.showPass = !this.showPass;
+    console.log(this.showPass)
+}
 }
