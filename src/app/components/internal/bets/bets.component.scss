@@ -17,12 +17,12 @@ a:after {
     transition: 0.3s;
   }
 
-  a:hover:after{
-    width: 112%;
- }
-
- a:hover{
+a:hover{
     color: #ffef5d;
+}
+  
+ a:hover:after{
+    width: 112%;
  }
 
 hr{
