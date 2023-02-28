@@ -19,6 +19,7 @@
    background-color: none;
    color: white;
    pointer-events: all !important;
+   cursor: pointer;
 }
 
 .i2{
@@ -29,6 +30,7 @@
    border: none;
    color: white;
    pointer-events: all!important;
+   cursor: pointer;
 }
 
 .i3{ 
@@ -39,6 +41,7 @@
    border: none;
    color: white;
    pointer-events: all!important;
+   cursor: pointer;
 }
 
   .input{
@@ -65,12 +68,14 @@
     height: 50px;
     border: transparent;
     border-radius: 6px;
+    cursor: pointer;
  }
  
  .box-1{
     width: 60px;
     height: 60px;
     border: transparent;
+    cursor: pointer;
  }
 
  img{
@@ -82,6 +87,7 @@
    font-size: 24px;
    width: 100%;
    height: 70px;
+   cursor: pointer;
  }
 
  .columnss{
@@ -92,4 +98,5 @@
  .numbers-box{
    border: transparent;
    width: 87px;
+   cursor: pointer;
  }
