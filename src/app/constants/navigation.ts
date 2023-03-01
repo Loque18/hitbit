@@ -1,8 +1,8 @@
-interface INavLink {
+type INavLink = {
     label: string;
     url: string;
     icon: string;
-}
+};
 
 const NAV_LINKS: INavLink[] = [
     {
@@ -12,47 +12,47 @@ const NAV_LINKS: INavLink[] = [
     },
     {
         label: 'Dice',
-        url: '/dice',
+        url: '/games/dice',
         icon: '/assets/icons/dice.svg',
     },
     {
         label: 'Slots',
-        url: '/slots',
+        url: '/games/slots',
         icon: '/assets/icons/apple-arcade.svg',
     },
     {
         label: 'Roulette',
-        url: '/roulette',
+        url: '/games/roulette',
         icon: '/assets/icons/poker-chip.svg',
     },
     {
         label: 'Blackjack',
-        url: '/blackjack',
+        url: '/games/blackjack',
         icon: '/assets/icons/cards.svg',
     },
     {
         label: 'Towers',
-        url: '/towers',
+        url: '/games/towers',
         icon: '/assets/icons/tower.svg',
     },
     {
         label: 'Mines',
-        url: '/mines',
+        url: '/games/mines',
         icon: '/assets/icons/bomb.svg',
     },
     {
         label: 'Lottery',
-        url: '/lottery',
+        url: '/games/lottery',
         icon: '/assets/icons/ticket.svg',
     },
     {
         label: 'JackPot',
-        url: '/jackpot',
+        url: '/games/jackpot',
         icon: '/assets/icons/cherry.svg',
     },
     {
         label: 'News',
-        url: '/news',
+        url: '/games/news',
         icon: '/assets/icons/news.svg',
     },
 ];

@@ -16,8 +16,6 @@ import { AppComponent } from './app.component';
 import { ModalModule } from './modal/modal.module';
 import { LayoutModule } from './layout/layout.module';
 
-import { PagenotfoundModule } from './pages/pagenotfound/pagenotfound.module';
-
 // *~~*~~*~~ Modals ~~*~~*~~* //
 import { LoginComponent } from './components/modals/login/login.component';
 import { SignupComponent } from './components/modals/signup/signup.component';
@@ -40,9 +38,6 @@ import { TestComponent } from './pages/test/test.component';
 
 import { LatestBetsComponent } from './components/internal/latest-bets/latest-bets.component';
 import { BetsComponent } from './components/internal/bets/bets.component';
-
-// *~~*~~*~~ Games modules ~~*~~*~~* //
-import { RouletteModule } from './pages/roulette/roulette.module';
 
 @NgModule({
     declarations: [
@@ -84,12 +79,6 @@ import { RouletteModule } from './pages/roulette/roulette.module';
         LayoutModule,
 
         ToastrModule.forRoot(),
-
-        // *~~*~~*~~ State Modules ~~*~~*~~* //
-        PagenotfoundModule,
-
-        // *~~*~~*~~ Games modules ~~*~~*~~* //
-        RouletteModule,
     ],
     bootstrap: [AppComponent],
 })

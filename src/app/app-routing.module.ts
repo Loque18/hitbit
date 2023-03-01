@@ -10,14 +10,13 @@ import { VerifyEmailComponent } from './pages/verify-email/verify-email.componen
 // *~~*~~*~~ Casino original games ~~*~~*~~* //
 import { TestComponent } from './pages/test/test.component';
 
-// *~~*~~*~~ States ~~*~~*~~* //
-
-import { PagenotfoundComponent } from './pages/pagenotfound/pagenotfound.component';
-
 const routes: Routes = [
     // redirect / -> /home
     { path: '', redirectTo: 'home', pathMatch: 'full' },
-    { path: 'home', component: HomeComponent },
+    {
+        path: 'home',
+        component: HomeComponent,
+    },
 
     // auth.verifyEmail
     { path: 'verifyemail', component: VerifyEmailComponent },
@@ -27,11 +26,13 @@ const routes: Routes = [
 
     // *~~*~~*~~ Casino original games ~~*~~*~~* //
     {
-        path: 'roulette',
-        loadChildren: () => import('src/app/pages/roulette/roulette.module').then(m => m.RouletteModule),
+        path: 'games',
+        loadChildren: () => import('src/app/pages/casino-games/casino-games.module').then(m => m.CasinoGamesModule),
     },
 
-    // otherwise redirect to 404
+    // *~~*~~*~~ States ~~*~~*~~* //
+
+    // 404
     {
         path: '**',
         loadChildren: () => import('src/app/pages/pagenotfound/pagenotfound.module').then(m => m.PagenotfoundModule),

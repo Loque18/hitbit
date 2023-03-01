@@ -1,10 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { RouletteComponent } from './roulette.component';
+
+import { DiceComponent } from './dice/dice.component';
+import { RouletteComponent } from './roulette/roulette.component';
 
 const routes: Routes = [
     {
-        path: '',
+        path: 'dice',
+        component: DiceComponent,
+    },
+    {
+        path: 'roulette',
         component: RouletteComponent,
     },
 ];
@@ -13,4 +19,4 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],
 })
-export class RouletteRoutingModule {}
+export class CasinoGamesRoutingModule {}
