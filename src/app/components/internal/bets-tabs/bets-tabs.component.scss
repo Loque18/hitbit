@@ -83,10 +83,15 @@ $br: 5px;
 .multiplier{
     padding-right: 4.5rem;
 }
+
 .tabs li.is-active a {
     color: $amarellow-2;
     border-bottom-color: $amarellow-2;
 }
+
 .tabs li a{
     padding-bottom: 1rem;
+    
+    font-weight: 200;
 }
+ 

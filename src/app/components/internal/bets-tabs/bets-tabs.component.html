@@ -1,12 +1,18 @@
 <div class="container mt-6">
     <div class="tabs">
         <ul>
-          <li class="is-active" id="color">
-          <a (click)="activateTab('All')">All</a></li>
-          <li>
-          <a (click)="activateTab('Highest')">Highest wins</a></li>
-          <li>
-          <a (click)="activateTab('Luckiest')">Lucky wins</a></li>
+          <li 
+          [ngClass]="activeTab === 'All' ? 'is-active' : ''">
+          <a 
+          (click)="activateTab('All')">All</a></li>
+          <li 
+          [ngClass]="activeTab === 'Highest' ? 'is-active' : 'none'">
+          <a 
+          (click)="activateTab('Highest')">Highest wins</a></li>
+          <li 
+          [ngClass]="activeTab === 'Luckiest' ? 'is-active' : 'none'">
+          <a 
+          (click)="activateTab('Luckiest')">Lucky wins</a></li>
         </ul>
     </div>
     <div *ngIf="activeTab === 'All'" class="table_container">
