@@ -54,8 +54,8 @@ export class LoginComponent extends AbstModalComponent implements OnInit, IOnMod
     showPass: boolean = false;
 
     loginForm: FormGroup = new FormGroup({
-        email: new FormControl('admin@admin.com', [Validators.required, Validators.email]),
-        password: new FormControl('admin123', [Validators.required]),
+        email: new FormControl('', [Validators.required, Validators.email]),
+        password: new FormControl('', [Validators.required]),
     });
 
     submitted: boolean = false;

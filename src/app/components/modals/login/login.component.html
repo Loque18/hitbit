@@ -8,7 +8,7 @@
             <div class="column">
                 <form [formGroup]="loginForm" (ngSubmit)="login()">
                     <div class="field">
-                        <label class="label has-text-white has-font-poppins semibold is-size-6" for="l.email"
+                        <label class="label has-text-ww1 has-font-poppins semibold is-size-6" for="l.email"
                             >Email</label
                         >
                         <div class="control">
@@ -28,7 +28,7 @@
                     </div>
 
                     <div class="field">
-                        <label class="label has-text-white has-font-poppins semibold is-size-6" for="l.password"
+                        <label class="label has-text-ww1 has-font-poppins semibold is-size-6" for="l.password"
                             >Password</label
                         >
                         <div class="control has-icons-right">
@@ -68,7 +68,7 @@
                                 type="button"
                                 (click)="loginWithWallet(injectedProvider)"
                             >
-                                <span class="icon">
+                                <span class="icon mr-3">
                                     <img src="/assets/logos/metamask.svg" alt="" />
                                 </span>
                                 <span> Metamask </span>
@@ -80,7 +80,7 @@
                                 type="button"
                                 (click)="loginWithWallet(linkedProvider)"
                             >
-                                <span class="icon">
+                                <span class="icon mr-3">
                                     <img src="/assets/logos/walletconnect.png" alt="" />
                                 </span>
                                 <span> WalletConnect </span>
@@ -93,11 +93,11 @@
 
                     <div class="field">
                         <button
-                            class="button hitbit-btn has-font-poppins extrabold is-fullwidth"
+                            class="button hitbit-btn has-font-poppins extrabold is-fullwidth is-size-5"
                             type="submit"
                             [ngClass]="{ 'is-loading': loading }"
                         >
-                            Login
+                            LOGIN
                         </button>
                     </div>
 
