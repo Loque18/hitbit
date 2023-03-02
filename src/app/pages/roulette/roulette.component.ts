@@ -8,4 +8,9 @@ import { Iroulette , image } from 'src/app/constants/roulette-game';
 })
 export class RouletteComponent {
  images : Iroulette[] = image;
+
+consoleLog():void{
+  console.log("It works")
+}
+
 }

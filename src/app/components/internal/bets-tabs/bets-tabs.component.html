@@ -1,0 +1,116 @@
+<div class="container mt-6">
+    <div class="tabs">
+        <ul>
+          <li 
+          [ngClass]="activeTab === 'All' ? 'is-active' : ''">
+          <a 
+          (click)="activateTab('All')">All</a></li>
+          <li 
+          [ngClass]="activeTab === 'Highest' ? 'is-active' : 'none'">
+          <a 
+          (click)="activateTab('Highest')">Highest wins</a></li>
+          <li 
+          [ngClass]="activeTab === 'Luckiest' ? 'is-active' : 'none'">
+          <a 
+          (click)="activateTab('Luckiest')">Lucky wins</a></li>
+        </ul>
+    </div>
+    <div *ngIf="activeTab === 'All'" class="table_container">
+        <table class="tablee hoverTable mb-6">
+            <thead>
+                <tr>
+                    <th class="has-text-white light players is-hidden-touch">Player</th>
+                    <th class="has-text-white light games">Game</th>
+                    <th class="has-text-white light pl-3 times is-hidden-touch">Time</th>
+                    <th class="has-text-white light wagers">Wager</th>
+                    <th class="has-text-white light multiplier is-hidden-touch pl-0">Multiplier</th>
+                    <th class="has-text-white light pl-1 payouts">Payout</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let link of links" class="row has-background-blue200">
+                    <td class="has-text-white is-hidden-touch">{{ link.player }}</td>
+                    <td class="fl has-text-white">
+                        <img [src]="link.img" width="25px" class="mr-2" /> {{ link.game }}
+                    </td>
+                    <td class="has-text-white is-hidden-touch">{{ link.time }}</td>
+                    <td class="has-text-white">{{ link.wager }}</td>
+                    <td class="has-text-amarellow2 is-hidden-touch">{{ link.multiplier }}</td>
+                    <td class="has-text-success payouts pl-2">{{ link.payout }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+    <div *ngIf="activeTab === 'Highest'" class="table-container">
+        <table class="tablee hoverTable mb-6">
+            <thead>
+                <tr>
+                    <th class="has-text-white light players is-hidden-touch">Player</th>
+                    <th class="has-text-white light games">Game</th>
+                    <th class="has-text-white light pl-3 times is-hidden-touch">Time</th>
+                    <th class="has-text-white light wagers">Wager</th>
+                    <th class="has-text-white light multiplier is-hidden-touch pl-0">Multiplier</th>
+                    <th class="has-text-white light pl-1 payouts">Payout</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let link of links" class="row has-background-blue-100">
+                    <td class="has-text-white is-hidden-touch">{{ link.player }}</td>
+                    <td class="fl has-text-white">
+                        <img [src]="link.img" width="25px" class="mr-2" /> {{ link.game }}
+                    </td>
+                    <td class="has-text-white is-hidden-touch">{{ link.time }}</td>
+                    <td class="has-text-white">{{ link.wager }}</td>
+                    <td class="has-text-amarellow2 is-hidden-touch">{{ link.multiplier }}</td>
+                    <td class="has-text-success payouts pl-2">{{ link.payout }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+    <div *ngIf="activeTab === 'Luckiest'" class="table-container">
+        <table class="tablee hoverTable mb-6">
+            <thead>
+                <tr>
+                    <th class="has-text-white light players is-hidden-touch">Player</th>
+                    <th class="has-text-white light games">Game</th>
+                    <th class="has-text-white light pl-3 times is-hidden-touch">Time</th>
+                    <th class="has-text-white light wagers">Wager</th>
+                    <th class="has-text-white light multiplier is-hidden-touch pl-0">Multiplier</th>
+                    <th class="has-text-white light pl-1 payouts">Payout</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let link of links" class="row has-background-blue400">
+                    <td class="has-text-white is-hidden-touch">
+                        {{ link.player }}
+                    </td>
+                    <td class="fl has-text-white">
+                        <img [src]="link.img" width="25px" class="mr-2" /> 
+                        {{ link.game }}
+                    </td>
+                    <td class="has-text-white is-hidden-touch">
+                        {{ link.time }}
+                    </td>
+                    <td class="has-text-white">
+                        {{ link.wager }}
+                    </td>
+                    <td class="has-text-amarellow2 is-hidden-touch">
+                        {{ link.multiplier }}
+                    </td>
+                    <td class="has-text-success payouts pl-2">
+                        {{ link.payout }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

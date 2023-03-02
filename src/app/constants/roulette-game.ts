@@ -6,15 +6,15 @@ interface Iroulette{
 
 const image : Iroulette[]=[
 {
-    img : '/assets/games/roulette.png',
+    img : '/assets/icons/bronze-coin.png',
     text : 'x2',
 },
 {
-    img : '/assets/games/roulette.png',
+    img : '/assets/icons/silver-oin 1.png',
     text : 'x4',
 },
 {
-    img : '/assets/games/roulette.png',
+    img : '/assets/icons/gold-coin 2.png',
     text : 'x10'
 },
 ];

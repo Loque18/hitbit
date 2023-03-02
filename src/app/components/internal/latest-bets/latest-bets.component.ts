@@ -8,4 +8,6 @@ import { Ibets, latestBets } from 'src/app/constants/latest-bets';
 })
 export class LatestBetsComponent {
     links: Ibets[] = latestBets;
+
+    //const tabs = document.querySelectorAll()
 }

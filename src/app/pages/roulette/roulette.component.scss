@@ -1,3 +1,6 @@
+@import 'src/scss/vars';
+
+
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: white;
     font-weight: 100;
@@ -6,50 +9,82 @@
  .input{
     border: none;
     font-size: 15px;
-    padding: 32px 0 32px 26px;
+    padding: 32px 6px 32px 26px;
     color: white;
     font-weight: 100;
- }
+    padding-right:30px;
 
- a{
-    color: white;
-    font-weight: 100;
  }
 
  .i1{
-    padding-right: 13rem;
+    margin-right: 12rem;
     padding-top: 1rem;
+    padding-right: 2rem;
+    padding-left: 1rem ;
     font-size: 15px;
+    border: none;
+    background-color: none;
+    color: white;
+    pointer-events: all !important;
+    cursor: pointer;
  }
 
  .i2{
-    padding-right: 8rem;
+    margin-right: 6rem;
     padding-top: 1rem;
+    padding-right: 2rem;
     font-size: 15px;
+    border: none;
+    color: white;
+    pointer-events: all !important;
+    cursor: pointer;
  }
 
  .i3{ 
-    padding-right: 2rem;
+    margin-right: 1rem;
     padding-top: 1rem;
+    padding-right: 1rem;
     font-size: 15px;
+    border: none;
+    color: white;
+    pointer-events: all !important;
+    cursor: pointer;
  }
  
- .flex{
-   display: inline-flex;
+ .box-current{
+   height: 298px;
  }
 
- .justify{
-   justify-content: space-between;
+ .hitbit-btn{
+  font-weight: 900;
+  font-size: 24px;
+  width: 100%;
+  height: 70px;
+  cursor: pointer;
+}
+
+ .mar{
+   position: relative;
+   bottom: 7px;
  }
 
- .ox{
-   height: 55%;
+ .animation{
+  background-color: $blue-300;
  }
 
- .button{
-   width: 100%;
-   border-radius: 0px;
-   color: black;
-   font-weight: 900;
-   box-shadow: 0 10px black;
+ .animation:hover{
+  background-color: $blue-400;
+  animation: 0.5s anim ease-in-out;
+  animation-fill-mode: forwards;
  }
+
+ @keyframes anim {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-10px);
+  }
+}
+

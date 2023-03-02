@@ -11,30 +11,30 @@ a:after {
     background-color: #ffef5d;
     height: 2px;
     width: 0;
-    left: 5;
+    left: 1;
     right: 0;
-    bottom: -26px;
+    bottom: -25px;
     transition: 0.3s;
   }
 
-  a:hover:after{
-    width: 110%;
- }
-
- a:hover{
+a:hover{
     color: #ffef5d;
+}
+  
+ a:hover:after{
+    width: 112%;
  }
 
 hr{
-    height: 2px;
+    height: 1px;
     background-color: gray;
     margin-bottom: 1rem;
 }
 
 td{
     padding-left: 20px;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 9px;
+    padding-bottom: 7px;
 }
 
 $br: 5px;
@@ -52,4 +52,24 @@ table {
     border-spacing: 0em 1em;
     border-collapse: separate;
     width: 100%;
+}
+
+.txt{
+    font-size: 16px;
+}
+
+.text{
+    font-size: 16px;
+}
+
+.mob-text{
+    font-size: 12px;
+}
+
+.des-text{
+    font-size: 12px;
+}
+
+img{
+    max-width: none;
 }

@@ -83,7 +83,7 @@ export class AuthService {
         const url = `${api.url}${api.auth.login}/?email=${email}&pass=${password}`;
 
         // process response data before returning it, store token in cookie and set auth state to true
-        const response = this.http.post(url, { email, password }) as Observable<LoginResponse>;
+        const response = this.http.post(url, null) as Observable<LoginResponse>;
 
         response.subscribe((res: LoginResponse) => {
             if (res.success) {
@@ -92,7 +92,7 @@ export class AuthService {
             }
         });
 
-        return response.pipe(catchError(this.handleError));
+        return response; //.pipe(catchError(this.handleError));
 
         // return (this.http.post(url, { email, password }) as Observable<ApiResponse>).pipe(catchError(this.handleError));
     }

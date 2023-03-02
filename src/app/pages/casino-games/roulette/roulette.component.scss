@@ -1,0 +1,158 @@
+@import 'src/scss/vars';
+
+::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: white;
+    font-weight: 100;
+}
+
+.input {
+    border: none;
+    font-size: 15px;
+    padding: 32px 6px 32px 26px;
+    color: white;
+    font-weight: 100;
+    padding-right: 30px;
+}
+
+.i1 {
+    margin-right: 12rem;
+    padding-top: 1rem;
+    padding-right: 2rem;
+    padding-left: 1rem;
+    font-size: 15px;
+    border: none;
+    background-color: none;
+    color: white;
+    pointer-events: all !important;
+    cursor: pointer;
+}
+
+.i2 {
+    margin-right: 6rem;
+    padding-top: 1rem;
+    padding-right: 2rem;
+    font-size: 15px;
+    border: none;
+    color: white;
+    pointer-events: all !important;
+    cursor: pointer;
+}
+
+.i3 {
+    margin-right: 1rem;
+    padding-top: 1rem;
+    padding-right: 1rem;
+    font-size: 15px;
+    border: none;
+    color: white;
+    pointer-events: all !important;
+    cursor: pointer;
+}
+
+.box-current {
+    height: 298px;
+}
+
+.mar {
+    position: relative;
+    bottom: 7px;
+}
+
+.animation {
+    background-color: $blue-300;
+}
+
+.animation:hover {
+    background-color: $blue-400;
+    animation: 0.5s anim ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+@keyframes anim {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-10px);
+    }
+}
+
+// *~~*~~*~~ Roulette ~~*~~*~~* //
+.roulette_box_container {
+    overflow: hidden;
+    position: relative;
+
+    padding: 1.5rem 2rem 1rem 2rem;
+
+    background-color: $blue-200;
+
+    border-radius: 0 999px 999px 0px;
+
+    box-shadow: 0 15px 0px 0px rgba($bb-1, 1);
+}
+
+.track_container {
+    overflow: hidden;
+}
+
+.coins-track {
+    display: flex;
+    // column-gap: 1rem;
+
+    // overflow: hidden;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+.selector {
+    position: absolute;
+    top: 0;
+    left: 50%;
+
+    width: 5px;
+    height: 100%;
+
+    background-color: white;
+
+    transform: translateX(-50%);
+
+    z-index: 1;
+
+    &::after {
+        content: '';
+        position: absolute;
+        background-image: url(/assets/games/roulette/triangle.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        width: 25px;
+        height: 25px;
+        top: 0;
+        // left: 50%;
+        transform: translateX(-40%);
+    }
+}
+
+.game-coin {
+    width: 80px;
+    height: 80px;
+
+    margin: 10px;
+
+    border-radius: 50%;
+
+    position: relative;
+
+    img {
+        width: 80px;
+        height: 80px;
+        max-width: unset;
+
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+}

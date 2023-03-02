@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 import { MainLayoutComponent } from './main-layout/main-layout.component';
+import { NavbarFooterLayoutComponent } from './navbar-footer-layout/navbar-footer-layout.component';
+
 import { NotFoundLayoutComponent } from './not-found-layout/not-found-layout.component';
 
 import { HeaderComponent } from 'src/app/layout/components/header/header.component';
@@ -18,7 +20,7 @@ import { ChatContainerComponent } from './components/chat-container/chat-contain
     ],
     exports: [
         MainLayoutComponent,
-        NotFoundLayoutComponent
+        NavbarFooterLayoutComponent
     ],
     declarations: [
         MainLayoutComponent,
@@ -28,6 +30,7 @@ import { ChatContainerComponent } from './components/chat-container/chat-contain
         BottomBarComponent,
         ChatContainerComponent,
         NotFoundLayoutComponent,
+        NavbarFooterLayoutComponent,
     ],
 })
 export class LayoutModule {}

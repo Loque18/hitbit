@@ -1,0 +1,83 @@
+<layout-main>
+    <section>
+        <button (click)="this._spin()">spin</button>
+        <div class="roulette_box_container">
+            <div class="track_container">
+                <div class="selector"></div>
+                <ul class="coins-track" #coinsTrack>
+                    <li *ngFor="let c of allCoins">
+                        <div
+                            class="game-coin"
+                            [ngClass]="{
+                                bronze: c.color === 'bronze',
+                                silver: c.color === 'silver',
+                                gold: c.color === 'gold'
+                            }"
+                        >
+                            <img [src]="c.img" alt="" />
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <br />
+
+        <div>
+            <div class="columns mb-6">
+                <div class="column is-two-fifths">
+                    <div class="box has-background-blue200">
+                        <p class="has-text-white mb-4 is-size-5">Place Bets</p>
+                        <p class="control has-icons-right is-size-5">
+                            <input
+                                class="input is-medium has-background-blue300"
+                                type="text"
+                                placeholder="Enter amount"
+                            />
+                            <span class="icon is-small is-right">
+                                <button class="i1 has-background-blue300 light">1/2</button>
+                            </span>
+                            <span class="icon is-small is-right">
+                                <button class="i2 has-background-blue300 light">x2</button>
+                            </span>
+                            <span class="icon is-small is-right">
+                                <button class="i3 has-background-blue300 light">Max</button>
+                            </span>
+                        </p>
+                        <div class="columns is-mobile is-variable is-2 mt-3">
+                            <div class="column" *ngFor="let image of images">
+                                <div class="box animation has-text-centered py-2">
+                                    <img width="87px" [src]="image.img" />
+                                    <p class="has-text-white mar">{{ image.text }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="mt-6 is-size-7 has-text-white light">Note : Placed bets cannot be removed !</p>
+                        <button class="button hitbit-btn has-font-poppins extrabold is-fullwidth is-size-5">
+                            PLACE BET
+                        </button>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="box has-background-blue200 is-hidden-mobile">
+                        <progress class="progress is-amarellow2" value="75" max="100"></progress>
+                        <p class="mb-3">
+                            <span class="has-text-white light is-size-6">Rolling in </span>
+                            <span class="has-text-white pl-1 is-size-5">10</span>
+                        </p>
+                    </div>
+                    <p class="has-text-white mb-4 medium is-size-5">Current Bets</p>
+                    <div class="box box-current ox has-background-blue200">
+                        <div class="is-flex is-justify-content-space-between">
+                            <p class="is-flex">
+                                <img width="30px" src="assets/icons/casino-chip 1.png" />
+                                <span class="has-text-white pl-3">JackUser</span>
+                            </p>
+                            <p class="has-text-success">150.00$</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</layout-main>
