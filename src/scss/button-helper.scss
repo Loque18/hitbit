@@ -21,6 +21,9 @@
 
     color: $bb-0 !important;
 
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+
     &.is-loading::after {
         border-left-color: $bb-0 !important;
         border-bottom-color: $bb-0 !important;
