@@ -48,7 +48,7 @@ import { LatestBetsComponent } from './components/internal/latest-bets/latest-be
 import { BetsComponent } from './components/internal/bets/bets.component';
 import { RouletteComponent } from './pages/roulette/roulette.component';
 import { MinesComponent } from './pages/mines/mines.component';
-import { BetsTabsComponent } from './pages/bets-tabs/bets-tabs.component';
+import { BetsTabsComponent } from './components/internal/bets-tabs/bets-tabs.component';
 
 @NgModule({
     declarations: [

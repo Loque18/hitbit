@@ -1,3 +1,5 @@
+@import 'src/scss/vars';
+
 .tablee {
     width: 100%; 
 }
@@ -82,11 +84,14 @@ $br: 5px;
     padding-right: 4.5rem;
 }
 
-.hide {
-    display: none;
+.tabs li.is-active a {
+    color: $amarellow-2;
+    border-bottom-color: $amarellow-2;
 }
 
-.active {
-    display: block;
+.tabs li a{
+    padding-bottom: 1rem;
+    
+    font-weight: 200;
 }
-
+ 
