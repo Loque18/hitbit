@@ -1,30 +1,45 @@
-$blue-300: #034e8a;
-$blue-400: #0462ad;
-$blue-500: #0575d0;
-$amarellow-2: #e2d34e;
+@import 'src/scss/vars';
 
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: white;
     font-weight: 100;
   }
 
-.ox{
-    width: 489px;
-    height: 680px;
+.box-3{
+    width: 467px;
 }
 
-.butto{
-    width: 100%;
-    border: solid black 3px;
-    border-radius: 5px;
-    color: black;
-    padding: 15px 0px;
-    background-color: $amarellow-2;
-    font-weight: 900;
-    font-size: 24px;
-    box-shadow: 0 10px black;
-    transition: none !important;
-  }
+  .i1{
+   margin-right: 12rem;
+   padding-top: 1rem;
+   padding-right: 2rem;
+   padding-left: 1rem ;
+   font-size: 15px;
+   border: none;
+   background-color: none;
+   color: white;
+   pointer-events: all !important;
+}
+
+.i2{
+   margin-right: 6rem;
+   padding-top: 1rem;
+   padding-right: 2rem;
+   font-size: 15px;
+   border: none;
+   color: white;
+   pointer-events: all!important;
+}
+
+.i3{ 
+   margin-right: 1rem;
+   padding-top: 1rem;
+   padding-right: 1rem;
+   font-size: 15px;
+   border: none;
+   color: white;
+   pointer-events: all!important;
+}
 
   .input{
     border: none;
@@ -35,35 +50,6 @@ $amarellow-2: #e2d34e;
     padding-right:30px;
  }
 
- .i1{
-    margin-right: 12rem;
-    padding-top: 1rem;
-    padding-right: 2rem;
-    padding-left: 1rem ;
-    font-size: 15px;
-    border: none;
-    background-color: none;
-    color: white;
- }
-
- .i2{
-    margin-right: 6rem;
-    padding-top: 1rem;
-    padding-right: 2rem;
-    font-size: 15px;
-    border: none;
-    color: white;
- }
-
- .i3{ 
-    margin-right: 1rem;
-    padding-top: 1rem;
-    padding-right: 1rem;
-    font-size: 15px;
-    border: none;
-    color: white;
- }
-
  .tag{
     padding: 5px 20px;
     background-color: #CC3B3B;
@@ -71,19 +57,39 @@ $amarellow-2: #e2d34e;
 
  .text{
     font-weight: 900;
+    border: transparent;
  }
 
- .nox{
+ .box-2{
     width: 50.36px;
     height: 50px;
-    justify-content: center;
+    border: transparent;
+    border-radius: 6px;
  }
  
- .wox{
+ .box-1{
     width: 60px;
     height: 60px;
+    border: transparent;
  }
 
  img{
-    max-width: none;
+    max-width: 30px;
+ }
+
+ .hitbit-btn{
+   font-weight: 900;
+   font-size: 24px;
+   width: 100%;
+   height: 70px;
+ }
+
+ .columnss{
+   display: flex;
+   gap: 1.3rem;
+ }
+
+ .numbers-box{
+   border: transparent;
+   width: 87px;
  }

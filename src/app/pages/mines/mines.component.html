@@ -1,51 +1,60 @@
-<app-main-layout>
-  <div class="header mb-3 is-flex">
+
+  <div class="header mb-3  is-flex">
     <p class="has-text-white is-size-3 text">MINES</p>
     <span class="tag has-text-white is-small mt-3 ml-5 bold">SPECIAL</span>
   </div> 
-    <div class="box ox has-background-blue200">
-        <p class="has-text-white mb-3 is-size-5">Place Bets</p>
-        <p class="control has-icons-right is-size-5">
-          <input class="input is-medium has-background-blue300" type="text" placeholder="Enter amount">
-          <span class="icon is-right">
-           <button class="i1 has-background-blue300 light">1/2</button> 
-          </span>
-          <span class="icon is-small is-right">
-            <button class="i2 has-background-blue300 light">x2</button>
-         </span>
-         <span class="icon is-small is-right">
-           <button class="i3 has-background-blue300 light">Max</button>
-         </span>
-        </p>
+    <div class="box box-3 has-background-blue200">
+        <div class="field">
+            <label class="label has-text-white is-size-5 light">Place Bets
+            </label>
+            <div class="control has-icons-right">
+                <input 
+                class="input is-medium has-background-blue300"
+                type="text" 
+                placeholder="Enter amount"/>
+                <span class="icon is-small is-right">
+                    <button class="i1 has-background-blue300 light">
+                        1/2
+                    </button> 
+                </span>
+                <span class="icon is-small is-right">
+                    <button class="i2 has-background-blue300 light">
+                        x2
+                    </button>
+                </span>
+                <span class="icon is-small is-right">
+                    <button class="i3 has-background-blue300 light">
+                        Max
+                    </button> 
+                </span>
+            </div>
+        </div>
         <p class="has-text-white is-size-5 mb-2 mt-4">Number of mines</p>
-        <input class="input is-medium has-background-blue300" type="text" placeholder="Enter amount">
-        <div class="columns is-mobile mt-2">
-            <div class="column" *ngFor="let number of numbers" >
-                <div class="box has-background-blue300 has-text-centered has-text-white">
-                    {{number.nums}}
-                </div>
-            </div>
-        </div>
-        <p class="has-text-white is-size-5">Game Hash</p>
-        <div class="columns is-mobile mt-1 pb-6">
-            <div class="column">
-                <div class="box wox has-background-blue500 has-text-centered">
-                    <img src="/assets/icons/Arrow 12.png">
-                </div>
-            </div>
+        <input 
+        class="input is-medium has-background-blue300" 
+        type="text" 
+        placeholder="Enter amount">
+        <div class="columns is-mobile mt-1">
             <div class="column" *ngFor="let number of numbers">
-                <div class="box nox mt-2 has-background-blue300">
-                    <img width="30px" [src]="number.img">
-                </div>
-            </div>
-            <div class="column">
-                <div class="box wox has-background-blue500 has-text-centered">
-                    <img src="/assets/icons/Arrow 11.png">
-                </div>
+                <button class="box numbers-box py-4 has-background-blue300 has-text-centered has-text-white">
+                    {{number.nums}}
+                </button>
             </div>
         </div>
-        <div class="butto mt-6 mb-3 has-text-centered">
+        <p class="has-text-white is-size-5 mb-1">Game Hash</p>
+        <div class="columnss is-mobile pb-6">
+            <button class="box box-1 has-background-blue500 has-text-centered">
+                <img src="/assets/icons/Arrow 12.png">
+            </button>
+            <button class="has-text-centered box-2 mt-2 pt-1 has-background-blue300"
+            *ngFor="let number of numbers">
+                <img width="30px" [src]="number.img">
+            </button>
+            <button class="box box-1 has-background-blue500 has-text-centered">
+                <img src="/assets/icons/Arrow 11.png">
+            </button>
+        </div>
+        <button class="hitbit-btn mt-5 mb-3 has-text-centered">
             PLACE BET
-        </div>
+        </button>
     </div>
-</app-main-layout>

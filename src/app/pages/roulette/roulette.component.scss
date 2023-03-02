@@ -1,7 +1,5 @@
-$blue-300: #034e8a;
-$blue-400: #0462ad;
-$blue-500: #0575d0;
-$amarellow-2: #e2d34e;
+@import 'src/scss/vars';
+
 
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: white;
@@ -27,6 +25,7 @@ $amarellow-2: #e2d34e;
     border: none;
     background-color: none;
     color: white;
+    pointer-events: all !important;
  }
 
  .i2{
@@ -36,6 +35,7 @@ $amarellow-2: #e2d34e;
     font-size: 15px;
     border: none;
     color: white;
+    pointer-events: all !important;
  }
 
  .i3{ 
@@ -45,24 +45,19 @@ $amarellow-2: #e2d34e;
     font-size: 15px;
     border: none;
     color: white;
+    pointer-events: all !important;
  }
  
- .ox{
-   height: 280px;
+ .box-current{
+   height: 298px;
  }
 
- .butto{
-   width: 100%;
-   border: solid black 3px;
-   border-radius: 5px;
-   color: black;
-   padding: 15px 0px;
-   background-color: $amarellow-2;
-   font-weight: 900;
-   font-size: 24px;
-   box-shadow: 0 10px black;
-   transition: none !important;
- }
+ .hitbit-btn{
+  font-weight: 900;
+  font-size: 24px;
+  width: 100%;
+  height: 70px;
+}
 
  .mar{
    position: relative;
