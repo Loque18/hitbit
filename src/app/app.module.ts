@@ -39,6 +39,8 @@ import { TestComponent } from './pages/test/test.component';
 import { LatestBetsComponent } from './components/internal/latest-bets/latest-bets.component';
 import { BetsComponent } from './components/internal/bets/bets.component';
 
+import { BetsTabsComponent } from './components/internal/bets-tabs/bets-tabs.component';
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -68,6 +70,8 @@ import { BetsComponent } from './components/internal/bets/bets.component';
 
         LatestBetsComponent,
         BetsComponent,
+
+        BetsTabsComponent,
     ],
     imports: [
         HttpClientModule,
