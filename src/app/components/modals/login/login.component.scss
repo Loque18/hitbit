@@ -4,7 +4,7 @@
     background-color: $blue-200;
     border-color: transparent;
     &::placeholder {
-        color: $ww-0;
+        color: $ww-1;
         font-weight: 500;
     }
 
@@ -24,16 +24,18 @@
 }
 
 .login-serparator {
-    background-color: white;
+    background-color: $ww-1;
 
     position: relative;
 
     overflow: visible;
 
+    height: 1px;
+
     &::after {
         content: 'Or Login With';
         background-color: $blue-100;
-        color: white;
+        color: $ww-1;
         padding: 0 10px;
         font-weight: 500;
         font-size: 0.75rem;
@@ -47,4 +49,6 @@
 
 .alternative-login-btn {
     color: $ww-0;
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
 }
