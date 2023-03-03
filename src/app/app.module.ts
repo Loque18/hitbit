@@ -35,6 +35,7 @@ import { VerifyEmailComponent } from './pages/verify-email/verify-email.componen
 // *~~*~~*~~ Components ~~*~~*~~* //
 import { CarouselComponent } from './components/internal/carousel/carousel.component';
 import { TabsComponent } from './components/internal/tabs/tabs.component';
+import { TabComponent } from './components/internal/tabs/tab.component';
 
 import { TestComponent } from './pages/test/test.component';
 
@@ -70,6 +71,7 @@ import { BetsTabsComponent } from './components/internal/bets-tabs/bets-tabs.com
         // *~~*~~*~~ Components ~~*~~*~~* //
         CarouselComponent,
         TabsComponent,
+        TabComponent,
 
         LatestBetsComponent,
         BetsComponent,

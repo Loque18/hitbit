@@ -1,7 +1,16 @@
 <div class="tabs">
     <ul>
-        <li *ngFor="let tab of tabs" [ngClass]="{ 'is-active': tab.id === activeTabId }">
+        <li
+            *ngFor="let tab of tabs"
+            [ngClass]="{ 'is-active': tab.id === activeTabId }"
+            (click)="tabClick($event)"
+            [attr.data-tab]="tab.id"
+        >
             <a>{{ tab.name }}</a>
         </li>
     </ul>
+</div>
+
+<div class="tab-content">
+    <ng-content></ng-content>
 </div>

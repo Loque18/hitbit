@@ -6,10 +6,7 @@ import { ModalCoreService } from 'src/app/modal/services/modal-core.service';
 import { config } from 'src/static/app.config';
 import { AppModals } from 'src/static/app.modals';
 
-type Tab = {
-    name: string;
-    id: string;
-};
+import { Tab } from 'src/app/shared/models/tab';
 
 @Component({
     templateUrl: './home.component.html',
@@ -28,16 +25,16 @@ export class HomeComponent {
 
     tabs: Tab[] = [
         {
+            id: 'tab1',
             name: 'Tab 1',
-            id: '1',
         },
         {
             name: 'Tab 2',
-            id: '2',
+            id: 'tab2',
         },
         {
             name: 'Tab 3',
-            id: '3',
+            id: 'tab3',
         },
     ];
 }

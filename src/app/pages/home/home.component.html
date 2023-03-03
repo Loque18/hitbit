@@ -27,9 +27,17 @@
     <app-bets></app-bets>
     <app-bets-tabs></app-bets-tabs>  -->
 
-    <comp-tabs [tabs]="tabs">
-        <!-- <div *ngIf="activeTabId === 'tab1'">
-            <div></div>
-        </div> -->
+    <comp-tabs>
+        <comp-tab [tabId]="'tab-1'" [tabName]="'Tab 1'">
+            <div class="box">
+                <h1 class="title">Tab 1</h1>
+            </div>
+        </comp-tab>
+
+        <comp-tab [tabId]="'tab-2'" [tabName]="'Tab 2'">
+            <div class="box">
+                <h1 class="title">Tab 2</h1>
+            </div>
+        </comp-tab>
     </comp-tabs>
 </layout-main>
