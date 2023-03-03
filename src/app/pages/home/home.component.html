@@ -1,43 +1,55 @@
 <layout-main>
-    <!-- News Carousel 
+    <!-- News Carousel -->
     <div class="block">
         <app-carousel></app-carousel>
     </div>
-    <br /> -->
+    <br />
 
-    <!-- Classic games
+    <!-- Classic games  -->
     <homepage-casino-original-games></homepage-casino-original-games>
-    <br /><br />  -->
+    <br /><br />
 
-    <!-- Live casino 
+    <!-- Live casino -->
     <homepage-live-casino-games></homepage-live-casino-games>
-    <br /><br /> -->
+    <br /><br />
 
-    <!-- Bonus Battles 
+    <!-- Bonus Battles -->
     <homepage-bonus-battles></homepage-bonus-battles>
-    <br /><br /> -->
+    <br /><br />
 
-    <!-- Providers games 
+    <!-- Providers games -->
     <homepage-providers-games></homepage-providers-games>
-    <br /><br /> -->
+    <br /><br />
 
-    <!-- Events
+    <!-- Events  -->
     <homepage-casino-events></homepage-casino-events>
-    <homepage-latest-bets></homepage-latest-bets>
-    <app-bets></app-bets>
-    <app-bets-tabs></app-bets-tabs>  -->
+    <br /><br />
 
+    <!-- latest-bets -->
     <comp-tabs>
-        <comp-tab [tabId]="'tab-1'" [tabName]="'Tab 1'">
-            <div class="box">
-                <h1 class="title">Tab 1</h1>
-            </div>
+        <comp-tab [tabId]="'latestbets_tab_1'" [tabName]="'All'">
+            <homepage-latest-bets></homepage-latest-bets>
         </comp-tab>
 
-        <comp-tab [tabId]="'tab-2'" [tabName]="'Tab 2'">
-            <div class="box">
-                <h1 class="title">Tab 2</h1>
-            </div>
+        <comp-tab [tabId]="'latestbets_tab_2'" [tabName]="'Highest Wins'">
+            <homepage-latest-bets></homepage-latest-bets>
+        </comp-tab>
+
+        <comp-tab [tabId]="'latestbets_tab_3'" [tabName]="'Lucky Wins'">
+            <div>another tab</div>
+        </comp-tab>
+    </comp-tabs>
+    <br /><br />
+
+    <!-- leader board -->
+    <div class="title is-size-5 has-text-white">LeaderBoard</div>
+    <comp-tabs>
+        <comp-tab [tabId]="'leaderboard_tab_1'" [tabName]="'Highest Wins'">
+            <app-bets></app-bets>
+        </comp-tab>
+
+        <comp-tab [tabId]="'leaderboard_tab_2'" [tabName]="'Luckiest Wins'">
+            <app-bets></app-bets>
         </comp-tab>
     </comp-tabs>
 </layout-main>
