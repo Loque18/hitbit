@@ -12,7 +12,7 @@
             </li>
 
             <li *ngFor="let link of topLinks">
-                <a class="sidebar-link" [routerLink]="link.url">
+                <a class="sidebar-link" [routerLink]="link.url" [ngClass]="{ active: activeRoute === link.active }">
                     <div class="sidebar-link-icon">
                         <img [src]="link.icon" alt="" />
                     </div>

@@ -6,6 +6,11 @@ import { ModalCoreService } from 'src/app/modal/services/modal-core.service';
 import { config } from 'src/static/app.config';
 import { AppModals } from 'src/static/app.modals';
 
+type Tab = {
+    name: string;
+    id: string;
+};
+
 @Component({
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.scss'],
@@ -20,4 +25,19 @@ export class HomeComponent {
             this.modalService.openModal(AppModals.LOGIN);
         }
     }
+
+    tabs: Tab[] = [
+        {
+            name: 'Tab 1',
+            id: '1',
+        },
+        {
+            name: 'Tab 2',
+            id: '2',
+        },
+        {
+            name: 'Tab 3',
+            id: '3',
+        },
+    ];
 }

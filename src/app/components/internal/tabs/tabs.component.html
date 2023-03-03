@@ -1,0 +1,7 @@
+<div class="tabs">
+    <ul>
+        <li *ngFor="let tab of tabs" [ngClass]="{ 'is-active': tab.id === activeTabId }">
+            <a>{{ tab.name }}</a>
+        </li>
+    </ul>
+</div>

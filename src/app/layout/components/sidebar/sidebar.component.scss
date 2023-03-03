@@ -79,7 +79,7 @@
                 // margin-bottom: 1.5rem;
 
                 &:hover,
-                .active {
+                &.active {
                     background-color: $blue-600;
                 }
 
@@ -118,6 +118,10 @@
                 display: flex;
                 column-gap: 1rem;
                 margin-bottom: 1.5rem;
+
+                &.active {
+                    background-color: $blue-600;
+                }
             }
         }
     }
