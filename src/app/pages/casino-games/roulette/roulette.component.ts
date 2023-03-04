@@ -1,13 +1,26 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+
 import { Iroulette, image } from 'src/app/constants/roulette-game';
 
+import { Bet } from 'src/app/shared/models/game/bet';
+
 import { ROULETTE_COINS, RouletteCoin } from 'src/app/shared/models/roulette/coin';
+import { RouletteService } from 'src/app/shared/services/games/roulette/roulette.service';
+
+enum Coin {
+    BRONZE = 'bronze',
+    SILVER = 'silver',
+    GOLD = 'gold',
+}
 
 @Component({
     templateUrl: './roulette.component.html',
     styleUrls: ['./roulette.component.scss'],
 })
 export class RouletteComponent implements AfterViewInit {
+    constructor(private gameService: RouletteService) {}
+
     images: Iroulette[] = image;
 
     protected _coins: RouletteCoin[] = ROULETTE_COINS;
@@ -95,5 +108,31 @@ export class RouletteComponent implements AfterViewInit {
     protected get allCoins(): RouletteCoin[] {
         const c = this._coins;
         return [...c, ...c, ...c, ...c, ...c, ...c, ...c];
+    }
+
+    // *~~*~~*~~ Component actions ~~*~~*~~* //
+
+    betForm: FormGroup = new FormGroup({
+        betAmount: new FormControl(0),
+        betCoin: new FormControl(Coin.BRONZE),
+    });
+
+    placeBet(): void {
+        // ...
+        // if (this.game.round.state !== GameState.WAITING_FOR_BETS) return;
+        // const { betAmount, betCoin } = this.betForm.value;
+        // const bet: Bet = {
+        //     amount: betAmount,
+        //     coinType: betCoin,
+        //     player: this.player,
+        // };
+        // this.game.placeBet(bet);
+        // this.resetForm();
+
+        alert(JSON.stringify(this.betForm.value, null, 2));
+    }
+
+    private resetForm(): void {
+        this.betForm.value['betAmount'] = 0;
     }
 }

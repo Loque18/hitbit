@@ -4,7 +4,7 @@ import { environment } from 'src/environments/environment';
 
 const events = {
     global: {
-        connect: 'connect',
+        connect: 'open',
     },
 
     games: {
@@ -20,8 +20,18 @@ const events = {
 export class WebsocketsService {
     private _socketInstance: WebSocket;
 
+    private _connected: boolean = false;
+
     constructor() {
         this._socketInstance = new WebSocket(environment.wsUrl);
+    }
+
+    public onConnect(callback: () => void) {
+        this._socketInstance.addEventListener(events.global.connect, () => {
+            this._connected = true;
+
+            callback();
+        });
     }
 
     public on(event: string, callback: (data: any) => void) {
@@ -32,6 +42,14 @@ export class WebsocketsService {
 
         // this._socketInstance.addEventListener(event, (e: MessageEvent) => {
         // });
+    }
+
+    public emit(data: string) {
+        if (!this._connected) {
+            throw new Error('Please verify that you are connected to the socket, before emitting data');
+        }
+
+        this._socketInstance.send(data);
     }
 
     private _isValidEvent(event: string): boolean {

@@ -50,15 +50,6 @@
     cursor: pointer;
 }
 
-.box-current {
-    height: 298px;
-}
-
-.mar {
-    position: relative;
-    bottom: 7px;
-}
-
 .animation {
     background-color: $blue-300;
 }
@@ -77,6 +68,50 @@
     to {
         transform: translateY(-10px);
     }
+}
+
+// *~~*~~*~~ Radio ~~*~~*~~* //
+.radio_container {
+    display: block;
+
+    // border: 1px solid red;
+
+    input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    .coin_card {
+        top: 0;
+        left: 0;
+        height: 120px;
+        width: 100%;
+        background-color: $blue-700;
+        border-radius: 5px;
+
+        display: grid;
+        place-items: center;
+
+        transition: 0.25s ease-in-out;
+
+        img {
+            width: 70px;
+            height: 70px;
+        }
+    }
+}
+
+/* On mouse-over, add a grey background color */
+.radio_container:hover input ~ .coin_card {
+    box-shadow: 0 2px 4px 2px rgba(black, 0.1);
+}
+
+/* When the radio button is checked, add a blue background */
+.radio_container input:checked ~ .coin_card {
+    background-color: $blue-400;
+
+    transform: translateY(-10px);
 }
 
 // *~~*~~*~~ Roulette ~~*~~*~~* //

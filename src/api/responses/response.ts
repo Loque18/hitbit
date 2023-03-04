@@ -8,7 +8,9 @@ interface LoginResponse {
     // all props from ApiResponse
     success: boolean;
     message?: string;
-    token?: string;
+    data?: {
+        verificatonToken: string;
+    };
     statusCode?: number;
 }
 

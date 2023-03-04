@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 // *~~*~~*~~ App Modules ~~*~~*~~* //
@@ -22,6 +23,7 @@ import { MinesComponent } from './mines/mines.component';
     imports: [
 		CommonModule,
 		CasinoGamesRoutingModule,
+        ReactiveFormsModule,
 
         LayoutModule
 	],

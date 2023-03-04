@@ -38,6 +38,10 @@ $custom-colors: (
         $blue-600,
         findColorInvert($blue-600),
     ),
+    'blue700': (
+        $blue-700,
+        findColorInvert($blue-700),
+    ),
     'ww0': (
         $ww-0,
         findColorInvert($ww-0),

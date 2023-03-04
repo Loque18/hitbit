@@ -87,7 +87,8 @@ export class AuthService {
 
         response.subscribe((res: LoginResponse) => {
             if (res.success) {
-                const token = res.token as string;
+                const token = res.data?.verificatonToken as string;
+
                 this.onLoginSuccess(token);
             }
         });
