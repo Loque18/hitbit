@@ -53,6 +53,8 @@ import { environment } from 'src/environments/environment';
 //     }
 // }
 
+const baseUrl = environment.apiUrl;
+
 const api = {
     url: environment.apiUrl,
 
@@ -66,6 +68,12 @@ const api = {
 
     others: {
         nonce: '/addressnonce',
+    },
+
+    games: {
+        roulette: {
+            activeGame: `${baseUrl}/roulette/currentRoundStats`,
+        },
     },
 };
 

@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { R_ActiveGameResponse } from 'src/api/responses/response';
 
 import { Iroulette, image } from 'src/app/constants/roulette-game';
 
@@ -34,6 +35,10 @@ export class RouletteComponent implements AfterViewInit {
         const firstChild: HTMLElement = elmt.children[0] as HTMLElement;
         this.squareWidth = firstChild.offsetWidth;
         this.initialPosition();
+
+        // this.gameService.getCurrentGame().subscribe((res: R_ActiveGameResponse) => {
+        //     console.log(res);
+        // });
     }
 
     public _spin(): void {

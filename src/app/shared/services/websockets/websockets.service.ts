@@ -40,8 +40,12 @@ export class WebsocketsService {
             throw new Error(`Invalid socket event: ${event}`);
         }
 
-        // this._socketInstance.addEventListener(event, (e: MessageEvent) => {
-        // });
+        console.log('on', event);
+
+        this._socketInstance.addEventListener(event, e => {
+            // callback(e);
+            console.log(e);
+        });
     }
 
     public emit(data: string) {
@@ -55,5 +59,9 @@ export class WebsocketsService {
     private _isValidEvent(event: string): boolean {
         // return event.split(':').every((e) => events.hasOwnProperty(e));
         return true;
+    }
+
+    public get state(): number {
+        return this._socketInstance.readyState;
     }
 }
