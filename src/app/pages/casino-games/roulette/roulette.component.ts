@@ -36,9 +36,7 @@ export class RouletteComponent implements AfterViewInit {
         this.squareWidth = firstChild.offsetWidth;
         this.initialPosition();
 
-        // this.gameService.getCurrentGame().subscribe((res: R_ActiveGameResponse) => {
-        //     console.log(res);
-        // });
+        this.gameService.updateStream$.subscribe((data: R_ActiveGameResponse) => {});
     }
 
     public _spin(): void {

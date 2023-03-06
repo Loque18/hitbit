@@ -24,23 +24,20 @@ type WalletLoginResponse = {
 // *~~*~~*~~ Roulette  *~~*~~*~~ //
 
 type R_ActiveGameResponse = {
-    event: string;
-    data: {
-        state: string;
-        bets: [];
-        hash: string | null;
-        'round-id': string;
+    state: string;
+    bets: [];
+    hash: string | null;
+    'round-id': string;
 
-        times: {
-            game_init: { start: string; end: string };
-            taking_bets: { start: string; end: string };
-            show_results: { start: string; end: string };
-            game_end: { start: string; end: string };
-        };
-
-        winningNumber: number | null;
-        spinNumber: number | null;
+    times: {
+        game_init: { start: number; end: number };
+        taking_bets: { start: number; end: number };
+        spin: { start: number; end: number };
+        show_results: { start: number; end: number };
     };
+
+    winningNumber: number | null;
+    spinNumber: number | null;
 };
 
 export { ApiResponse, LoginResponse };

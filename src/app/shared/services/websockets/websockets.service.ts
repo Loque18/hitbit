@@ -34,17 +34,25 @@ export class WebsocketsService {
         });
     }
 
-    public on(event: string, callback: (data: any) => void) {
+    public on(eventName: string, callback: (data: any) => void) {
         // verify that event is valid
-        if (!this._isValidEvent(event)) {
-            throw new Error(`Invalid socket event: ${event}`);
+        if (!this._isValidEvent(eventName)) {
+            throw new Error(`Invalid socket event: ${eventName}`);
         }
 
-        console.log('on', event);
+        this._socketInstance.addEventListener('message', e => {
+            let data = null;
 
-        this._socketInstance.addEventListener(event, e => {
-            // callback(e);
-            console.log(e);
+            try {
+                const jsonData = JSON.parse(e.data);
+                data = jsonData;
+
+                if (data.event === eventName) {
+                    callback(data.data);
+                }
+            } catch (err) {
+                console.error(err);
+            }
         });
     }
 
