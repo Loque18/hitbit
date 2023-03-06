@@ -9,6 +9,8 @@ import { GameInitState, SpinningState, TakingBetsState, ResultsState } from './s
 
 import { api } from 'src/api';
 
+import { RouletteCoin, ROULETTE_COINS } from 'src/app/shared/models/roulette/coin';
+
 import { R_ActiveGameResponse } from 'src/api/responses/response';
 import { Bet } from 'src/app/shared/models/game/bet';
 
@@ -22,7 +24,7 @@ import { RouletteRound } from 'src/app/shared/models/roulette/roulette-round';
 export class RouletteService {
     // *~~*~~*~~ GAME DATA ~~*~~*~~* //
 
-    private _lastStremData!: R_ActiveGameResponse;
+    public coins: Readonly<RouletteCoin[]> = ROULETTE_COINS;
 
     private takingBets: boolean = false;
 
@@ -42,6 +44,8 @@ export class RouletteService {
         [RouletteState.SHOW_RESULTS]: new ResultsState(),
     };
 
+    private _lastStremData!: R_ActiveGameResponse;
+
     private _machine = new StateMachine<RouletteContext>(this._states, {
         controller: {
             openBets: () => this._openBets(),
@@ -49,15 +53,30 @@ export class RouletteService {
 
             getStreamData: () => this._lastStremData,
 
+            setResults: (results: any) => {
+                const { winningNumber, spinNumber } = results;
+
+                this._round = {
+                    ...this._round,
+                    spinNumber,
+                    winningNumber,
+                };
+            },
+
             changeState: (state: RouletteState) => this._changeState(state),
 
             updateRound: () => this._updateRound(),
         },
+
+        getRouletteProps: () => ({
+            coins: this.coins,
+            round: this.round,
+        }),
     });
 
     // *~~*~~*~~ Streams ~~*~~*~~* //
 
-    private updateStreamSub: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+    private updateStreamSub: BehaviorSubject<RouletteRound> = new BehaviorSubject<RouletteRound>(this._round);
     public updateStream$ = this.updateStreamSub.asObservable();
 
     // *~~*~~*~~ setters & getters ~~*~~*~~* //
@@ -79,11 +98,17 @@ export class RouletteService {
         this.socket.emit(event);
 
         this.socket.on('rouletteDataUpdate', (data: R_ActiveGameResponse) => {
-            const state = data.state === 'game_start' ? RouletteState.GAME_INIT : RouletteState.SPIN;
-
             this._lastStremData = data;
 
-            this._changeState(state);
+            switch (data.state) {
+                case 'game_start':
+                    this._changeState(RouletteState.GAME_INIT);
+                    break;
+
+                case 'results_state':
+                    this._changeState(RouletteState.SPIN);
+                    break;
+            }
         });
 
         setInterval(() => {
@@ -130,6 +155,8 @@ export class RouletteService {
     // *~~*~~*~~ External methods ~~*~~*~~* //
 
     public placeBet(bet: Bet): any {
+        if (!this.takingBets) throw new Error('This game is not taking bets currently');
+
         // const url = api.games.roulette.placeBet;
         // return this.http.post(url, bet);
     }

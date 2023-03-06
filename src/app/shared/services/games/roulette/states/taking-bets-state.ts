@@ -10,17 +10,25 @@ class TakingBetsState extends State<RouletteContext> {
     };
 
     onEnter(context: RouletteContext): void {
-        // context.controller.openBets();
-        // context.controller.updateGame();
+        const { controller } = context;
+
+        controller.openBets();
+
+        controller.updateRound();
+
         // setTimeout(() => {
-        //     context.controller.changeState(GameState.SPINNING);
-        // }, rouletteContstants.BETTING_TIME);
+        //     context.controller.changeState(RouletteState.SPIN);
+        // }, timeForNextState * 1000);
     }
 
-    update(): void {}
+    update(): void {
+        //
+    }
 
     onExit(context: RouletteContext): void {
-        // context.controller.closeBets();
+        const { controller } = context;
+
+        controller.closeBets();
     }
 }
 

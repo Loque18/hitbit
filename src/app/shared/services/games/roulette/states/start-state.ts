@@ -12,27 +12,16 @@ class GameInitState extends State<RouletteContext> {
     onEnter(context: RouletteContext): void {
         const { controller } = context;
 
-        const streamData = controller.getStreamData();
+        const times = controller.getStreamData().times.game_init;
 
-        console.log('streamData', streamData);
+        // calculate seconds between start and end of the state
+        const timeForNextState = this.getNextStateTime(times.start, times.end);
 
-        // timestamp of the start of this state
-        const start_time = streamData.times.game_init.start;
+        setTimeout(() => {
+            controller.changeState(RouletteState.TAKING_BETS);
+        }, timeForNextState * 1000);
 
-        // timestamp of the end of this state
-        const end_time = streamData.times.game_init.end;
-
-        const timeForNextState = end_time - start_time;
-
-        console.log({
-            timeForNextState,
-        });
-
-        // controller.restart();
-        // controller.updateGame();
-        // setTimeout(() => {
-        //     context.controller.changeState(GameState.WAITING_FOR_BETS);
-        // }, 200);
+        controller.updateRound();
     }
 
     update(): void {
@@ -41,6 +30,16 @@ class GameInitState extends State<RouletteContext> {
 
     onExit(): void {
         //
+    }
+
+    /**
+     *
+     * @param spinTimeStart timestamp in seconds of the roulette spin start
+     * @param spinTimEnd timestamp in seocnds of the roulette spin end
+     * @returns seconds to next state
+     */
+    getNextStateTime(startTime: number, endTime: number): number {
+        return endTime - startTime;
     }
 }
 

@@ -1,12 +1,13 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { R_ActiveGameResponse } from 'src/api/responses/response';
 
 import { Iroulette, image } from 'src/app/constants/roulette-game';
 
 import { Bet } from 'src/app/shared/models/game/bet';
 
 import { ROULETTE_COINS, RouletteCoin } from 'src/app/shared/models/roulette/coin';
+import { RouletteRound } from 'src/app/shared/models/roulette/roulette-round';
+import { RouletteState } from 'src/app/shared/models/roulette/roulette-states';
 import { RouletteService } from 'src/app/shared/services/games/roulette/roulette.service';
 
 enum Coin {
@@ -20,7 +21,7 @@ enum Coin {
     styleUrls: ['./roulette.component.scss'],
 })
 export class RouletteComponent implements AfterViewInit {
-    constructor(private gameService: RouletteService) {}
+    constructor(protected game: RouletteService) {}
 
     images: Iroulette[] = image;
 
@@ -36,18 +37,24 @@ export class RouletteComponent implements AfterViewInit {
         this.squareWidth = firstChild.offsetWidth;
         this.initialPosition();
 
-        this.gameService.updateStream$.subscribe((data: R_ActiveGameResponse) => {});
+        this.game.updateStream$.subscribe((data: RouletteRound) => {
+            if (data.state === RouletteState.SPIN) {
+                this.spin(data.spinNumber as number);
+
+                console.log(data.winningNumber);
+            }
+        });
     }
 
     public _spin(): void {
         const randomNumber = Math.floor(Math.random() * 9);
         const spinNumber = Math.floor(Math.random() * 14);
 
-        this.spin(randomNumber, spinNumber);
+        this.spin(spinNumber);
     }
 
-    private spin(randomNumber: number, spinNumber: number): void {
-        const winnerIndex = (randomNumber + spinNumber) % 15;
+    private spin(spinNumber: number): void {
+        const winnerIndex = spinNumber;
 
         const track: HTMLElement = this.coinsTrack.nativeElement;
 
@@ -122,20 +129,23 @@ export class RouletteComponent implements AfterViewInit {
 
     placeBet(): void {
         // ...
-        // if (this.game.round.state !== GameState.WAITING_FOR_BETS) return;
-        // const { betAmount, betCoin } = this.betForm.value;
+        if (this.game.round.state !== RouletteState.TAKING_BETS) return;
+
+        const { betAmount, betCoin } = this.betForm.value;
+
         // const bet: Bet = {
         //     amount: betAmount,
         //     coinType: betCoin,
         //     player: this.player,
         // };
         // this.game.placeBet(bet);
-        // this.resetForm();
 
         alert(JSON.stringify(this.betForm.value, null, 2));
+
+        this.resetForm();
     }
 
     private resetForm(): void {
-        this.betForm.value['betAmount'] = 0;
+        this.betForm.reset();
     }
 }
