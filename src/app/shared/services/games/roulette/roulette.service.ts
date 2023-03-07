@@ -25,6 +25,13 @@ export class RouletteService {
     // *~~*~~*~~ GAME DATA ~~*~~*~~* //
 
     public coins: Readonly<RouletteCoin[]> = ROULETTE_COINS;
+    private _history: RouletteCoin[] = (function (): RouletteCoin[] {
+        const h = [];
+
+        for (let i = 0; i < 100; i++) h.push(ROULETTE_COINS[Math.floor(Math.random() * 14)]);
+
+        return h;
+    })();
 
     private takingBets: boolean = false;
 
@@ -85,6 +92,10 @@ export class RouletteService {
         return this._round;
     }
 
+    public get history(): Readonly<RouletteCoin[]> {
+        return this._history;
+    }
+
     // *~~*~~*~~ INIT ~~*~~*~~* //
 
     constructor(private http: HttpClient, private socket: WebsocketsService) {
@@ -115,7 +126,7 @@ export class RouletteService {
             const _heartBeat = JSON.stringify({ event: 'updateRouletteSubscription' });
 
             this.socket.emit(_heartBeat);
-        }, 1000 * 10);
+        }, 1000 * 45);
     }
 
     private getCurrentGame(): Observable<any> {

@@ -18,7 +18,7 @@ enum Coin {
 
 @Component({
     templateUrl: './roulette.component.html',
-    styleUrls: ['./roulette.component.scss'],
+    styleUrls: ['./roulette.component.scss', './roulette-game.component.scss'],
 })
 export class RouletteComponent implements AfterViewInit {
     constructor(protected game: RouletteService) {}

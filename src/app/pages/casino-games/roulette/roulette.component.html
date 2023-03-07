@@ -2,9 +2,9 @@
     <section>
         <!-- <button (click)="this._spin()">spin</button> -->
 
-        <div>
+        <!-- <div>
             <h1 class="title has-text-white">Current state: {{ this.game.round.state }}</h1>
-        </div>
+        </div> -->
 
         <div class="roulette_box_container">
             <div class="track_container">
@@ -24,6 +24,16 @@
                     </li>
                 </ul>
             </div>
+        </div>
+
+        <div class="roulette_history_container">
+            <ul class="history-list">
+                <li *ngFor="let c of game.history">
+                    <div class="history-coin">
+                        <img [src]="c.img" alt="" />
+                    </div>
+                </li>
+            </ul>
         </div>
 
         <br />

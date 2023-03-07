@@ -6,6 +6,10 @@ import { CommonModule } from '@angular/common';
 import { LayoutModule } from 'src/app/layout/layout.module';
 import { CasinoGamesRoutingModule } from './casino-games-routing.module';
 
+// // *~~*~~*~~ Components ~~*~~*~~* //
+// import { TabsComponent } from 'src/app/components/internal/tabs/tabs.component';
+// import { TabComponent } from 'src/app/components/internal/tabs/tab.component';
+
 // *~~*~~*~~ Games module's components ~~*~~*~~* //
 import { RouletteComponent } from './roulette/roulette.component';
 import { DiceComponent } from './dice/dice.component';
@@ -25,7 +29,9 @@ import { MinesComponent } from './mines/mines.component';
 		CasinoGamesRoutingModule,
         ReactiveFormsModule,
 
-        LayoutModule
+        LayoutModule,
+
+   
 	],
 })
 export class CasinoGamesModule {}
