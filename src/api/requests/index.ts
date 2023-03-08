@@ -13,4 +13,8 @@ type SignupRequest = {
     password: string;
 };
 
-export { LoginRequest, Web3LoginRequest, SignupRequest };
+type UserBalanceRequest = {
+    verificationToken: string;
+};
+
+export { LoginRequest, Web3LoginRequest, SignupRequest, UserBalanceRequest };

@@ -1,14 +1,16 @@
 interface ApiResponse {
     success: boolean;
-    message: string;
-    statusCode: number;
+    message?: string;
+    statusCode?: number;
 }
 
 interface LoginResponse {
     // all props from ApiResponse
     success: boolean;
     message?: string;
-    token?: string;
+    data?: {
+        verificatonToken: string;
+    };
     statusCode?: number;
 }
 
@@ -19,7 +21,37 @@ type WalletLoginResponse = {
     statusCode?: number;
 };
 
+type UserBalanceResponse = ApiResponse & {
+    data?: {
+        ETH: number;
+        BNB: number;
+        MATIC: number;
+    };
+};
+
+// *~~*~~*~~ Roulette  *~~*~~*~~ //
+
+type R_ActiveGameResponse = {
+    state: string;
+    hash: string | null;
+    'round-id': string;
+
+    times: {
+        game_init: { start: number; end: number };
+        taking_bets: { start: number; end: number };
+        spin: { start: number; end: number };
+        show_results: { start: number; end: number };
+    };
+
+    winningNumber: number | null;
+    spinNumber: number | null;
+};
+
 export { ApiResponse, LoginResponse };
+
+export { R_ActiveGameResponse };
+
+export { UserBalanceResponse };
 
 // type ApiResponse = {
 //     success: boolean;

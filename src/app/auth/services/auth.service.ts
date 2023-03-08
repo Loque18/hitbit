@@ -1,28 +1,83 @@
+// angular modules
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 
-import { BehaviorSubject, from, lastValueFrom } from 'rxjs';
+// extenral libraries
+import { BehaviorSubject, lastValueFrom, of } from 'rxjs';
 import { Observable, throwError, catchError } from 'rxjs';
 
-import { LoginRequest, SignupRequest } from 'src/api/requests';
-
-import { ApiResponse, LoginResponse } from 'src/api/responses/response';
-
-import { environment } from 'src/environments/environment';
-
-import { api } from 'src/api';
+// other services
 import { CookieService } from 'src/app/utils/services/cookie.service';
 import { Web3Service } from 'src/app/utils/services/web3/web3.service';
 import { ProviderType } from 'src/app/utils/services/web3/types';
 
+// models
+import { LoginRequest, SignupRequest, UserBalanceRequest } from 'src/api/requests';
+import { ApiResponse, LoginResponse } from 'src/api/responses/response';
+import { UserBalanceResponse } from 'src/api/responses/response';
+import { UserData } from 'src/app/shared/models/user/user-data';
+
+// environment
+import { environment } from 'src/environments/environment';
+
+// constants
+import { api } from 'src/api';
+
 class SessionData {
-    constructor(public isAuthenticated: boolean = false, public token: string | null = null) {}
+    constructor(
+        public isAuthenticated: boolean = false,
+        public token: string | null = null,
+        public userData: UserData = {
+            username: '',
+            balance: [
+                {
+                    crypto: 'eth',
+                    amount: 0,
+                },
+                {
+                    crypto: 'bnb',
+                    amount: 0,
+                },
+                {
+                    crypto: 'matic',
+                    amount: 0,
+                },
+            ],
+        }
+    ) {}
 
     public toJson(): string {
         return JSON.stringify({
             token: this.token,
         });
+    }
+
+    public setUsername(username: string) {
+        this.userData = {
+            ...this.userData,
+            username,
+        };
+    }
+
+    public setBalance(crypto: 'eth' | 'bnb' | 'matic', amount: number) {
+        const bal = {
+            crypto,
+            amount,
+        };
+
+        const balance = this.userData.balance.map(b => {
+            if (b.crypto === crypto) {
+                return bal;
+            }
+
+            return b;
+        });
+
+        this.userData = {
+            ...this.userData,
+            balance,
+        };
     }
 }
 
@@ -44,6 +99,12 @@ export class AuthService {
     private _authState = new BehaviorSubject<boolean>(this._sessionData.isAuthenticated);
     public authState$ = this._authState.asObservable();
 
+    // *~~*~~*~~ getters ~~*~~*~~* //
+
+    public get session(): SessionData {
+        return this._sessionData;
+    }
+
     // *~~*~~*~~ Auth events ~~*~~*~~* //
 
     private onLoginSuccess(token: string): void {
@@ -52,10 +113,20 @@ export class AuthService {
         const sessionJson = this._sessionData.toJson();
 
         // store session in cookie
-        this.cookieService.setCookie('session', sessionJson, 5);
+        this.cookieService.setCookie('session_token', sessionJson, 5);
 
-        // notify new auth state
-        this._authState.next(this._sessionData.isAuthenticated);
+        this.getUserData({
+            verificationToken: token,
+        }).subscribe((res: UserBalanceResponse) => {
+            if (res.success) {
+                this._sessionData.setBalance('eth', res.data?.ETH || 0);
+                this._sessionData.setBalance('bnb', res.data?.BNB || 0);
+                this._sessionData.setBalance('matic', res.data?.MATIC || 0);
+            }
+
+            // notify new auth state
+            this._authState.next(this._sessionData.isAuthenticated);
+        });
     }
 
     private onLogout(): void {
@@ -87,7 +158,8 @@ export class AuthService {
 
         response.subscribe((res: LoginResponse) => {
             if (res.success) {
-                const token = res.token as string;
+                const token = res.data?.verificatonToken as string;
+
                 this.onLoginSuccess(token);
             }
         });
@@ -103,9 +175,6 @@ export class AuthService {
         if (!this.web3Service.walletData.isLoggedIn)
             await lastValueFrom(this.web3Service.requestConnection(providerType));
 
-        // 2. once wallet is connected fetch web3 nonce
-        console.log('wallet data', this.web3Service.walletData);
-
         const nonceUrl = `${api.url}${api.others.nonce}/?address=${this.web3Service.walletData.address}`;
         const { nonce } = (await lastValueFrom(this.http.get(nonceUrl))) as any;
 
@@ -119,7 +188,7 @@ export class AuthService {
 
         // 5. if token is received, store it in cookie and set auth state to true
         if (res.success) {
-            const token = res.token as string;
+            const token = res.data.verificationToken as string;
             this.onLoginSuccess(token);
         }
 
@@ -158,6 +227,14 @@ export class AuthService {
         // this.router.navigate(['/'], { queryParams: { logout: true } });
     }
 
+    private getUserData(req: UserBalanceRequest): Observable<UserBalanceResponse> {
+        const url = `${api.user.balance}/?verificationToken=${req.verificationToken}`;
+
+        return this.http
+            .get<UserBalanceResponse>(url)
+            .pipe(catchError(this._handleError<UserBalanceResponse>('getUserData')));
+    }
+
     private handleError(error: HttpErrorResponse) {
         if (!environment.production) {
             console.error('Auth service error: ', error);
@@ -178,5 +255,13 @@ export class AuthService {
 
         // return an observable with a user-facing error message
         return throwError(() => new Error(errorMessage));
+    }
+
+    private _handleError<T>(operation = 'operation', result?: T) {
+        return (error: any): Observable<T> => {
+            // log to remote logging infrastructure
+
+            return of(result as T);
+        };
     }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { INavLink, NAV_LINKS } from 'src/app/constants/navigation';
 
@@ -18,13 +19,18 @@ export class SidebarComponent implements OnInit {
     readonly arrowLeftIcon = '/assets/icons/arrow-left.svg';
     readonly arrowRightIcon = '/assets/icons/arrow-right.svg';
 
-    constructor(private LayoutService: LayoutService) {}
+    constructor(private LayoutService: LayoutService, private route: ActivatedRoute) {}
+
+    protected activeRoute = '';
 
     ngOnInit(): void {
         // subscribe to sidebar toggle changes
         this.LayoutService.isSidebarCollapsed$.subscribe((isCollapsed: boolean) => {
             this.collapsed = isCollapsed;
         });
+
+        const url = this.route.snapshot.url[0].path;
+        this.activeRoute = url;
     }
 
     toggleSidebar() {

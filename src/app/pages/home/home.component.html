@@ -1,9 +1,11 @@
 <layout-main>
+    <!-- News Carousel -->
     <div class="block">
         <app-carousel></app-carousel>
     </div>
+    <br />
 
-    <!-- Classic games -->
+    <!-- Classic games  -->
     <homepage-casino-original-games></homepage-casino-original-games>
     <br /><br />
 
@@ -19,9 +21,35 @@
     <homepage-providers-games></homepage-providers-games>
     <br /><br />
 
-    <!-- Events -->
+    <!-- Events  -->
     <homepage-casino-events></homepage-casino-events>
-    <homepage-latest-bets></homepage-latest-bets>
-    <app-bets></app-bets>
-    <app-bets-tabs></app-bets-tabs>
+    <br /><br />
+
+    <!-- latest-bets -->
+    <comp-tabs>
+        <comp-tab [tabId]="'latestbets_tab_1'" [tabName]="'All'">
+            <homepage-latest-bets></homepage-latest-bets>
+        </comp-tab>
+
+        <comp-tab [tabId]="'latestbets_tab_2'" [tabName]="'Highest Wins'">
+            <homepage-latest-bets></homepage-latest-bets>
+        </comp-tab>
+
+        <comp-tab [tabId]="'latestbets_tab_3'" [tabName]="'Lucky Wins'">
+            <div>another tab</div>
+        </comp-tab>
+    </comp-tabs>
+    <br /><br />
+
+    <!-- leader board -->
+    <div class="title is-size-5 has-text-white">LeaderBoard</div>
+    <comp-tabs>
+        <comp-tab [tabId]="'leaderboard_tab_1'" [tabName]="'Highest Wins'">
+            <app-bets></app-bets>
+        </comp-tab>
+
+        <comp-tab [tabId]="'leaderboard_tab_2'" [tabName]="'Luckiest Wins'">
+            <app-bets></app-bets>
+        </comp-tab>
+    </comp-tabs>
 </layout-main>

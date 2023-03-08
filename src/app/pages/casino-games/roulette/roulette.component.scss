@@ -50,15 +50,6 @@
     cursor: pointer;
 }
 
-.box-current {
-    height: 298px;
-}
-
-.mar {
-    position: relative;
-    bottom: 7px;
-}
-
 .animation {
     background-color: $blue-300;
 }
@@ -79,80 +70,46 @@
     }
 }
 
-// *~~*~~*~~ Roulette ~~*~~*~~* //
-.roulette_box_container {
-    overflow: hidden;
-    position: relative;
+// *~~*~~*~~ Radio ~~*~~*~~* //
+.radio_container {
+    display: block;
 
-    padding: 1.5rem 2rem 1rem 2rem;
+    // border: 1px solid red;
 
-    background-color: $blue-200;
-
-    border-radius: 0 999px 999px 0px;
-
-    box-shadow: 0 15px 0px 0px rgba($bb-1, 1);
-}
-
-.track_container {
-    overflow: hidden;
-}
-
-.coins-track {
-    display: flex;
-    // column-gap: 1rem;
-
-    // overflow: hidden;
-
-    position: relative;
-
-    z-index: 2;
-}
-
-.selector {
-    position: absolute;
-    top: 0;
-    left: 50%;
-
-    width: 5px;
-    height: 100%;
-
-    background-color: white;
-
-    transform: translateX(-50%);
-
-    z-index: 1;
-
-    &::after {
-        content: '';
+    input {
         position: absolute;
-        background-image: url(/assets/games/roulette/triangle.png);
-        background-size: contain;
-        background-repeat: no-repeat;
-        width: 25px;
-        height: 25px;
-        top: 0;
-        // left: 50%;
-        transform: translateX(-40%);
+        opacity: 0;
+        cursor: pointer;
     }
-}
 
-.game-coin {
-    width: 80px;
-    height: 80px;
-
-    margin: 10px;
-
-    border-radius: 50%;
-
-    position: relative;
-
-    img {
-        width: 80px;
-        height: 80px;
-        max-width: unset;
-
-        position: absolute;
+    .coin_card {
         top: 0;
         left: 0;
+        height: 120px;
+        width: 100%;
+        background-color: $blue-700;
+        border-radius: 5px;
+
+        display: grid;
+        place-items: center;
+
+        transition: 0.25s ease-in-out;
+
+        img {
+            width: 70px;
+            height: 70px;
+        }
     }
+}
+
+/* On mouse-over, add a grey background color */
+.radio_container:hover input ~ .coin_card {
+    box-shadow: 0 2px 4px 2px rgba(black, 0.1);
+}
+
+/* When the radio button is checked, add a blue background */
+.radio_container input:checked ~ .coin_card {
+    background-color: $blue-400;
+
+    transform: translateY(-10px);
 }
