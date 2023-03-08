@@ -1,14 +1,19 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
-import { Iroulette, image } from 'src/app/constants/roulette-game';
+import { RouletteService } from 'src/app/shared/services/games/roulette/roulette.service';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
-import { Bet } from 'src/app/shared/models/game/bet';
+import { ToastrService } from 'ngx-toastr';
+
+import { Iroulette, image } from 'src/app/constants/roulette-game';
+import { ModalCoreService } from 'src/app/modal/services/modal-core.service';
 
 import { ROULETTE_COINS, RouletteCoin } from 'src/app/shared/models/roulette/coin';
 import { RouletteRound } from 'src/app/shared/models/roulette/roulette-round';
 import { RouletteState } from 'src/app/shared/models/roulette/roulette-states';
-import { RouletteService } from 'src/app/shared/services/games/roulette/roulette.service';
+
+import { AppModals } from 'src/static/app.modals';
 
 enum Coin {
     BRONZE = 'bronze',
@@ -21,7 +26,12 @@ enum Coin {
     styleUrls: ['./roulette.component.scss', './roulette-game.component.scss'],
 })
 export class RouletteComponent implements AfterViewInit {
-    constructor(protected game: RouletteService) {}
+    constructor(
+        protected game: RouletteService,
+        private toastr: ToastrService,
+        protected authSvc: AuthService,
+        protected modalService: ModalCoreService
+    ) {}
 
     images: Iroulette[] = image;
 
@@ -40,17 +50,8 @@ export class RouletteComponent implements AfterViewInit {
         this.game.updateStream$.subscribe((data: RouletteRound) => {
             if (data.state === RouletteState.SPIN) {
                 this.spin(data.spinNumber as number);
-
-                console.log('update', data);
             }
         });
-    }
-
-    public _spin(): void {
-        const randomNumber = Math.floor(Math.random() * 9);
-        const spinNumber = Math.floor(Math.random() * 14);
-
-        this.spin(spinNumber);
     }
 
     private spin(spinNumber: number): void {
@@ -72,7 +73,8 @@ export class RouletteComponent implements AfterViewInit {
         const winningPosition =
             HALFWIDTH_CONTAINER - ONE_TRACK_WIDTH - ALL_TRACKS_WIDH - OFFSET_TO_WINNING_COIN - this.squareWidth / 2;
 
-        // 3
+        const now = new Date().getTime() / 1000;
+
         track.style.transitionDuration = '3s';
         track.style.transitionTimingFunction = 'cubic-bezier(0.12, 0.8, 0.38, 1)';
         track.style.transform = `translateX(${winningPosition + randomOffset}px)`;
@@ -120,6 +122,18 @@ export class RouletteComponent implements AfterViewInit {
         return [...c, ...c, ...c, ...c, ...c, ...c, ...c];
     }
 
+    // protected get prtg(): number {
+
+    //     if(!this.game.round.spinTimeStart) return 0;
+
+    //     const now = new Date().getTime();
+    //     const target = this.game.round.spinTimeStart * 1000;
+
+    //     const secondsToSpin = target - now / 1000;
+
+    //     return
+    // }
+
     // *~~*~~*~~ Component actions ~~*~~*~~* //
 
     betForm: FormGroup = new FormGroup({
@@ -129,7 +143,15 @@ export class RouletteComponent implements AfterViewInit {
 
     placeBet(): void {
         // ...
-        if (this.game.round.state !== RouletteState.TAKING_BETS) return;
+
+        if (!this.authSvc.session.isAuthenticated) {
+            return this.modalService.openModal(AppModals.LOGIN);
+        }
+
+        if (this.game.round.state !== RouletteState.TAKING_BETS) {
+            this.toastr.error('Betting is not allowed at this time');
+            return;
+        }
 
         const { betAmount, betCoin } = this.betForm.value;
 
@@ -138,9 +160,12 @@ export class RouletteComponent implements AfterViewInit {
         //     coinType: betCoin,
         //     player: this.player,
         // };
-        // this.game.placeBet(bet);
 
-        alert(JSON.stringify(this.betForm.value, null, 2));
+        // try {
+        //     this.game.placeBet(bet);
+        // } catch (e) {
+        //     this.toastr.error(e.message);
+        // }
 
         this.resetForm();
     }

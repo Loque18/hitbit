@@ -116,7 +116,7 @@
                                     <button
                                         class="button hitbit-btn has-font-poppins extrabold is-fullwidth is-size-5"
                                         type="submit"
-                                        [disabled]="game.round.state !== 'taking_bets'"
+                                        [disabled]="game.round.state !== 'taking_bets' || betForm.value.betAmount === 0"
                                     >
                                         PLACE BET
                                     </button>
@@ -127,11 +127,23 @@
                 </div>
                 <div class="column">
                     <div class="box has-background-blue200 is-hidden-mobile">
-                        <progress class="progress is-amarellow2" value="75" max="100"></progress>
-                        <p class="mb-3">
-                            <span class="has-text-white light is-size-6">Rolling in </span>
-                            <span class="has-text-white pl-1 is-size-5">10</span>
-                        </p>
+                        <ng-container [ngSwitch]="this.game.round.state">
+                            <ng-container *ngSwitchDefault>
+                                <h1 class="subtitle has-text-white">Game starting...</h1>
+                            </ng-container>
+
+                            <ng-container *ngSwitchCase="'taking_bets'">
+                                <progress class="progress is-amarellow2" value="75" max="100"></progress>
+                                <p class="mb-3">
+                                    <span class="has-text-white light is-size-6">Rolling in </span>
+                                    <span class="has-text-white pl-1 is-size-5">10</span>
+                                </p>
+                            </ng-container>
+
+                            <ng-container *ngSwitchCase="'spin'">
+                                <h1 class="subtitle has-text-white">Spinning...</h1>
+                            </ng-container>
+                        </ng-container>
                     </div>
                     <p class="has-text-white mb-4 medium is-size-5">Current Bets</p>
                     <div class="box ox has-background-blue200">

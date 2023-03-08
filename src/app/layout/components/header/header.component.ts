@@ -10,19 +10,12 @@ import { AppModals } from 'src/static/app.modals';
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
     menuOpen: boolean = false;
-
-    userAuthenticated: boolean = true;
 
     constructor(private modalService: ModalCoreService, protected authService: AuthService) {}
 
     // *~~*~~*~~ lifecycle hooks ~~*~~*~~* //
-    ngOnInit(): void {
-        this.authService.authState$.subscribe((isAuthenticated: boolean) => {
-            this.userAuthenticated = isAuthenticated;
-        });
-    }
 
     // *~~*~~*~~ header methods ~~*~~*~~* //
     toggleMenuMobile(): void {

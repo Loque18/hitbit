@@ -24,17 +24,24 @@ class SpinningState extends State<RouletteContext> {
 
         const results = controller.getStreamData();
 
+        const currentRound = context.getRouletteProps().round;
+
+        controller.updateRound({
+            ...currentRound,
+            spinNumber: results.spinNumber,
+            winningNumber: results.winningNumber,
+        });
+
         // const winningBets = this.computeWinningBets(context.getRouletteProps().roundValues.bets, results);
-        controller.setResults(results);
         // controller.setWinners(winningBets);
 
-        const time = this.getNextStateTime(results.times.spin.start, results.times.spin.end);
+        const time = this.getNextStateTime(results.times.spin.end);
 
         setTimeout(() => {
             controller.changeState(RouletteState.SHOW_RESULTS);
         }, time * 1000);
 
-        controller.updateRound();
+        controller.streamRound();
     }
 
     update(): void {
@@ -51,8 +58,10 @@ class SpinningState extends State<RouletteContext> {
      * @param spinTimEnd timestamp in seocnds of the roulette spin end
      * @returns seconds to next state
      */
-    getNextStateTime(spinTimeStart: number, spinTimeEnd: number): number {
-        return spinTimeEnd - spinTimeStart;
+    getNextStateTime(spinTimeEnd: number): number {
+        const now = new Date().getTime() / 1000;
+
+        return spinTimeEnd - now;
     }
 }
 

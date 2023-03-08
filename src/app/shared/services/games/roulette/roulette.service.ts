@@ -31,8 +31,6 @@ export class RouletteService {
 
     private takingBets: boolean = false;
 
-    private _initialState: RouletteState = RouletteState.GAME_INIT;
-
     private _round: RouletteRound = RouletteFactory.createRound();
 
     private _states = {
@@ -51,19 +49,13 @@ export class RouletteService {
 
             getStreamData: () => this._lastStremData,
 
-            setResults: (results: any) => {
-                const { winningNumber, spinNumber } = results;
+            addToHistory: (coin: RouletteCoin) => this._addToHistory(coin),
 
-                this._round = {
-                    ...this._round,
-                    spinNumber,
-                    winningNumber,
-                };
-            },
+            updateRound: (round: RouletteRound) => this._updateRound(round),
 
             changeState: (state: RouletteState) => this._changeState(state),
 
-            updateRound: () => this._updateRound(),
+            streamRound: () => this._streamRound(),
         },
 
         getRouletteProps: () => ({
@@ -224,8 +216,12 @@ export class RouletteService {
         this.takingBets = false;
     }
 
-    private _updateRound(): void {
+    private _streamRound(): void {
         this.updateStreamSub.next(this.round);
+    }
+
+    private _updateRound(round: RouletteRound): void {
+        this._round = round;
     }
 
     private _changeState(state: RouletteState): void {
@@ -235,6 +231,11 @@ export class RouletteService {
         };
 
         this._machine.changeState(state);
+    }
+
+    private _addToHistory(coin: RouletteCoin): void {
+        // add coin to the beginning of the array
+        this._history = [coin, ...this._history];
     }
 
     // *~~*~~*~~ External methods ~~*~~*~~* //

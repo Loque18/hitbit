@@ -14,7 +14,7 @@ class TakingBetsState extends State<RouletteContext> {
 
         controller.openBets();
 
-        controller.updateRound();
+        controller.streamRound();
 
         // setTimeout(() => {
         //     context.controller.changeState(RouletteState.SPIN);

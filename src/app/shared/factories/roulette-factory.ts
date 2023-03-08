@@ -8,8 +8,12 @@ class RouletteFactory {
         return {
             id: '',
             state: RouletteState.GAME_INIT,
+
             spinNumber: null,
             winningNumber: null,
+
+            spinTimeStart: null,
+            spinTimeEnd: null,
         };
     }
 

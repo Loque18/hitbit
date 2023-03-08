@@ -6,6 +6,9 @@ type RouletteRound = GameRound & {
 
     spinNumber: number | null;
     winningNumber: number | null;
+
+    spinTimeStart: number | null;
+    spinTimeEnd: number | null;
 };
 
 export { RouletteRound };

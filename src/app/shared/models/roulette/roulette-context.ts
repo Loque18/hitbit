@@ -10,11 +10,13 @@ type RouletteContext = {
 
         getStreamData: () => R_ActiveGameResponse;
 
-        setResults: (restuls: any) => void;
+        addToHistory: (coin: RouletteCoin) => void;
+
+        updateRound: (round: RouletteRound) => void;
 
         changeState: (state: RouletteState) => void;
 
-        updateRound: () => void;
+        streamRound: () => void;
     };
 
     getRouletteProps: () => {

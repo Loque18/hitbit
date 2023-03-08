@@ -1,7 +1,7 @@
 interface ApiResponse {
     success: boolean;
-    message: string;
-    statusCode: number;
+    message?: string;
+    statusCode?: number;
 }
 
 interface LoginResponse {
@@ -19,6 +19,14 @@ type WalletLoginResponse = {
     message?: string;
     token?: string;
     statusCode?: number;
+};
+
+type UserBalanceResponse = ApiResponse & {
+    data?: {
+        ETH: number;
+        BNB: number;
+        MATIC: number;
+    };
 };
 
 // *~~*~~*~~ Roulette  *~~*~~*~~ //
@@ -42,6 +50,8 @@ type R_ActiveGameResponse = {
 export { ApiResponse, LoginResponse };
 
 export { R_ActiveGameResponse };
+
+export { UserBalanceResponse };
 
 // type ApiResponse = {
 //     success: boolean;

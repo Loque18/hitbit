@@ -58,6 +58,10 @@ const baseUrl = environment.apiUrl;
 const api = {
     url: environment.apiUrl,
 
+    user: {
+        balance: `${baseUrl}/balanceOf`,
+    },
+
     // *~~*~~*~~ Auth *~~*~~*~~ //
     auth: {
         signup: '/signup',
