@@ -41,7 +41,7 @@ export class RouletteComponent implements AfterViewInit {
             if (data.state === RouletteState.SPIN) {
                 this.spin(data.spinNumber as number);
 
-                console.log(data.winningNumber);
+                console.log('update', data);
             }
         });
     }

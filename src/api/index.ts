@@ -72,7 +72,7 @@ const api = {
 
     games: {
         roulette: {
-            activeGame: `${baseUrl}/roulette/currentRoundStats`,
+            activeGame: `${baseUrl}/roulette/activeGame`,
         },
     },
 };

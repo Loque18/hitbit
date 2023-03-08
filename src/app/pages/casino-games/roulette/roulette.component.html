@@ -2,23 +2,16 @@
     <section>
         <!-- <button (click)="this._spin()">spin</button> -->
 
-        <!-- <div>
+        <div>
             <h1 class="title has-text-white">Current state: {{ this.game.round.state }}</h1>
-        </div> -->
+        </div>
 
         <div class="roulette_box_container">
             <div class="track_container">
                 <div class="selector"></div>
                 <ul class="coins-track" #coinsTrack>
-                    <li *ngFor="let c of allCoins">
-                        <div
-                            class="game-coin"
-                            [ngClass]="{
-                                bronze: c.color === 'bronze',
-                                silver: c.color === 'silver',
-                                gold: c.color === 'gold'
-                            }"
-                        >
+                    <li *ngFor="let c of allCoins" [attr.data-coin]="c.id">
+                        <div class="game-coin">
                             <img [src]="c.img" alt="" />
                         </div>
                     </li>

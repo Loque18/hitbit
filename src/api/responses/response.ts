@@ -25,7 +25,6 @@ type WalletLoginResponse = {
 
 type R_ActiveGameResponse = {
     state: string;
-    bets: [];
     hash: string | null;
     'round-id': string;
 

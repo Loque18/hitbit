@@ -56,6 +56,13 @@ export class WebsocketsService {
         });
     }
 
+    public off(eventName: string) {
+        // verify that event is valid
+        if (!this._isValidEvent(eventName)) {
+            throw new Error(`Invalid socket event: ${eventName}`);
+        }
+    }
+
     public emit(data: string) {
         if (!this._connected) {
             throw new Error('Please verify that you are connected to the socket, before emitting data');

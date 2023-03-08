@@ -10,21 +10,21 @@ const silver_url = '/assets/games/roulette/silver-coin.png';
 const gold_url = '/assets/games/roulette/gold-coin.png';
 
 const ROULETTE_COINS: RouletteCoin[] = [
-    { id: 1, color: 'bronze', value: 1, img: bronze_url },
-    { id: 2, color: 'silver', value: 2, img: silver_url },
-    { id: 3, color: 'bronze', value: 1, img: bronze_url },
-    { id: 4, color: 'silver', value: 2, img: silver_url },
-    { id: 5, color: 'bronze', value: 1, img: bronze_url },
-    { id: 6, color: 'silver', value: 2, img: silver_url },
-    { id: 7, color: 'bronze', value: 1, img: bronze_url },
-    { id: 8, color: 'silver', value: 2, img: silver_url },
-    { id: 9, color: 'bronze', value: 1, img: bronze_url },
-    { id: 10, color: 'silver', value: 2, img: silver_url },
-    { id: 11, color: 'bronze', value: 1, img: bronze_url },
-    { id: 12, color: 'silver', value: 2, img: silver_url },
-    { id: 13, color: 'bronze', value: 1, img: bronze_url },
-    { id: 14, color: 'silver', value: 2, img: silver_url },
-    { id: 15, color: 'gold', value: 3, img: gold_url },
+    { id: 0, color: 'bronze', value: 0, img: bronze_url },
+    { id: 1, color: 'silver', value: 1, img: silver_url },
+    { id: 2, color: 'bronze', value: 0, img: bronze_url },
+    { id: 3, color: 'silver', value: 1, img: silver_url },
+    { id: 4, color: 'bronze', value: 0, img: bronze_url },
+    { id: 5, color: 'silver', value: 1, img: silver_url },
+    { id: 6, color: 'bronze', value: 0, img: bronze_url },
+    { id: 7, color: 'silver', value: 1, img: silver_url },
+    { id: 8, color: 'bronze', value: 0, img: bronze_url },
+    { id: 9, color: 'silver', value: 1, img: silver_url },
+    { id: 10, color: 'bronze', value: 0, img: bronze_url },
+    { id: 11, color: 'silver', value: 1, img: silver_url },
+    { id: 12, color: 'bronze', value: 0, img: bronze_url },
+    { id: 13, color: 'silver', value: 1, img: silver_url },
+    { id: 14, color: 'gold', value: 2, img: gold_url },
 ];
 
 export { RouletteCoin, ROULETTE_COINS };

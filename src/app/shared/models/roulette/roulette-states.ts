@@ -1,4 +1,5 @@
 enum RouletteState {
+    NULL = 'null',
     GAME_INIT = 'game_init',
     TAKING_BETS = 'taking_bets',
     SPIN = 'spin',

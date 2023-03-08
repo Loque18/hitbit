@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, tap, of, switchMap, from, retry } from 'rxjs';
 
 import { WebsocketsService } from '../../websockets/websockets.service';
 
@@ -14,6 +14,8 @@ import { RouletteCoin, ROULETTE_COINS } from 'src/app/shared/models/roulette/coi
 import { R_ActiveGameResponse } from 'src/api/responses/response';
 import { Bet } from 'src/app/shared/models/game/bet';
 
+import { RouletteFactory } from 'src/app/shared/factories/roulette-factory';
+
 import { RouletteState } from 'src/app/shared/models/roulette/roulette-states';
 import { RouletteContext } from 'src/app/shared/models/roulette/roulette-context';
 import { RouletteRound } from 'src/app/shared/models/roulette/roulette-round';
@@ -25,24 +27,13 @@ export class RouletteService {
     // *~~*~~*~~ GAME DATA ~~*~~*~~* //
 
     public coins: Readonly<RouletteCoin[]> = ROULETTE_COINS;
-    private _history: RouletteCoin[] = (function (): RouletteCoin[] {
-        const h = [];
-
-        for (let i = 0; i < 100; i++) h.push(ROULETTE_COINS[Math.floor(Math.random() * 14)]);
-
-        return h;
-    })();
+    private _history: RouletteCoin[] = [];
 
     private takingBets: boolean = false;
 
     private _initialState: RouletteState = RouletteState.GAME_INIT;
 
-    private _round: RouletteRound = {
-        id: '',
-        state: this._initialState,
-        spinNumber: null,
-        winningNumber: null,
-    };
+    private _round: RouletteRound = RouletteFactory.createRound();
 
     private _states = {
         [RouletteState.GAME_INIT]: new GameInitState(),
@@ -99,10 +90,65 @@ export class RouletteService {
     // *~~*~~*~~ INIT ~~*~~*~~* //
 
     constructor(private http: HttpClient, private socket: WebsocketsService) {
-        socket.onConnect(() => {
-            this.subscribeToRouletteUpdates();
+        // socket.onConnect(() => {
+        //     this.subscribeToRouletteUpdates();
+        // });
+
+        const sub = () => {
+            if (socket.state === WebSocket.OPEN) {
+                this.subscribeToRouletteUpdates();
+            } else {
+                socket.onConnect(() => {
+                    this.subscribeToRouletteUpdates();
+                });
+            }
+        };
+
+        // 1. get current game
+        this.getCurrentGame().subscribe((data: R_ActiveGameResponse) => {
+            if (data.state === RouletteState.NULL) {
+                // notify that there is an error
+                return;
+            }
+
+            this._lastStremData = data;
+
+            const { times } = data;
+
+            const game_init1 = times.game_init.start;
+            const game_init2 = times.game_init.end;
+
+            const taking_bets1 = times.taking_bets.start;
+            const taking_bets2 = times.taking_bets.end;
+
+            const spin1 = times.spin.start;
+            const spin2 = times.spin.end;
+
+            const results1 = times.show_results.start;
+            const results2 = times.show_results.end;
+
+            const now = new Date().getTime() / 1000;
+
+            let nextState = '';
+            if (now > game_init1 && now < game_init2) {
+                nextState = RouletteState.GAME_INIT;
+            } else if (now > taking_bets1 && now < taking_bets2) {
+                nextState = RouletteState.TAKING_BETS;
+            } else if (now > spin1 && now < spin2) {
+                nextState = RouletteState.SPIN;
+            } else if (now > results1 && now < results2) {
+                nextState = RouletteState.SHOW_RESULTS;
+            }
+
+            this._changeState(nextState as RouletteState);
+
+            sub();
         });
+
+        // 2. subscribe to updates
     }
+
+    // *~~*~~*~~ Networking ~~*~~*~~* //
 
     private subscribeToRouletteUpdates() {
         const event = JSON.stringify({ event: 'subscribeToRoulette' });
@@ -129,15 +175,43 @@ export class RouletteService {
         }, 1000 * 45);
     }
 
-    private getCurrentGame(): Observable<any> {
-        const url = api.games.roulette.activeGame;
+    unsubscribeFromRouletteUpdates() {
+        const event = JSON.stringify({ event: 'unsubscribeFromRoulette' });
+        this.socket.emit(event);
 
-        return this.http.get(url);
+        // this.socket.off('rouletteDataUpdate');
     }
 
-    private _handleErorr(error: any) {
-        console.error('An error occurred', error);
-        return Promise.reject(error.message || error);
+    /**
+     * Get the current game from the server
+     * if req fails for any reason create a null response
+     *
+     */
+    private getCurrentGame(): Observable<R_ActiveGameResponse> {
+        const url = api.games.roulette.activeGame;
+
+        return this.http.get<{ event: string; data: R_ActiveGameResponse }>(url).pipe(
+            switchMap((r: { event: string; data: R_ActiveGameResponse }) => {
+                return of(r.data);
+            }),
+            catchError(this._handleError('getActiveGame', RouletteFactory.createNullStreamDataResponse()))
+        );
+    }
+
+    /**
+     * Handle Http operation that failed.
+     * Let the app continue.
+     *
+     * @param operation - name of the operation that failed
+     * @param result - optional value to return as the observable result
+     */
+    private _handleError<T>(operation = 'operation', result?: T) {
+        return (error: any): Observable<T> => {
+            // TODO: send the error to remote logging infrastructure
+            // console.error(error); // log to console instead
+
+            return of(result as T);
+        };
     }
 
     // *~~*~~*~~ Internal methods ~~*~~*~~* //
